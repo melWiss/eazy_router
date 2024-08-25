@@ -111,7 +111,7 @@ class ThirdScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.removePage(secondPage);
+                context.removePage(secondPage, notifyRootWidget: true);
               },
               child: const Text('remove second from stack'),
             ),

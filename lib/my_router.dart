@@ -109,9 +109,6 @@ class MyNavigator extends StatelessWidget {
             return Navigator(
               pages: snapshot.data!,
               onDidRemovePage: _navigatorHandler.removePage,
-              observers: [
-                MyNavigatorObserver(navigatorHandler: _navigatorHandler)
-              ],
             );
           }
           return const Center(
@@ -120,19 +117,6 @@ class MyNavigator extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-class MyNavigatorObserver extends NavigatorObserver {
-  final IMyNavigatorHandler navigatorHandler;
-
-  MyNavigatorObserver({required this.navigatorHandler});
-  @override
-  void didPop(Route route, Route? previousRoute) {
-    if (previousRoute != null &&
-        !navigatorHandler.hasPage(previousRoute.settings.name!)) {
-      previousRoute.navigator?.maybePop();
-    }
   }
 }
 
