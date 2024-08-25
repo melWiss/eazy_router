@@ -10,15 +10,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyNavigator(
-        initialPage: homePage,
-        pages: pages,
+      // routerConfig: MyRouteConfig(
+      //   navigatorHandler: MyNavigatorHandler(
+      //     initialPage: homePage,
+      //     pages: pages,
+      //   ),
+      // ),
+      routeInformationParser: MyRouteInformationParser(),
+      routerDelegate: MyRouterDelegate(
+        MyNavigatorHandler(
+          initialPage: homePage,
+          pages: pages,
+        ),
       ),
     );
   }
@@ -55,7 +64,6 @@ class HomeScaffold extends StatelessWidget {
               },
               child: const Text('Push second and third'),
             ),
-
           ],
         ),
       ),
@@ -126,8 +134,8 @@ class ThirdScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 context.popUntilTrue(
-                      (page) => page.name == homePage.name,
-                    );
+                  (page) => page.name == homePage.name,
+                );
               },
               child: const Text('pop until home'),
             ),
