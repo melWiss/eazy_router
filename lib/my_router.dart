@@ -86,16 +86,19 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
 
 class MyNavigator extends StatelessWidget {
   MyNavigator({
-    required Page initialPage,
-    required Map<String, Page> pages,
+    required this.initialPage,
+    required this.pages,
     super.key,
   }) : _navigatorHandler =
             MyNavigatorHandler(initialPage: initialPage, pages: pages);
 
   final IMyNavigatorHandler _navigatorHandler;
+  final Page initialPage;
+  final Map<String, Page> pages;
 
   @override
   Widget build(BuildContext context) {
+    MyNavigatorContext._navigatorHandler = _navigatorHandler;
     return Provider<IMyNavigatorHandler>.value(
       value: _navigatorHandler,
       builder: (_, __) => StreamBuilder<List<Page>>(
@@ -131,4 +134,23 @@ class MyNavigatorObserver extends NavigatorObserver {
       previousRoute.navigator?.maybePop();
     }
   }
+}
+
+extension MyNavigatorContext on BuildContext {
+  static late IMyNavigatorHandler _navigatorHandler;
+
+  void push(Page page) => _navigatorHandler.push(page);
+  void pushPages(List<Page> pages) => _navigatorHandler.pushPages(pages);
+  void pop({int times = 1}) => _navigatorHandler.pop(times: times);
+  void removePage(Page page, {bool notifyRootWidget = false}) =>
+      _navigatorHandler.removePage(page, notifyRootWidget: notifyRootWidget);
+  void removePageByName(String name, {bool notifyRootWidget = false}) =>
+      _navigatorHandler.removePageByName(
+        name,
+        notifyRootWidget: notifyRootWidget,
+      );
+  void popUntilTrue(bool Function(Page page) predicate) =>
+      _navigatorHandler.popUntilTrue(predicate);
+  bool hasPage(String name) => _navigatorHandler.hasPage(name);
+  Stream<List<Page>> get stream => _navigatorHandler.stream;
 }

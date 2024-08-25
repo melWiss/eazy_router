@@ -40,7 +40,7 @@ class HomeScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // use context to push
-                context.read<IMyNavigatorHandler>().push(secondPage);
+                context.push(secondPage);
               },
               child: const Text('Go second'),
             ),
@@ -48,7 +48,7 @@ class HomeScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // use context to push
-                context.read<IMyNavigatorHandler>().pushPages([
+                context.pushPages([
                   secondPage,
                   thirdPage,
                 ]);
@@ -78,14 +78,14 @@ class SecondScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.read<IMyNavigatorHandler>().pop();
+                context.pop();
               },
               child: const Text('pop'),
             ),
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.read<IMyNavigatorHandler>().push(thirdPage);
+                context.push(thirdPage);
               },
               child: const Text('go to third'),
             ),
@@ -111,21 +111,21 @@ class ThirdScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.read<IMyNavigatorHandler>().removePage(secondPage);
+                context.removePage(secondPage);
               },
               child: const Text('remove second from stack'),
             ),
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.read<IMyNavigatorHandler>().pop();
+                context.pop();
               },
               child: const Text('pop'),
             ),
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.read<IMyNavigatorHandler>().popUntilTrue(
+                context.popUntilTrue(
                       (page) => page.name == homePage.name,
                     );
               },
@@ -134,7 +134,7 @@ class ThirdScaffold extends StatelessWidget {
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.read<IMyNavigatorHandler>().pop(times: 2);
+                context.pop(times: 2);
               },
               child: const Text('pop two times'),
             ),
