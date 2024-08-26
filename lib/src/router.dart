@@ -44,8 +44,7 @@ class MyRouteState {
       MyRouteState.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'MyRouteState(path: $path, params: $params)';
+  String toString() => 'MyRouteState(path: $path, params: $params)';
 
   @override
   bool operator ==(Object other) {
@@ -76,7 +75,8 @@ class MyRouteState {
 
 class MyRouteInformationParser extends RouteInformationParser<MyRouteState> {
   @override
-  Future<MyRouteState> parseRouteInformation(RouteInformation routeInformation) async {
+  Future<MyRouteState> parseRouteInformation(
+      RouteInformation routeInformation) async {
     return MyRouteState.fromUri(routeInformation.uri);
   }
 
@@ -90,9 +90,11 @@ class MyRouteInformationParser extends RouteInformationParser<MyRouteState> {
 }
 
 class MyRouterDelegate extends RouterDelegate<MyRouteState>
-    with ChangeNotifier, PopNavigatorRouterDelegateMixin {
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRouteState> {
   final IMyNavigatorHandler navigatorHandler;
-  MyRouterDelegate(this.navigatorHandler);
+  MyRouterDelegate(this.navigatorHandler) {
+    navigatorHandler.addListener(notifyListeners);
+  }
 
   @override
   Widget build(BuildContext context) => MyNavigator(
@@ -114,13 +116,15 @@ class MyRouterDelegate extends RouterDelegate<MyRouteState>
   }
 
   @override
-  MyRouteState? get currentConfiguration => MyRouteState.fromUri(navigatorHandler.currentUri);
+  MyRouteState? get currentConfiguration =>
+      MyRouteState.fromUri(navigatorHandler.currentUri);
 
   @override
   GlobalKey<NavigatorState>? get navigatorKey => GlobalKey<NavigatorState>();
 }
 
-class MyRouteConfig extends RouterConfig<MyRouteState> with WidgetsBindingObserver {
+class MyRouteConfig extends RouterConfig<MyRouteState>
+    with WidgetsBindingObserver {
   MyRouteConfig({
     required IMyNavigatorHandler navigatorHandler,
   }) : super(
@@ -132,15 +136,4 @@ class MyRouteConfig extends RouterConfig<MyRouteState> with WidgetsBindingObserv
                 WidgetsBinding.instance.platformDispatcher.defaultRouteName),
           )),
         );
-}
-
-class MyRouteInformationProvider extends RouteInformationProvider
-    with WidgetsBindingObserver, ChangeNotifier {
-  RouteInformation _value = RouteInformation(
-    uri: Uri.parse('/'),
-    state: Uri.parse('/'),
-  );
-
-  @override
-  RouteInformation get value => _value;
 }

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 export 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
-abstract class IMyNavigatorHandler {
+abstract class IMyNavigatorHandler with ChangeNotifier {
   final Map<String, Page> pages;
 
   IMyNavigatorHandler({required this.pages});
@@ -31,6 +31,9 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
   }) {
     _state = [initialPage];
     _controller.add(_state);
+    _controller.listen(
+      (value) => notifyListeners(),
+    );
   }
   @override
   void push(Page page) {
@@ -100,7 +103,7 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
     }
     _controller.add(_state);
   }
-  
+
   @override
   Uri get currentUri {
     String completePath = '/';
@@ -124,7 +127,7 @@ class MyNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyNavigatorContext._navigatorHandler = _navigatorHandler;
-    return Provider<IMyNavigatorHandler>.value(
+    return ChangeNotifierProvider<IMyNavigatorHandler>.value(
       value: _navigatorHandler,
       builder: (_, __) => StreamBuilder<List<Page>>(
         stream: _navigatorHandler.stream,
