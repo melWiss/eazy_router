@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 export 'package:provider/provider.dart';
-import 'package:rxdart/rxdart.dart';
 
 abstract class IMyNavigatorHandler with ChangeNotifier {
   final Map<String, Page> pages;
@@ -17,41 +14,37 @@ abstract class IMyNavigatorHandler with ChangeNotifier {
   void popUntilTrue(bool Function(Page page) predicate);
   void goTo(Uri uri);
   bool hasPage(String name);
-  Stream<List<Page>> get stream;
+  List<Page> get pageStack;
   Uri get currentUri;
 }
 
 class MyNavigatorHandler extends IMyNavigatorHandler {
   List<Page> _state = [];
-  final BehaviorSubject<List<Page>> _controller = BehaviorSubject();
 
   MyNavigatorHandler({
     required Page initialPage,
     required super.pages,
   }) {
     _state = [initialPage];
-    _controller.add(_state);
-    _controller.listen(
-      (value) => notifyListeners(),
-    );
+    notifyListeners();
   }
   @override
   void push(Page page) {
     _state = List.from([..._state, page]);
-    _controller.add(_state);
+    notifyListeners();
   }
 
   @override
   void pushPages(List<Page> pages) {
     _state = List.from([..._state, ...pages]);
-    _controller.add(_state);
+    notifyListeners();
   }
 
   @override
   void pop({int times = 1}) {
     _state.removeRange(_state.length - times, _state.length);
     _state = List.from(_state);
-    _controller.add(_state);
+    notifyListeners();
   }
 
   @override
@@ -60,11 +53,8 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
       _state.removeLast();
     }
     _state = List.from(_state);
-    _controller.add(_state);
+    notifyListeners();
   }
-
-  @override
-  Stream<List<Page>> get stream => _controller.stream;
 
   @override
   void removePage(Page page, {bool notifyRootWidget = false}) {
@@ -72,7 +62,7 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
       _state.remove(page);
       if (notifyRootWidget) {
         _state = List.from(_state);
-        _controller.add(_state);
+        notifyListeners();
       }
     }
   }
@@ -83,7 +73,7 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
     _state.remove(pageToRemove);
     if (notifyRootWidget) {
       _state = List.from(_state);
-      _controller.add(_state);
+      notifyListeners();
     }
   }
 
@@ -101,7 +91,7 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
     if (_state.isEmpty) {
       _state.add(pages.values.first);
     }
-    _controller.add(_state);
+    notifyListeners();
   }
 
   @override
@@ -112,6 +102,9 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
     }
     return Uri.parse(completePath);
   }
+
+  @override
+  List<Page> get pageStack => _state;
 }
 
 class MyNavigator extends StatelessWidget {
@@ -129,29 +122,30 @@ class MyNavigator extends StatelessWidget {
     MyNavigatorContext._navigatorHandler = _navigatorHandler;
     return ChangeNotifierProvider<IMyNavigatorHandler>.value(
       value: _navigatorHandler,
-      builder: (_, __) => StreamBuilder<List<Page>>(
-        stream: _navigatorHandler.stream,
-        builder: (BuildContext context,
-            AsyncSnapshot<List<Page<dynamic>>> snapshot) {
-          if (snapshot.hasData) {
-            return Navigator(
-              pages: snapshot.data!,
-              key: navigatorKey,
-              onGenerateRoute: (settings) {
-                if (settings.name != null &&
-                    _navigatorHandler.hasPage(settings.name!)) {
-                  return _navigatorHandler.pages[settings.name]!
-                      .createRoute(context);
-                }
-                return _navigatorHandler.pages.values.first
-                    .createRoute(context);
-              },
-              onDidRemovePage: _navigatorHandler.removePage,
+      builder: (_, __) => ListenableBuilder(
+        listenable: _navigatorHandler,
+        child: Navigator(
+          pages: _navigatorHandler.pageStack,
+          key: navigatorKey,
+          onGenerateRoute: (settings) {
+            if (settings.name != null &&
+                _navigatorHandler.hasPage(settings.name!)) {
+              return _navigatorHandler.pages[settings.name]!
+                  .createRoute(context);
+            }
+            return _navigatorHandler.pages.values.first.createRoute(context);
+          },
+          onDidRemovePage: (page) {
+            _navigatorHandler.removePage(page, notifyRootWidget: true);
+          },
+        ),
+        builder: (context, child) {
+          if (child == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return child;
         },
       ),
     );
@@ -174,5 +168,5 @@ extension MyNavigatorContext on BuildContext {
   void popUntilTrue(bool Function(Page page) predicate) =>
       _navigatorHandler.popUntilTrue(predicate);
   bool hasPage(String name) => _navigatorHandler.hasPage(name);
-  Stream<List<Page>> get stream => _navigatorHandler.stream;
+  List<Page> get pageStack => _navigatorHandler.pageStack;
 }
