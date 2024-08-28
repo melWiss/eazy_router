@@ -119,8 +119,10 @@ class MyRouterDelegate extends RouterDelegate<MyRouteState>
   MyRouteState? get currentConfiguration =>
       MyRouteState.fromUri(navigatorHandler.currentUri);
 
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
   @override
-  GlobalKey<NavigatorState>? get navigatorKey => GlobalKey<NavigatorState>();
+  GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 }
 
 class MyRouteConfig extends RouterConfig<MyRouteState>
