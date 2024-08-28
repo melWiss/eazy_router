@@ -16,15 +16,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // routerConfig: MyRouteConfig(
-      //   navigatorHandler: MyNavigatorHandler(
-      //     initialPage: homePage,
-      //     pages: pages,
-      //   ),
-      // ),
-      routeInformationParser: MyRouteInformationParser(),
-      routerDelegate: MyRouterDelegate(
-        MyNavigatorHandler(
+      routerConfig: MyRouteConfig(
+        navigatorHandler: MyNavigatorHandler(
           initialPage: homePage,
           pages: pages,
         ),
@@ -33,14 +26,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// TODO: @generateRoute('home-scaffold')
 class HomeScaffold extends StatelessWidget {
-  const HomeScaffold({super.key});
+  const HomeScaffold({
+    this.title,
+    super.key,
+  });
+  // TODO: @queryParam
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home scaffold'),
+        title: Text('Home ${title ?? 'scaffold'}'),
       ),
       body: Center(
         child: Column(
@@ -169,8 +168,49 @@ Page thirdPage = const MaterialPage(
   child: ThirdScaffold(),
 );
 
-Map<String, Page> pages = {
-  homePage.name!: homePage,
-  secondPage.name!: secondPage,
-  thirdPage.name!: thirdPage,
+class HomeRoute extends MyPageRoute {
+  final String? title;
+
+  HomeRoute({this.title});
+
+  factory HomeRoute.fromQueryParam(Map<String, String>? params) {
+    return HomeRoute(title: params?['title']);
+  }
+
+  @override
+  Page get page => MaterialPage(
+        key: const ValueKey('home'),
+        name: 'home',
+        arguments: queryParameters,
+        child: HomeScaffold(
+          title: title,
+        ),
+      );
+
+  @override
+  Map<String, String> get queryParameters => {
+        if (title != null) 'title': title!,
+      };
+}
+
+class SecondRoute extends MyPageRoute {
+  @override
+  Page get page => secondPage;
+
+  @override
+  Map<String, String> get queryParameters => const {};
+}
+
+class ThirdRoute extends MyPageRoute {
+  @override
+  Page get page => thirdPage;
+
+  @override
+  Map<String, String> get queryParameters => const {};
+}
+
+Map<String, MyPageRoute Function(Map<String, String>? params)> pages = {
+  homePage.name!: (params) => HomeRoute.fromQueryParam(params),
+  secondPage.name!: (params) => SecondRoute(),
+  thirdPage.name!: (params) => ThirdRoute(),
 };

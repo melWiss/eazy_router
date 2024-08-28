@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 export 'package:provider/provider.dart';
 
 abstract class IMyNavigatorHandler with ChangeNotifier {
-  final Map<String, Page> pages;
+  final Map<String, MyPageRoute Function(Map<String, String>? params)> pages;
 
   IMyNavigatorHandler({required this.pages});
   void push(Page page);
@@ -85,22 +85,27 @@ class MyNavigatorHandler extends IMyNavigatorHandler {
     _state = List.empty(growable: true);
     for (var path in uri.pathSegments) {
       if (pages[path] != null) {
-        _state.add(pages[path]!);
+        _state.add(pages[path]!(uri.queryParameters).page);
       }
     }
     if (_state.isEmpty) {
-      _state.add(pages.values.first);
+      _state.add(pages.values.first(uri.queryParameters).page);
     }
     notifyListeners();
   }
 
   @override
   Uri get currentUri {
-    String completePath = '/';
+    String completePath = '';
+    Map<String, String> params = {};
     for (var page in _state) {
-      completePath += '${page.name}/';
+      completePath += '/${page.name}';
+      params.addAll((page.arguments as Map<String, String>?) ?? {});
     }
-    return Uri.parse(completePath);
+    return Uri(
+      path: completePath,
+      queryParameters: params,
+    );
   }
 
   @override
@@ -130,10 +135,16 @@ class MyNavigator extends StatelessWidget {
           onGenerateRoute: (settings) {
             if (settings.name != null &&
                 _navigatorHandler.hasPage(settings.name!)) {
-              return _navigatorHandler.pages[settings.name]!
+              return _navigatorHandler
+                  .pages[settings.name]!
+                      (settings.arguments as Map<String, String>?)
+                  .page
                   .createRoute(context);
             }
-            return _navigatorHandler.pages.values.first.createRoute(context);
+            return _navigatorHandler.pages.values
+                .first(settings.arguments as Map<String, String>?)
+                .page
+                .createRoute(context);
           },
           onDidRemovePage: (page) {
             _navigatorHandler.removePage(page, notifyRootWidget: true);
@@ -169,4 +180,9 @@ extension MyNavigatorContext on BuildContext {
       _navigatorHandler.popUntilTrue(predicate);
   bool hasPage(String name) => _navigatorHandler.hasPage(name);
   List<Page> get pageStack => _navigatorHandler.pageStack;
+}
+
+abstract class MyPageRoute {
+  Map<String, String> get queryParameters;
+  Page get page;
 }
