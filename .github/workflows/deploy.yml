@@ -26,7 +26,7 @@ jobs:
       - name: Enable flutter web
         run: cd example && flutter config --enable-web
       - name: "Build Web App"
-        run: cd example && flutter build web
+        run: cd example && flutter build web --wasm --base-href /my_router/
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
