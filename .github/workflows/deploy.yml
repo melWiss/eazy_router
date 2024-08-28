@@ -6,7 +6,7 @@ name: Build, Release app to Github Pages
 on:
   push:
     branches:
-      - router
+      - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,3 +32,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./example/build/web
+          publish_branch: master
