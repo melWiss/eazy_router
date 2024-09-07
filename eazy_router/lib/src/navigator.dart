@@ -146,14 +146,9 @@ class MyNavigator extends StatelessWidget {
                 .page
                 .createRoute(context);
           },
-          onPopPage: (route, result) {
-            _navigatorHandler.removePageByName(route.settings.name!,
-                notifyRootWidget: true);
-            return true;
+          onDidRemovePage: (page) {
+            _navigatorHandler.removePage(page, notifyRootWidget: true);
           },
-          // onDidRemovePage: (page) {
-          //   _navigatorHandler.removePage(page, notifyRootWidget: true);
-          // },
         ),
         builder: (context, child) {
           if (child == null) {
