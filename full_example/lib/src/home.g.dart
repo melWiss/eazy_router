@@ -6,7 +6,7 @@ part of 'home.dart';
 // EazyRouteGenerator
 // **************************************************************************
 
-class HomeScaffoldRoute extends MyPageRoute {
+class HomeScaffoldRoute extends EazyRoute {
   final String? title;
 
   HomeScaffoldRoute({

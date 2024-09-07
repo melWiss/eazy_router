@@ -1,15 +1,27 @@
 targets:
   $default:
     builders:
-      eazy_router_generator: # generators|annotations: Refers to the simple_generator builder when dealing with files annotated with annotations.
-        enabled: true
+      eazy_router_generator|eazy_router_generator:
+        generate_for:
+          - lib/**.dart
+      eazy_router_generator|eazy_router_registrar:
+        generate_for:
+          - lib/**.g.dart
+
 
 builders:
   eazy_router_generator:
-    target: ":eazy_router_generator" # Generator name
     import: "package:eazy_router_generator/eazy_router_generator.dart"
     builder_factories: ["generateRoute"] # Builder name(BuilderOption) this is a definition
     build_extensions: { ".dart": [".route.g.part"] }
     auto_apply: dependents
     build_to: cache
     applies_builders: ["source_gen:combining_builder"]
+    runs_before: ["eazy_router_generator|eazy_router_registrar"]
+  eazy_router_registrar:
+    import: "package:eazy_router_generator/eazy_router_generator.dart"
+    builder_factories: ["registerRoute"] # Builder name(BuilderOption) this is a definition
+    build_extensions: { ".dart": [".registrar.g.part"] }
+    auto_apply: dependents
+    build_to: source
+    required_inputs: ["**/*.g.dart"]  # Include the pre-built files as required inputs

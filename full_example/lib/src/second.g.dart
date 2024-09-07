@@ -6,7 +6,7 @@ part of 'second.dart';
 // EazyRouteGenerator
 // **************************************************************************
 
-class SecondScaffoldRoute extends MyPageRoute {
+class SecondScaffoldRoute extends EazyRoute {
   SecondScaffoldRoute();
 
   factory SecondScaffoldRoute.fromQueryParam(Map<String, String>? params) {

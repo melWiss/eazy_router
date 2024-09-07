@@ -91,13 +91,13 @@ class EazyRouteInformationParser extends RouteInformationParser<EazyRouteState> 
 
 class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<EazyRouteState> {
-  final IMyNavigatorHandler navigatorHandler;
+  final IEazyRouterHandler navigatorHandler;
   EazyRouterDelegate(this.navigatorHandler) {
     navigatorHandler.addListener(notifyListeners);
   }
 
   @override
-  Widget build(BuildContext context) => MyNavigator(
+  Widget build(BuildContext context) => EazyRouterNavigator(
         navigatorHandler: navigatorHandler,
         key: navigatorKey,
       );
@@ -125,12 +125,10 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 }
 
-class EazyRouteConfig extends RouterConfig<EazyRouteState>
+class EazyRouter extends RouterConfig<EazyRouteState>
     with WidgetsBindingObserver {
-  EazyRouteConfig({
-    required IMyNavigatorHandler navigatorHandler,
-  }) : super(
-          routerDelegate: EazyRouterDelegate(navigatorHandler),
+  EazyRouter() : super(
+          routerDelegate: EazyRouterDelegate(EazyRouterHandler()),
           routeInformationParser: EazyRouteInformationParser(),
           routeInformationProvider: PlatformRouteInformationProvider(
               initialRouteInformation: RouteInformation(

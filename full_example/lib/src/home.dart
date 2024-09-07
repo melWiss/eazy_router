@@ -6,7 +6,7 @@ import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 
 part 'home.g.dart';
 
-@GenerateRoute('home')
+@GenerateRoute(pathName: 'home', isInitial: true)
 class HomeScaffold extends StatelessWidget {
   const HomeScaffold({
     this.title,
@@ -28,7 +28,7 @@ class HomeScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // use context to push
-                context.push(SecondScaffoldRoute().page);
+                context.push(SecondScaffoldRoute());
               },
               child: const Text('Go second'),
             ),
@@ -36,9 +36,9 @@ class HomeScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // use context to push
-                context.pushPages([
-                  SecondScaffoldRoute().page,
-                  ThirdScaffoldRoute().page,
+                context.pushRoutes([
+                  SecondScaffoldRoute(),
+                  ThirdScaffoldRoute(),
                 ]);
               },
               child: const Text('Push second and third'),
