@@ -21,6 +21,7 @@ abstract class IEazyRouterHandler with ChangeNotifier {
 
 class EazyRouterHandler extends IEazyRouterHandler {
   List<EazyRoute> _state = [];
+  EazyRoute? _initialRoute;
   final Map<String, EazyRoute Function(Map<String, String> params)>
       _registeredRoutes = {};
 
@@ -98,7 +99,11 @@ class EazyRouterHandler extends IEazyRouterHandler {
       }
     }
     if (_state.isEmpty) {
-      _state.add(routes.values.first(uri.queryParameters));
+      if (_initialRoute != null) {
+        _state.add(_initialRoute!);
+      } else {
+        _state.add(routes.values.first(uri.queryParameters));
+      }
     }
     notifyListeners();
   }
@@ -132,6 +137,7 @@ class EazyRouterHandler extends IEazyRouterHandler {
 
   @override
   void setInitialRoute(EazyRoute route) {
+    _initialRoute = route;
     _state.insert(0, route);
     notifyListeners();
   }
