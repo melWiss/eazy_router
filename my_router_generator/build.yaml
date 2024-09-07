@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      my_router_generator: # generators|annotations: Refers to the simple_generator builder when dealing with files annotated with annotations.
+        enabled: true
+
+builders:
+  my_router_generator:
+    # target: ":my_router_generator" # Generator name
+    import: "package:my_router_generator/my_router_generator.dart"
+    builder_factories: ["generateRoute"] # Builder name(BuilderOption) this is a definition
+    build_extensions: { ".dart": [".route.g.part"] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen:combining_builder"]
