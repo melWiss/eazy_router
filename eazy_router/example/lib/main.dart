@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_router/my_router.dart';
+import 'package:eazy_router/eazy_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      routerConfig: MyRouteConfig(
+      routerConfig: EazyRouteConfig(
         navigatorHandler: MyNavigatorHandler(
           initialPage: homePage,
           pages: pages,

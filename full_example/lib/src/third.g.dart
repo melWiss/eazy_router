@@ -3,7 +3,7 @@
 part of 'third.dart';
 
 // **************************************************************************
-// MyRouteGenerator
+// EazyRouteGenerator
 // **************************************************************************
 
 class ThirdScaffoldRoute extends MyPageRoute {

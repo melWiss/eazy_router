@@ -3,7 +3,7 @@
 part of 'home.dart';
 
 // **************************************************************************
-// MyRouteGenerator
+// EazyRouteGenerator
 // **************************************************************************
 
 class HomeScaffoldRoute extends MyPageRoute {

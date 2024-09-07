@@ -1,10 +1,10 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/src/builder/build_step.dart';
-import 'package:my_router_annotation/my_router_annotation.dart';
-import 'package:my_router_generator/src/visitor.dart';
+import 'package:eazy_router_annotation/eazy_router_annotation.dart';
+import 'package:eazy_router_generator/src/visitor.dart';
 import 'package:source_gen/source_gen.dart';
 
-class MyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
+class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
   @override
   String generateForAnnotatedElement(
     Element element,

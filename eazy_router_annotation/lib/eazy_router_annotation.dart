@@ -1,4 +1,4 @@
-library my_router_annotation;
+library eazy_router_annotation;
 
 class GenerateRoute {
   final String? pathName;

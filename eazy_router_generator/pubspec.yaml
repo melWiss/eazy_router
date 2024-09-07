@@ -1,24 +1,26 @@
-name: my_router
+name: eazy_router_generator
 description: "A new Flutter package project."
 version: 0.0.1
-homepage: https://oussama-maatallah.web.app/blog/my_router
+homepage: none
 
 environment:
-  sdk: ^3.3.2
+  sdk: ">=3.4.3 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^6.1.2
-  rxdart: ^0.28.0
+
+  build:
+  source_gen:
+  analyzer:
+  eazy_router_annotation:
+    path: ../eazy_router_annotation
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^4.0.0
-  integration_test:
-    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner:
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -32,10 +34,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
-  # https://flutter.dev/to/asset-from-package
+  # https://flutter.dev/assets-and-images/#from-packages
   #
   # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
+  # https://flutter.dev/assets-and-images/#resolution-aware
 
   # To add custom fonts to your package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -55,4 +57,4 @@ flutter:
   #         weight: 700
   #
   # For details regarding fonts in packages, see
-  # https://flutter.dev/to/font-from-package
+  # https://flutter.dev/custom-fonts/#from-packages

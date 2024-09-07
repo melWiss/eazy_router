@@ -1,26 +1,18 @@
-name: my_router_generator
+name: eazy_router_annotation
 description: "A new Flutter package project."
 version: 0.0.1
-homepage: none
+homepage: "https://oussama-maatallah.web.app"
 
 environment:
-  sdk: ">=3.4.3 <4.0.0"
+  sdk: '>=3.4.3 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  build:
-  source_gen:
-  analyzer:
-  my_router_annotation:
-    path: ../my_router_annotation
-
 dev_dependencies:
   flutter_lints: ^3.0.0
-  build_runner:
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

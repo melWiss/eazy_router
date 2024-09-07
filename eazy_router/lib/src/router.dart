@@ -3,22 +3,22 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:my_router/my_router.dart';
+import 'package:eazy_router/eazy_router.dart';
 
-class MyRouteState {
+class EazyRouteState {
   final String path;
   final Map<String, String>? params;
-  MyRouteState({
+  EazyRouteState({
     required this.path,
     this.params,
   });
 
-  MyRouteState copyWith({
+  EazyRouteState copyWith({
     String? path,
     Map<String, String>? params,
     String? pathId,
   }) {
-    return MyRouteState(
+    return EazyRouteState(
       path: path ?? this.path,
       params: params ?? this.params,
     );
@@ -31,8 +31,8 @@ class MyRouteState {
     };
   }
 
-  factory MyRouteState.fromMap(Map<String, dynamic> map) {
-    return MyRouteState(
+  factory EazyRouteState.fromMap(Map<String, dynamic> map) {
+    return EazyRouteState(
       path: map['path'] ?? '',
       params: Map<String, String>.from(map['params']),
     );
@@ -40,17 +40,17 @@ class MyRouteState {
 
   String toJson() => json.encode(toMap());
 
-  factory MyRouteState.fromJson(String source) =>
-      MyRouteState.fromMap(json.decode(source));
+  factory EazyRouteState.fromJson(String source) =>
+      EazyRouteState.fromMap(json.decode(source));
 
   @override
-  String toString() => 'MyRouteState(path: $path, params: $params)';
+  String toString() => 'EazyRouteState(path: $path, params: $params)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is MyRouteState &&
+    return other is EazyRouteState &&
         other.path == path &&
         mapEquals(other.params, params);
   }
@@ -58,8 +58,8 @@ class MyRouteState {
   @override
   int get hashCode => path.hashCode ^ params.hashCode;
 
-  factory MyRouteState.fromUri(Uri uri) {
-    return MyRouteState(
+  factory EazyRouteState.fromUri(Uri uri) {
+    return EazyRouteState(
       path: uri.path,
       params: uri.queryParameters,
     );
@@ -73,15 +73,15 @@ class MyRouteState {
   }
 }
 
-class MyRouteInformationParser extends RouteInformationParser<MyRouteState> {
+class EazyRouteInformationParser extends RouteInformationParser<EazyRouteState> {
   @override
-  Future<MyRouteState> parseRouteInformation(
+  Future<EazyRouteState> parseRouteInformation(
       RouteInformation routeInformation) async {
-    return MyRouteState.fromUri(routeInformation.uri);
+    return EazyRouteState.fromUri(routeInformation.uri);
   }
 
   @override
-  RouteInformation? restoreRouteInformation(MyRouteState configuration) {
+  RouteInformation? restoreRouteInformation(EazyRouteState configuration) {
     return RouteInformation(
       uri: configuration.toUri(),
       state: configuration,
@@ -89,10 +89,10 @@ class MyRouteInformationParser extends RouteInformationParser<MyRouteState> {
   }
 }
 
-class MyRouterDelegate extends RouterDelegate<MyRouteState>
-    with ChangeNotifier, PopNavigatorRouterDelegateMixin<MyRouteState> {
+class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<EazyRouteState> {
   final IMyNavigatorHandler navigatorHandler;
-  MyRouterDelegate(this.navigatorHandler) {
+  EazyRouterDelegate(this.navigatorHandler) {
     navigatorHandler.addListener(notifyListeners);
   }
 
@@ -110,14 +110,14 @@ class MyRouterDelegate extends RouterDelegate<MyRouteState>
   }
 
   @override
-  Future<void> setNewRoutePath(MyRouteState configuration) async {
+  Future<void> setNewRoutePath(EazyRouteState configuration) async {
     navigatorHandler.goTo(configuration.toUri());
     notifyListeners();
   }
 
   @override
-  MyRouteState? get currentConfiguration =>
-      MyRouteState.fromUri(navigatorHandler.currentUri);
+  EazyRouteState? get currentConfiguration =>
+      EazyRouteState.fromUri(navigatorHandler.currentUri);
 
   final _navigatorKey = GlobalKey<NavigatorState>();
 
@@ -125,13 +125,13 @@ class MyRouterDelegate extends RouterDelegate<MyRouteState>
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 }
 
-class MyRouteConfig extends RouterConfig<MyRouteState>
+class EazyRouteConfig extends RouterConfig<EazyRouteState>
     with WidgetsBindingObserver {
-  MyRouteConfig({
+  EazyRouteConfig({
     required IMyNavigatorHandler navigatorHandler,
   }) : super(
-          routerDelegate: MyRouterDelegate(navigatorHandler),
-          routeInformationParser: MyRouteInformationParser(),
+          routerDelegate: EazyRouterDelegate(navigatorHandler),
+          routeInformationParser: EazyRouteInformationParser(),
           routeInformationProvider: PlatformRouteInformationProvider(
               initialRouteInformation: RouteInformation(
             uri: Uri.parse(
