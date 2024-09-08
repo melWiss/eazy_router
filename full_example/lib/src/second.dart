@@ -5,7 +5,7 @@ import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 
 part 'second.g.dart';
 
-@GenerateRoute('second')
+@GenerateRoute(pathName: 'second')
 class SecondScaffold extends StatelessWidget {
   const SecondScaffold({super.key});
 
@@ -28,7 +28,7 @@ class SecondScaffold extends StatelessWidget {
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.push(ThirdScaffoldRoute().page);
+                context.push(ThirdScaffoldRoute());
               },
               child: const Text('go to third'),
             ),

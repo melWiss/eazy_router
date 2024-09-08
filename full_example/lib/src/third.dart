@@ -6,7 +6,7 @@ import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 
 part 'third.g.dart';
 
-@GenerateRoute('third')
+@GenerateRoute(pathName: 'third')
 class ThirdScaffold extends StatelessWidget {
   const ThirdScaffold({super.key});
 
@@ -22,7 +22,7 @@ class ThirdScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.removePageByName(SecondScaffoldRoute().page.name!,
+                context.removeRouteByName(SecondScaffoldRoute().page.name!,
                     notifyRootWidget: true);
               },
               child: const Text('remove second from stack'),
@@ -38,7 +38,7 @@ class ThirdScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 context.popUntilTrue(
-                  (page) => page.name == HomeScaffoldRoute().page.name,
+                  (route) => route.page.name == HomeScaffoldRoute().page.name,
                 );
               },
               child: const Text('pop until home'),

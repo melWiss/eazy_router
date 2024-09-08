@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:build/src/builder/build_step.dart';
+import 'package:build/build.dart';
 import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 import 'package:eazy_router_generator/src/visitor.dart';
 import 'package:source_gen/source_gen.dart';
@@ -12,12 +12,12 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     BuildStep buildStep,
   ) {
     String pathName = annotation.peek('pathName')?.stringValue ??
-        _generateRouteNameFromClassName(element.name!);
+        generateRouteNameFromClassName(element.name!);
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
     final buffer = StringBuffer();
     String routeClassName = '${visitor.className}Route';
-    buffer.writeln('class $routeClassName extends MyPageRoute {');
+    buffer.writeln('class $routeClassName extends EazyRoute {');
     // state the class fields
     visitor.fields.forEach(
       (key, value) {
@@ -103,19 +103,19 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     buffer.write('}');
     return buffer.toString();
   }
+}
 
-  String _generateRouteNameFromClassName(String className) {
-    var pathName = '';
-    for (var char in className.runes) {
-      if (char < 'a'.codeUnitAt(0)) {
-        pathName += '-${String.fromCharCode(char).toLowerCase()}';
-      } else {
-        pathName += String.fromCharCode(char);
-      }
+String generateRouteNameFromClassName(String className) {
+  var pathName = '';
+  for (var char in className.runes) {
+    if (char < 'a'.codeUnitAt(0)) {
+      pathName += '-${String.fromCharCode(char).toLowerCase()}';
+    } else {
+      pathName += String.fromCharCode(char);
     }
-    List<String> parts = pathName.split('-');
-    parts.removeAt(0);
-    pathName = parts.join('-');
-    return pathName;
   }
+  List<String> parts = pathName.split('-');
+  parts.removeAt(0);
+  pathName = parts.join('-');
+  return pathName;
 }

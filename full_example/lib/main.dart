@@ -1,10 +1,11 @@
+import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
-import 'package:full_example/src/home.dart';
-import 'package:full_example/src/second.dart';
-import 'package:full_example/src/third.dart';
+import 'package:full_example/main.routes.dart';
 import 'package:eazy_router/eazy_router.dart';
 
+@RegisterRoutes()
 void main() {
+  registerRoutes();
   runApp(const MyApp());
 }
 
@@ -19,18 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      routerConfig: EazyRouteConfig(
-        navigatorHandler: MyNavigatorHandler(
-          initialPage: HomeScaffoldRoute().page,
-          pages: pages,
-        ),
-      ),
+      routerConfig: EazyRouter(),
     );
   }
 }
-
-Map<String, MyPageRoute Function(Map<String, String>? params)> pages = {
-  'home': (params) => HomeScaffoldRoute.fromQueryParam(params),
-  'second': (params) => SecondScaffoldRoute.fromQueryParam(params),
-  'third': (params) => ThirdScaffoldRoute.fromQueryParam(params),
-};

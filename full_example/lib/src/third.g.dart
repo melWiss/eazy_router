@@ -6,7 +6,7 @@ part of 'third.dart';
 // EazyRouteGenerator
 // **************************************************************************
 
-class ThirdScaffoldRoute extends MyPageRoute {
+class ThirdScaffoldRoute extends EazyRoute {
   ThirdScaffoldRoute();
 
   factory ThirdScaffoldRoute.fromQueryParam(Map<String, String>? params) {
