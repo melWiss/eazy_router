@@ -1,3 +1,4 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Added a code generator
+* Router is now in sync with URL address bar
