@@ -1,7 +1,7 @@
 name: eazy_router_generator
 description: "A new Flutter package project."
 version: 0.0.1
-homepage: none
+homepage: https://github.com/melWiss/eazy_router
 
 environment:
   sdk: ">=3.4.3 <4.0.0"
@@ -14,8 +14,7 @@ dependencies:
   build:
   source_gen:
   analyzer:
-  eazy_router_annotation:
-    path: ../eazy_router_annotation
+  eazy_router_annotation: ^0.0.1
   glob: ^2.1.2
 
 dev_dependencies:

@@ -1,7 +1,7 @@
 name: eazy_router
 description: "A new Flutter package project."
 version: 0.0.1
-homepage: https://oussama-maatallah.web.app/blog/eazy_router
+homepage: https://github.com/melWiss/eazy_router
 
 environment:
   sdk: ^3.3.2

@@ -1,6 +1,6 @@
 # EazyRouter Documentation
 
-EazyRouter is a flexible and easy-to-use navigation package for Flutter that leverages code generation to simplify route management. This documentation will guide you through the key features and usage of EazyRouter.
+EazyRouter is a flexible and easy-to-use navigation package for Flutter that leverages code generation to simplify route management. This documentation will guide you through the key features and usage of EazyRouter. For a live example please check [this page](https://melwiss.github.io/eazy_router).
 
 ## Table of Contents
 
