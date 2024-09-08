@@ -18,10 +18,18 @@ builders:
     build_to: cache
     applies_builders: ["source_gen:combining_builder"]
     runs_before: ["eazy_router_generator|eazy_router_registrar"]
+  eazy_router_configure_registrar:
+    import: "package:eazy_router_generator/eazy_router_generator.dart"
+    builder_factories: ["configureRouteRegistrar"] # Builder name(BuilderOption) this is a definition
+    build_extensions: { ".dart": [".registrar.json"] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen:combining_builder"]
+    runs_before: ["eazy_router_generator|eazy_router_registrar"]
   eazy_router_registrar:
     import: "package:eazy_router_generator/eazy_router_generator.dart"
     builder_factories: ["registerRoute"] # Builder name(BuilderOption) this is a definition
     build_extensions: { ".dart": [".registrar.g.part"] }
     auto_apply: dependents
     build_to: source
-    required_inputs: ["**/*.g.dart"]  # Include the pre-built files as required inputs
+    required_inputs: ["**/*.registrar.json"]  # Include the pre-built files as required inputs
