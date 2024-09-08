@@ -30,10 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  eazy_router:
-    path: ../eazy_router
-  eazy_router_annotation:
-    path: ../eazy_router_annotation
+  eazy_router: ^0.0.1
+  eazy_router_annotation: ^0.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,8 +42,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner:
-  eazy_router_generator:
-    path: ../eazy_router_generator
+  eazy_router_generator: ^0.0.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
