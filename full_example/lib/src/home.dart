@@ -12,7 +12,7 @@ class HomeScaffold extends StatelessWidget {
     this.title,
     super.key,
   });
-  @QueryParam('title')
+  
   final String? title;
 
   @override

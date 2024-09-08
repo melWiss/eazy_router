@@ -10,11 +10,6 @@ class GenerateRoute {
   });
 }
 
-class QueryParam {
-  final String? paramKey;
-  const QueryParam([this.paramKey]);
-}
-
 class RegisterRoutes {
   const RegisterRoutes();
 }
