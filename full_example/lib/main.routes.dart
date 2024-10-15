@@ -14,7 +14,7 @@ void registerRoutes() {
       {'second': (params) => SecondScaffoldRoute.fromQueryParam(params)});
   EazyRouterHandler().registerRoutes(
       {'third': (params) => ThirdScaffoldRoute.fromQueryParam(params)});
-  EazyRouterHandler().setInitialRoute(HomeScaffoldRoute());
   EazyRouterHandler().registerRoutes(
       {'home': (params) => HomeScaffoldRoute.fromQueryParam(params)});
+  EazyRouterHandler().setInitialRoute(HomeScaffoldRoute());
 }

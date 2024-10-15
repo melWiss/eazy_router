@@ -1,8 +1,8 @@
+import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:full_example/src/second.dart';
 import 'package:full_example/src/third.dart';
 import 'package:eazy_router/eazy_router.dart';
-import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 
 part 'home.g.dart';
 

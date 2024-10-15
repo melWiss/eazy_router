@@ -1,8 +1,8 @@
+import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:full_example/src/home.dart';
 import 'package:full_example/src/second.dart';
 import 'package:eazy_router/eazy_router.dart';
-import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 
 part 'third.g.dart';
 
@@ -49,6 +49,13 @@ class ThirdScaffold extends StatelessWidget {
                 context.pop(times: 2);
               },
               child: const Text('pop two times'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () {
+                context.replaceRoutes(context.routeSack.reversed.toList());
+              },
+              child: const Text('replace routes => /third/second/home'),
             ),
           ],
         ),
