@@ -9,6 +9,7 @@ abstract class IEazyRouterHandler with ChangeNotifier {
       Map<String, EazyRoute Function(Map<String, String> params)> routes);
   void push(EazyRoute route);
   void pushRoutes(List<EazyRoute> routes);
+  void replaceRoutes(List<EazyRoute> routes);
   void pop({int times = 1});
   void removeRoute(EazyRoute route, {bool notifyRootWidget = false});
   void removeRouteByName(String name, {bool notifyRootWidget = false});
@@ -43,6 +44,12 @@ class EazyRouterHandler extends IEazyRouterHandler {
   @override
   void pushRoutes(List<EazyRoute> routes) {
     _state = List.from([..._state, ...routes]);
+    notifyListeners();
+  }
+
+  @override
+  void replaceRoutes(List<EazyRoute> routes) {
+    _state = routes;
     notifyListeners();
   }
 
@@ -205,6 +212,8 @@ extension EazyRouterNavigatorContext on BuildContext {
   void push(EazyRoute route) => _navigatorHandler.push(route);
   void pushRoutes(List<EazyRoute> routes) =>
       _navigatorHandler.pushRoutes(routes);
+  void replaceRoutes(List<EazyRoute> routes) =>
+      _navigatorHandler.replaceRoutes(routes);
   void pop({int times = 1}) => _navigatorHandler.pop(times: times);
   void removeRoute(EazyRoute route, {bool notifyRootWidget = false}) =>
       _navigatorHandler.removeRoute(route, notifyRootWidget: notifyRootWidget);
@@ -217,6 +226,7 @@ extension EazyRouterNavigatorContext on BuildContext {
       _navigatorHandler.popUntilTrue(predicate);
   bool hasRoute(String name) => _navigatorHandler.hasRoute(name);
   List<EazyRoute> get routeSack => _navigatorHandler.routeStack;
+  IEazyRouterHandler get router => _navigatorHandler;
 }
 
 abstract class EazyRoute {
