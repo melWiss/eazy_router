@@ -128,6 +128,7 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
 class EazyRouter extends RouterConfig<EazyRouteState>
     with WidgetsBindingObserver {
   EazyRouter() : super(
+          backButtonDispatcher: RootBackButtonDispatcher(),
           routerDelegate: EazyRouterDelegate(EazyRouterHandler()),
           routeInformationParser: EazyRouteInformationParser(),
           routeInformationProvider: PlatformRouteInformationProvider(
