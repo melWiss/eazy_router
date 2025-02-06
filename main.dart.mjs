@@ -460,6 +460,8 @@ class CompiledApp {
       _1685: (decoder, codeUnits) => decoder.decode(codeUnits),
       _1686: () => new TextDecoder("utf-8", {fatal: true}),
       _1687: () => new TextDecoder("utf-8", {fatal: false}),
+      _1688: x0 => new WeakRef(x0),
+      _1689: x0 => x0.deref(),
       _1695: Date.now,
       _1697: s => new Date(s * 1000).getTimezoneOffset() * 60,
       _1698: s => {
@@ -483,6 +485,7 @@ class CompiledApp {
       _1705: () => new WeakMap(),
       _1706: (map, o) => map.get(o),
       _1707: (map, o, v) => map.set(o, v),
+      _1708: () => globalThis.WeakRef,
       _1718: s => JSON.stringify(s),
       _1719: s => printToConsole(s),
       _1720: a => a.join(''),
