@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eazy_router/src/eazy_route.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +8,10 @@ abstract class IEazyRouter with ChangeNotifier {
   void setInitialRoute(EazyRoute route);
   void registerRoutes(
       Map<String, EazyRoute Function(Map<String, String> params)> routes);
-  void push(EazyRoute route);
+  Future<T> push<T>(EazyRoute route);
   void pushRoutes(List<EazyRoute> routes);
   void replaceRoutes(List<EazyRoute> routes);
-  void pop({int times = 1});
+  void pop({int times = 1, dynamic data});
   void removeRoute(EazyRoute route, {bool notifyRootWidget = false});
   void removeRouteByName(String name, {bool notifyRootWidget = false});
   void popUntilTrue(bool Function(EazyRoute route) predicate);
@@ -21,6 +23,7 @@ abstract class IEazyRouter with ChangeNotifier {
 
 class EazyRouter extends IEazyRouter {
   List<EazyRoute> _state = [];
+  final List<Completer> _completersStack = [];
   EazyRoute? _initialRoute;
   final Map<String, EazyRoute Function(Map<String, String> params)>
       _registeredRoutes = {};
@@ -28,9 +31,12 @@ class EazyRouter extends IEazyRouter {
   EazyRouter();
 
   @override
-  void push(EazyRoute route) {
+  Future<T> push<T>(EazyRoute route) {
     _state = List.from([..._state, route]);
     notifyListeners();
+    Completer<T> completer = Completer();
+    _completersStack.add(completer);
+    return completer.future;
   }
 
   @override
@@ -46,10 +52,12 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
-  void pop({int times = 1}) {
+  void pop({int times = 1, dynamic data}) {
     _state.removeRange(_state.length - times, _state.length);
     _state = List.from(_state);
     notifyListeners();
+    _completersStack.last.complete(data);
+    _completersStack.removeLast();
   }
 
   @override

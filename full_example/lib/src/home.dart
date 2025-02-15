@@ -7,7 +7,7 @@ import 'package:eazy_router/eazy_router.dart';
 part 'home.g.dart';
 
 @GenerateRoute(pathName: 'home', isInitial: true)
-class HomeScaffold extends StatelessWidget {
+class HomeScaffold extends StatefulWidget {
   const HomeScaffold({
     this.title,
     super.key,
@@ -16,19 +16,31 @@ class HomeScaffold extends StatelessWidget {
   final String? title;
 
   @override
+  State<HomeScaffold> createState() => _HomeScaffoldState();
+}
+
+class _HomeScaffoldState extends State<HomeScaffold> {
+  DateTime? secondPagePoped;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home ${title ?? 'scaffold'}'),
+        title: Text('Home ${widget.title ?? 'scaffold'}'),
       ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (secondPagePoped != null)
+              Text(
+                  "Second page was poped on: ${secondPagePoped!.toIso8601String()}"),
+            const Divider(),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // use context to push
-                context.router?.push(SecondScaffoldRoute());
+                secondPagePoped = await context.router
+                    ?.push<DateTime?>(SecondScaffoldRoute());
+                setState(() {});
               },
               child: const Text('Go second'),
             ),

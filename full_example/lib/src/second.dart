@@ -23,7 +23,7 @@ class SecondScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.router?.pop();
+                context.router?.pop(data: DateTime.now());
               },
               child: const Text('pop'),
             ),
