@@ -12,7 +12,7 @@ class HomeScaffold extends StatelessWidget {
     this.title,
     super.key,
   });
-  
+
   final String? title;
 
   @override
@@ -28,7 +28,7 @@ class HomeScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // use context to push
-                context.push(SecondScaffoldRoute());
+                context.router?.push(SecondScaffoldRoute());
               },
               child: const Text('Go second'),
             ),
@@ -36,7 +36,7 @@ class HomeScaffold extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // use context to push
-                context.pushRoutes([
+                context.router?.pushRoutes([
                   SecondScaffoldRoute(),
                   ThirdScaffoldRoute(),
                 ]);

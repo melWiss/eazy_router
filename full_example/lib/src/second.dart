@@ -21,14 +21,14 @@ class SecondScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.pop();
+                context.router?.pop();
               },
               child: const Text('pop'),
             ),
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.push(ThirdScaffoldRoute());
+                context.router?.push(ThirdScaffoldRoute());
               },
               child: const Text('go to third'),
             ),

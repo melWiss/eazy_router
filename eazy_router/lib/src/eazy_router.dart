@@ -1,8 +1,7 @@
+import 'package:eazy_router/src/eazy_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-export 'package:provider/provider.dart';
 
-abstract class IEazyRouterHandler with ChangeNotifier {
+abstract class IEazyRouter with ChangeNotifier {
   Map<String, EazyRoute Function(Map<String, String> params)> get routes;
   void setInitialRoute(EazyRoute route);
   void registerRoutes(
@@ -20,20 +19,13 @@ abstract class IEazyRouterHandler with ChangeNotifier {
   Uri get currentUri;
 }
 
-class EazyRouterHandler extends IEazyRouterHandler {
+class EazyRouter extends IEazyRouter {
   List<EazyRoute> _state = [];
   EazyRoute? _initialRoute;
   final Map<String, EazyRoute Function(Map<String, String> params)>
       _registeredRoutes = {};
 
-  // create a singleton constructor
-  static EazyRouterHandler? _instance;
-
-  EazyRouterHandler._internal();
-
-  factory EazyRouterHandler() {
-    return _instance ??= EazyRouterHandler._internal();
-  }
+  EazyRouter();
 
   @override
   void push(EazyRoute route) {
@@ -148,88 +140,4 @@ class EazyRouterHandler extends IEazyRouterHandler {
     _state.insert(0, route);
     notifyListeners();
   }
-}
-
-class EazyRouterNavigator extends StatelessWidget {
-  const EazyRouterNavigator({
-    required IEazyRouterHandler navigatorHandler,
-    this.navigatorKey,
-    super.key,
-  }) : _navigatorHandler = navigatorHandler;
-
-  final IEazyRouterHandler _navigatorHandler;
-  final GlobalKey<NavigatorState>? navigatorKey;
-
-  @override
-  Widget build(BuildContext context) {
-    EazyRouterNavigatorContext._navigatorHandler = _navigatorHandler;
-    return ChangeNotifierProvider<IEazyRouterHandler>.value(
-      value: _navigatorHandler,
-      builder: (_, __) => ListenableBuilder(
-        listenable: _navigatorHandler,
-        child: Navigator(
-          pages: _navigatorHandler.routeStack
-              .map<Page>(
-                (r) => r.page,
-              )
-              .toList(),
-          key: navigatorKey,
-          onGenerateRoute: (settings) {
-            if (settings.name != null &&
-                _navigatorHandler.hasRoute(settings.name!)) {
-              return _navigatorHandler
-                  .routes[settings.name]!
-                      (settings.arguments as Map<String, String>)
-                  .page
-                  .createRoute(context);
-            }
-            return _navigatorHandler.routes.values
-                .first(settings.arguments as Map<String, String>)
-                .page
-                .createRoute(context);
-          },
-          onDidRemovePage: (page) {
-            _navigatorHandler.removeRouteByName(page.name!,
-                notifyRootWidget: true);
-          },
-        ),
-        builder: (context, child) {
-          if (child == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return child;
-        },
-      ),
-    );
-  }
-}
-
-extension EazyRouterNavigatorContext on BuildContext {
-  static late IEazyRouterHandler _navigatorHandler;
-
-  void push(EazyRoute route) => _navigatorHandler.push(route);
-  void pushRoutes(List<EazyRoute> routes) =>
-      _navigatorHandler.pushRoutes(routes);
-  void replaceRoutes(List<EazyRoute> routes) =>
-      _navigatorHandler.replaceRoutes(routes);
-  void pop({int times = 1}) => _navigatorHandler.pop(times: times);
-  void removeRoute(EazyRoute route, {bool notifyRootWidget = false}) =>
-      _navigatorHandler.removeRoute(route, notifyRootWidget: notifyRootWidget);
-  void removeRouteByName(String name, {bool notifyRootWidget = false}) =>
-      _navigatorHandler.removeRouteByName(
-        name,
-        notifyRootWidget: notifyRootWidget,
-      );
-  void popUntilTrue(bool Function(EazyRoute route) predicate) =>
-      _navigatorHandler.popUntilTrue(predicate);
-  bool hasRoute(String name) => _navigatorHandler.hasRoute(name);
-  List<EazyRoute> get routeSack => _navigatorHandler.routeStack;
-  IEazyRouterHandler get router => _navigatorHandler;
-}
-
-abstract class EazyRoute {
-  Map<String, String> get queryParameters;
-  Page get page;
 }

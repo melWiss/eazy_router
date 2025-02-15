@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:eazy_router_annotation/eazy_router_annotation.dart';
+import 'package:eazy_router_generator/src/utils/strings.dart';
 import 'package:eazy_router_generator/src/visitor.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -46,17 +47,17 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     buffer.writeln('return $routeClassName(');
     visitor.fields.forEach(
       (key, value) {
-        if (value.contains('int')) {
+        if (value.equal('int')) {
           buffer.writeln("$key: int.parse(params?['$key']),");
-        } else if (value.contains('double')) {
+        } else if (value.equal('double')) {
           buffer.writeln("$key: double.parse(params?['$key']),");
-        } else if (value.contains('bool')) {
+        } else if (value.equal('bool')) {
           buffer.writeln("$key: bool.parse(params?['$key']),");
-        } else if (value.contains('String')) {
+        } else if (value.equal('String')) {
           buffer.writeln("$key: params?['$key'],");
-        } else if (value.contains('List') || value.contains('Map')) {
+        } else if (value.equal('List') || value.equal('Map')) {
           buffer.writeln("$key: jsonDecode(params?['$key']),");
-        } else if (value.contains('DateTime')) {
+        } else if (value.equal('DateTime')) {
           buffer.writeln("$key: DateTime.parse(params?['$key']),");
         } else {
           buffer.writeln('// key=$key,\tvalue=$value');

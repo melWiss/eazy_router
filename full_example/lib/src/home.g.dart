@@ -15,8 +15,8 @@ class HomeScaffoldRoute extends EazyRoute {
 
   factory HomeScaffoldRoute.fromQueryParam(Map<String, String>? params) {
     return HomeScaffoldRoute(
-      title: params?['title'],
-    );
+// key=title,	value=String?
+        );
   }
 
   @override

@@ -22,7 +22,8 @@ class ThirdScaffold extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.removeRouteByName(SecondScaffoldRoute().page.name!,
+                context.router?.removeRouteByName(
+                    SecondScaffoldRoute().page.name!,
                     notifyRootWidget: true);
               },
               child: const Text('remove second from stack'),
@@ -30,14 +31,14 @@ class ThirdScaffold extends StatelessWidget {
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.pop();
+                context.router?.pop();
               },
               child: const Text('pop'),
             ),
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.popUntilTrue(
+                context.router?.popUntilTrue(
                   (route) => route.page.name == HomeScaffoldRoute().page.name,
                 );
               },
@@ -46,14 +47,17 @@ class ThirdScaffold extends StatelessWidget {
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.pop(times: 2);
+                context.router?.pop(times: 2);
               },
               child: const Text('pop two times'),
             ),
             const Divider(),
             ElevatedButton(
               onPressed: () {
-                context.replaceRoutes(context.routeSack.reversed.toList());
+                if (context.router != null) {
+                  context.router!.replaceRoutes(
+                      context.router!.routeStack.reversed.toList());
+                }
               },
               child: const Text('replace routes => /third/second/home'),
             ),

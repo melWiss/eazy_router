@@ -5,6 +5,7 @@ import 'package:eazy_router/eazy_router.dart';
 
 @RegisterRoutes()
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   registerRoutes();
   runApp(const MyApp());
 }
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      routerConfig: EazyRouter(),
+      routerConfig: EazyRouterConfiguration.instance,
     );
   }
 }
