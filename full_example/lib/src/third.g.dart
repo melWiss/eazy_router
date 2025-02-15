@@ -14,10 +14,11 @@ class ThirdScaffoldRoute extends EazyRoute {
   }
 
   @override
-  Page get page => MaterialPage(
+  Page get page => AdaptivePage(
         key: const ValueKey('third'),
         name: 'third',
         arguments: queryParameters,
+        canPop: true,
         child: ThirdScaffold(),
       );
 

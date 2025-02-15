@@ -14,6 +14,9 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
   ) {
     String pathName = annotation.peek('pathName')?.stringValue ??
         generateRouteNameFromClassName(element.name!);
+    String transition =
+        annotation.peek('transition')?.stringValue ?? 'AdaptivePage';
+    bool canPop = annotation.peek('canPop')?.boolValue ?? true;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
     final buffer = StringBuffer();
@@ -70,10 +73,11 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
 
     // state the page getter
     buffer.writeln('@override');
-    buffer.writeln('Page get page => MaterialPage(');
+    buffer.writeln('Page get page => $transition(');
     buffer.writeln("key: const ValueKey('$pathName'),");
     buffer.writeln("name: '$pathName',");
     buffer.writeln("arguments: queryParameters,");
+    buffer.writeln("canPop: $canPop,");
     buffer.writeln("child: ${visitor.className} (");
     visitor.fields.forEach(
       (key, value) {

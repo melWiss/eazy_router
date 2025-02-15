@@ -192,11 +192,10 @@ packages:
   eazy_router_annotation:
     dependency: "direct main"
     description:
-      name: eazy_router_annotation
-      sha256: "2829baaa33ebb34943ea6a43945e677eb57541b7ea54369a6dc5cb8217c5af71"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1"
+      path: "../eazy_router_annotation"
+      relative: true
+    source: path
+    version: "1.0.0"
   eazy_router_generator:
     dependency: "direct dev"
     description:

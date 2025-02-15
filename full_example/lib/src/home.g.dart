@@ -20,10 +20,11 @@ class HomeScaffoldRoute extends EazyRoute {
   }
 
   @override
-  Page get page => MaterialPage(
+  Page get page => AdaptivePage(
         key: const ValueKey('home'),
         name: 'home',
         arguments: queryParameters,
+        canPop: true,
         child: HomeScaffold(
           title: title,
         ),

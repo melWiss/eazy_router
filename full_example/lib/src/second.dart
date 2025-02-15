@@ -1,5 +1,7 @@
 import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
+import 'package:full_example/src/bottom_sheet.dart';
+import 'package:full_example/src/processing_dialog.dart';
 import 'package:full_example/src/third.dart';
 import 'package:eazy_router/eazy_router.dart';
 
@@ -31,6 +33,22 @@ class SecondScaffold extends StatelessWidget {
                 context.router?.push(ThirdScaffoldRoute());
               },
               child: const Text('go to third'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () {
+                context.router?.push(BottomSheetExampleRoute());
+              },
+              child: const Text('open bottom sheet'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () async {
+                context.router?.push(ProcessingDialogRoute());
+                await Future.delayed(const Duration(seconds: 5));
+                context.router?.pop();
+              },
+              child: const Text('open processing dialog'),
             ),
           ],
         ),

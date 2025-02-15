@@ -14,10 +14,11 @@ class SecondScaffoldRoute extends EazyRoute {
   }
 
   @override
-  Page get page => MaterialPage(
+  Page get page => AdaptivePage(
         key: const ValueKey('second'),
         name: 'second',
         arguments: queryParameters,
+        canPop: true,
         child: SecondScaffold(),
       );
 
