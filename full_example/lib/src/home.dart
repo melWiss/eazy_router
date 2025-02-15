@@ -27,6 +27,13 @@ class _HomeScaffoldState extends State<HomeScaffold> {
       appBar: AppBar(
         title: Text('Home ${widget.title ?? 'scaffold'}'),
       ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: 0,
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'home'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'profile'),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

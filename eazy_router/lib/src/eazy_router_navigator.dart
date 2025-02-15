@@ -1,3 +1,4 @@
+import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/src/eazy_router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,4 +60,10 @@ class EazyRouterNavigator extends StatelessWidget {
 extension EazyRouterNavigatorContext on BuildContext {
   IEazyRouter? get router =>
       findAncestorWidgetOfExactType<EazyRouterNavigator>()?.router;
+  void showSnackBar(SnackBar snackBar,
+      {AnimationStyle? snackBarAnimationStyle}) {
+    EazyRouterConfiguration.instance.scaffoldMessengerKey.currentState
+        ?.showSnackBar(snackBar,
+            snackBarAnimationStyle: snackBarAnimationStyle);
+  }
 }

@@ -25,4 +25,6 @@ class EazyRouterConfiguration extends RouterConfig<EazyRouteState>
 
   EazyRouterDelegate get delegate => routerDelegate as EazyRouterDelegate;
   IEazyRouter get router => delegate.router;
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 }

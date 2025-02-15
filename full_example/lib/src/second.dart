@@ -43,6 +43,18 @@ class SecondScaffold extends StatelessWidget {
             ),
             const Divider(),
             ElevatedButton(
+              onPressed: () {
+                context.showSnackBar(
+                  SampleToast(
+                    title: 'Hello world',
+                    toastDuration: const Duration(seconds: 3),
+                  ),
+                );
+              },
+              child: const Text('show a snackbar'),
+            ),
+            const Divider(),
+            ElevatedButton(
               onPressed: () async {
                 context.router?.push(ProcessingDialogRoute());
                 await Future.delayed(const Duration(seconds: 5));
@@ -55,4 +67,34 @@ class SecondScaffold extends StatelessWidget {
       ),
     );
   }
+}
+
+class SampleToast extends SnackBar {
+  SampleToast({
+    super.key,
+    required String title,
+    ToastType toastType = ToastType.info,
+    bool showClose = false,
+    Duration toastDuration = Durations.medium2,
+  }) : super(
+          content: Text(title),
+          backgroundColor: toastType.color,
+          showCloseIcon: showClose,
+          duration: toastDuration,
+          behavior: SnackBarBehavior.floating,
+        );
+}
+
+enum ToastType {
+  info,
+  danger,
+  warning,
+  success;
+
+  Color get color => switch (this) {
+        danger => Colors.red,
+        warning => Colors.orange,
+        success => Colors.green,
+        _ => Colors.black,
+      };
 }
