@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 abstract class IEazyRouter with ChangeNotifier {
   Map<String, EazyRoute Function(Map<String, String> params)> get routes;
   void setInitialRoute(EazyRoute route);
+  void setNotFoundRoute(EazyRoute route);
   void registerRoutes(
       Map<String, EazyRoute Function(Map<String, String> params)> routes);
   Future<T> push<T>(EazyRoute route);
@@ -25,6 +26,7 @@ class EazyRouter extends IEazyRouter {
   List<EazyRoute> _state = [];
   final List<Completer> _completersStack = [];
   EazyRoute? _initialRoute;
+  EazyRoute? _notFoundRoute;
   final Map<String, EazyRoute Function(Map<String, String> params)>
       _registeredRoutes = {};
 
@@ -103,6 +105,9 @@ class EazyRouter extends IEazyRouter {
     for (var path in uri.pathSegments) {
       if (routes[path] != null) {
         _state.add(routes[path]!(uri.queryParameters));
+      } else if (_notFoundRoute != null) {
+        _state.add(_notFoundRoute!);
+        break;
       }
     }
     if (_state.isEmpty) {
@@ -147,5 +152,10 @@ class EazyRouter extends IEazyRouter {
     _initialRoute = route;
     _state.insert(0, route);
     notifyListeners();
+  }
+  
+  @override
+  void setNotFoundRoute(EazyRoute route) {
+    _notFoundRoute = route;
   }
 }

@@ -3,6 +3,7 @@ library eazy_router_annotation;
 class GenerateRoute {
   final String? pathName;
   final bool isInitial;
+  final bool isNotFoundRoute;
   final bool canPop;
   final String transition;
 
@@ -11,6 +12,7 @@ class GenerateRoute {
     this.isInitial = false,
     this.canPop = true,
     this.transition = RouteTransitions.adaptive,
+    this.isNotFoundRoute = false,
   });
 }
 

@@ -36,6 +36,10 @@ class EazyRouteRegistrar extends GeneratorForAnnotation<RegisterRoutes> {
         buffer.writeln(
             "EazyRouterConfiguration.instance.router.setInitialRoute(${model.routeClassName}());");
       }
+      if (model.isNotFoundRoute) {
+        buffer.writeln(
+            "EazyRouterConfiguration.instance.router.setNotFoundRoute(${model.routeClassName}());");
+      }
     }
 
     buffer.writeln("}");

@@ -24,6 +24,7 @@ class RegistrarConfigureGenerator
       routeClassName: routeClassName,
       pageFilePath: buildStep.inputId.path,
       isIinitial: annotation.peek('isInitial')?.boolValue ?? false,
+      isNotFoundRoute: annotation.peek('isNotFoundRoute')?.boolValue ?? false,
     );
     return model.toJson();
   }
