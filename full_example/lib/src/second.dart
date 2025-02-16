@@ -8,9 +8,15 @@ import 'package:eazy_router/eazy_router.dart';
 part 'second.g.dart';
 
 @GenerateRoute(pathName: 'second')
-class SecondScaffold extends StatelessWidget {
+class SecondScaffold extends StatefulWidget {
   const SecondScaffold({super.key});
 
+  @override
+  State<SecondScaffold> createState() => _SecondScaffoldState();
+}
+
+class _SecondScaffoldState extends State<SecondScaffold> {
+  int selected = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +42,14 @@ class SecondScaffold extends StatelessWidget {
             ),
             const Divider(),
             ElevatedButton(
-              onPressed: () {
-                context.router?.push(BottomSheetExampleRoute());
+              onPressed: () async {
+                var result =
+                    await context.router?.push<int?>(BottomSheetExampleRoute());
+                setState(() {
+                  selected = result ?? 0;
+                });
               },
-              child: const Text('open bottom sheet'),
+              child: Text('open bottom sheet $selected'),
             ),
             const Divider(),
             ElevatedButton(
@@ -47,7 +57,7 @@ class SecondScaffold extends StatelessWidget {
                 context.showSnackBar(
                   SampleToast(
                     title: 'Hello world',
-                    toastDuration: const Duration(seconds: 3),
+                    toastDuration: const Duration(seconds: 10),
                   ),
                 );
               },
@@ -58,7 +68,9 @@ class SecondScaffold extends StatelessWidget {
               onPressed: () async {
                 context.router?.push(ProcessingDialogRoute());
                 await Future.delayed(const Duration(seconds: 5));
-                context.router?.pop();
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  context.router?.pop();
+                });
               },
               child: const Text('open processing dialog'),
             ),
