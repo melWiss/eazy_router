@@ -31,10 +31,14 @@ class EazyRouteRegistrar extends GeneratorForAnnotation<RegisterRoutes> {
       RegistrarConfigModel model =
           RegistrarConfigModel.fromJson(file.readAsStringSync());
       buffer.writeln(
-          "EazyRouterHandler().registerRoutes({'${model.pathName}': (params) => ${model.routeClassName}.fromQueryParam(params)});");
+          "EazyRouterConfiguration.instance.router.registerRoutes({'${model.pathName}': (params) => ${model.routeClassName}.fromQueryParam(params),},);");
       if (model.isIinitial) {
         buffer.writeln(
-            "EazyRouterHandler().setInitialRoute(${model.routeClassName}());");
+            "EazyRouterConfiguration.instance.router.setInitialRoute(${model.routeClassName}());");
+      }
+      if (model.isNotFoundRoute) {
+        buffer.writeln(
+            "EazyRouterConfiguration.instance.router.setNotFoundRoute(${model.routeClassName}());");
       }
     }
 

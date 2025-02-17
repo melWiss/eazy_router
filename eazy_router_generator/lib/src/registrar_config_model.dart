@@ -5,11 +5,13 @@ class RegistrarConfigModel {
   final String routeClassName;
   final String pageFilePath;
   final bool isIinitial;
+  final bool isNotFoundRoute;
   RegistrarConfigModel({
     required this.pathName,
     required this.routeClassName,
     required this.pageFilePath,
     required this.isIinitial,
+    required this.isNotFoundRoute,
   });
 
   RegistrarConfigModel copyWith({
@@ -17,12 +19,14 @@ class RegistrarConfigModel {
     String? routeClassName,
     String? pageFilePath,
     bool? isIinitial,
+    bool? isNotFoundRoute,
   }) {
     return RegistrarConfigModel(
       pathName: pathName ?? this.pathName,
       routeClassName: routeClassName ?? this.routeClassName,
       pageFilePath: pageFilePath ?? this.pageFilePath,
       isIinitial: isIinitial ?? this.isIinitial,
+      isNotFoundRoute: isNotFoundRoute ?? this.isNotFoundRoute,
     );
   }
 
@@ -32,6 +36,7 @@ class RegistrarConfigModel {
       'routeClassName': routeClassName,
       'pageFilePath': pageFilePath,
       'isIinitial': isIinitial,
+      'isNotFoundRoute': isNotFoundRoute,
     };
   }
 
@@ -41,6 +46,7 @@ class RegistrarConfigModel {
       routeClassName: map['routeClassName'] ?? '',
       pageFilePath: map['pageFilePath'] ?? '',
       isIinitial: map['isIinitial'] ?? false,
+      isNotFoundRoute: map['isNotFoundRoute'] ?? false,
     );
   }
 
@@ -51,7 +57,7 @@ class RegistrarConfigModel {
 
   @override
   String toString() {
-    return 'RegistrarConfigModel(pathName: $pathName, routeClassName: $routeClassName, pageFilePath: $pageFilePath, isIinitial: $isIinitial)';
+    return 'RegistrarConfigModel(pathName: $pathName, routeClassName: $routeClassName, pageFilePath: $pageFilePath, isIinitial: $isIinitial, isNotFoundRoute: $isNotFoundRoute)';
   }
 
   @override
@@ -62,7 +68,8 @@ class RegistrarConfigModel {
         other.pathName == pathName &&
         other.routeClassName == routeClassName &&
         other.pageFilePath == pageFilePath &&
-        other.isIinitial == isIinitial;
+        other.isIinitial == isIinitial &&
+        other.isNotFoundRoute == isNotFoundRoute;
   }
 
   @override
@@ -70,6 +77,7 @@ class RegistrarConfigModel {
     return pathName.hashCode ^
         routeClassName.hashCode ^
         pageFilePath.hashCode ^
-        isIinitial.hashCode;
+        isIinitial.hashCode ^
+        isNotFoundRoute.hashCode;
   }
 }

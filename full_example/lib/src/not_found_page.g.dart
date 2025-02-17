@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'second.dart';
+part of 'not_found_page.dart';
 
 // **************************************************************************
 // EazyRouteGenerator
 // **************************************************************************
 
-class SecondScaffoldRoute extends EazyRoute {
-  SecondScaffoldRoute();
+class NotFoundPageRoute extends EazyRoute {
+  NotFoundPageRoute();
 
-  factory SecondScaffoldRoute.fromQueryParam(Map<String, String>? params) {
-    return SecondScaffoldRoute();
+  factory NotFoundPageRoute.fromQueryParam(Map<String, String>? params) {
+    return NotFoundPageRoute();
   }
 
   @override
   Page get page => AdaptivePage(
-        key: const ValueKey('second'),
-        name: 'second',
+        key: const ValueKey('not-found'),
+        name: 'not-found',
         arguments: queryParameters,
         canPop: true,
-        child: SecondScaffold(),
+        child: NotFoundPage(),
       );
 
   @override

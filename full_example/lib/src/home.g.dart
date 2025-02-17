@@ -15,15 +15,16 @@ class HomeScaffoldRoute extends EazyRoute {
 
   factory HomeScaffoldRoute.fromQueryParam(Map<String, String>? params) {
     return HomeScaffoldRoute(
-      title: params?['title'],
-    );
+// key=title,	value=String?
+        );
   }
 
   @override
-  Page get page => MaterialPage(
+  Page get page => AdaptivePage(
         key: const ValueKey('home'),
         name: 'home',
         arguments: queryParameters,
+        canPop: true,
         child: HomeScaffold(
           title: title,
         ),
