@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:eazy_router/src/eazy_route.dart';
-import 'package:flutter/material.dart';
+import 'package:eazy_router/src/other/eazy_route_middleware.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class IEazyRouter with ChangeNotifier {
   Map<String, EazyRoute Function(Map<String, String> params)> get routes;
@@ -9,7 +10,7 @@ abstract class IEazyRouter with ChangeNotifier {
   void setNotFoundRoute(EazyRoute route);
   void registerRoutes(
       Map<String, EazyRoute Function(Map<String, String> params)> routes);
-  Future<T> push<T>(EazyRoute route);
+  Future<T?> push<T>(EazyRoute route);
   void pushRoutes(List<EazyRoute> routes);
   void replaceRoutes(List<EazyRoute> routes);
   void pop({int times = 1, dynamic data});
@@ -33,12 +34,33 @@ class EazyRouter extends IEazyRouter {
   EazyRouter();
 
   @override
-  Future<T> push<T>(EazyRoute route) {
-    _state = List.from([..._state, route]);
-    notifyListeners();
-    Completer<T> completer = Completer();
-    _completersStack.add(completer);
-    return completer.future;
+  Future<T?> push<T>(EazyRoute route) {
+    if (!_resolveRoute(route)) {
+      _state = List.from([..._state, route]);
+      notifyListeners();
+      Completer<T> completer = Completer();
+      _completersStack.add(completer);
+      return completer.future;
+    }
+    return Future.value(null);
+  }
+
+  bool _resolveRoute(EazyRoute route) {
+    var resolver = EazyRouterResolver(
+      redirect: (newRouteStack) =>
+          replaceRoutes(newRouteStack.map((e) => e as EazyRoute).toList()),
+      goHome: () =>
+          _initialRoute != null ? replaceRoutes([_initialRoute!]) : null,
+      goNotFound: () =>
+          _notFoundRoute != null ? push(_notFoundRoute!) : null,
+      push: (route) => push(route as EazyRoute),
+    );
+    for (var middleware in route.middlewares) {
+      if (!middleware.onNavigation(resolver)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override

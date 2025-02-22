@@ -1,6 +1,7 @@
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
+import 'package:full_example/src/admin_page.dart';
 import 'package:full_example/src/bottom_sheet.dart';
 import 'package:full_example/src/processing_dialog.dart';
 import 'package:full_example/src/third.dart';
@@ -73,6 +74,13 @@ class _SecondScaffoldState extends State<SecondScaffold> {
                 });
               },
               child: const Text('open processing dialog'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () async {
+                context.router?.push(AdminPageRoute());
+              },
+              child: const Text('open admin page'),
             ),
           ],
         ),

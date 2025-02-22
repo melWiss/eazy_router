@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
@@ -17,6 +18,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     String transition =
         annotation.peek('transition')?.stringValue ?? 'AdaptivePage';
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
+    List<DartObject>? middlewares = annotation.peek('middlewares')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
     final buffer = StringBuffer();
@@ -104,6 +106,14 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
       },
     );
     buffer.writeln('};');
+    if (middlewares?.isNotEmpty == true) {
+      buffer.writeln('@override');
+      buffer.writeln('List<EazyRouteMiddleware> get middlewares => [');
+      for (var middleware in middlewares!) {
+        buffer.writeln('${middleware.type?.getDisplayString()}(),');
+      }
+      buffer.writeln('];');
+    }
 
     buffer.write('}');
     return buffer.toString();
