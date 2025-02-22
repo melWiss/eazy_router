@@ -35,7 +35,7 @@ class EazyRouter extends IEazyRouter {
 
   @override
   Future<T?> push<T>(EazyRoute route) {
-    if (!_resolveRoute(route)) {
+    if (_canNavigate(route)) {
       _state = List.from([..._state, route]);
       notifyListeners();
       Completer<T> completer = Completer();
@@ -45,7 +45,7 @@ class EazyRouter extends IEazyRouter {
     return Future.value(null);
   }
 
-  bool _resolveRoute(EazyRoute route) {
+  bool _canNavigate(EazyRoute route) {
     var resolver = EazyRouterResolver(
       redirect: (newRouteStack) =>
           replaceRoutes(newRouteStack.map((e) => e as EazyRoute).toList()),
@@ -57,10 +57,10 @@ class EazyRouter extends IEazyRouter {
     );
     for (var middleware in route.middlewares) {
       if (!middleware.onNavigation(resolver)) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   @override
