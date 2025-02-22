@@ -14,8 +14,8 @@ dependencies:
   build:
   source_gen:
   analyzer:
-  eazy_router_annotation:
-    path: ../eazy_router_annotation
+  eazy_router:
+    path: ../eazy_router
   glob: ^2.1.2
 
 dev_dependencies:

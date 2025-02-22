@@ -1,6 +1,6 @@
-import 'package:eazy_router_annotation/eazy_router_annotation.dart';
-import 'package:flutter/material.dart';
 import 'package:eazy_router/eazy_router.dart';
+import 'package:eazy_router/eazy_router_annotation.dart';
+import 'package:flutter/material.dart';
 part 'bottom_sheet.g.dart';
 
 @GenerateRoute(transition: RouteTransitions.bottomsheet)

@@ -1,9 +1,9 @@
-import 'package:eazy_router_annotation/eazy_router_annotation.dart';
+import 'package:eazy_router/eazy_router.dart';
+import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:full_example/src/bottom_sheet.dart';
 import 'package:full_example/src/processing_dialog.dart';
 import 'package:full_example/src/third.dart';
-import 'package:eazy_router/eazy_router.dart';
 
 part 'second.g.dart';
 
