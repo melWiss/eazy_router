@@ -56,8 +56,8 @@ class _SecondScaffoldState extends State<SecondScaffold> {
             const Divider(),
             ElevatedButton(
               onPressed: () async {
-                var result =
-                    await context.router?.push<int?>(AnonymousBottomSheetRoute());
+                var result = await context.router
+                    ?.push<int?>(AnonymousBottomSheetRoute());
                 setState(() {
                   selected = result ?? 0;
                 });
@@ -86,6 +86,16 @@ class _SecondScaffoldState extends State<SecondScaffold> {
                 });
               },
               child: const Text('open processing dialog'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () async {
+                var router = context.router!;
+                router.pushTop(ProcessingDialogRoute());
+                await Future.delayed(const Duration(seconds: 5));
+                router.popTop();
+              },
+              child: const Text('open always on top processing dialog'),
             ),
             const Divider(),
             ElevatedButton(
