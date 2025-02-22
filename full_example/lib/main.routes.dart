@@ -37,7 +37,7 @@ void registerRoutes() {
   );
   EazyRouterConfiguration.instance.router.registerRoutes(
     {
-      'admin-page': (params) => AdminPageRoute.fromQueryParam(params),
+      'admin': (params) => AdminPageRoute.fromQueryParam(params),
     },
   );
   EazyRouterConfiguration.instance.router.registerRoutes(

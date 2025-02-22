@@ -51,8 +51,7 @@ class EazyRouter extends IEazyRouter {
           replaceRoutes(newRouteStack.map((e) => e as EazyRoute).toList()),
       goHome: () =>
           _initialRoute != null ? replaceRoutes([_initialRoute!]) : null,
-      goNotFound: () =>
-          _notFoundRoute != null ? push(_notFoundRoute!) : null,
+      goNotFound: () => _notFoundRoute != null ? push(_notFoundRoute!) : null,
       push: (route) => push(route as EazyRoute),
     );
     for (var middleware in route.middlewares) {
@@ -65,12 +64,18 @@ class EazyRouter extends IEazyRouter {
 
   @override
   void pushRoutes(List<EazyRoute> routes) {
+    for (var route in routes) {
+      if (!_canNavigate(route)) return;
+    }
     _state = List.from([..._state, ...routes]);
     notifyListeners();
   }
 
   @override
   void replaceRoutes(List<EazyRoute> routes) {
+    for (var route in routes) {
+      if (!_canNavigate(route)) return;
+    }
     _state = routes;
     notifyListeners();
   }
@@ -126,16 +131,20 @@ class EazyRouter extends IEazyRouter {
     _state = List.empty(growable: true);
     for (var path in uri.pathSegments) {
       if (routes[path] != null) {
-        _state.add(routes[path]!(uri.queryParameters));
+        if (_canNavigate(routes[path]!(uri.queryParameters))) {
+          _state.add(routes[path]!(uri.queryParameters));
+        } else {
+          return;
+        }
       } else if (_notFoundRoute != null) {
         _state.add(_notFoundRoute!);
         break;
       }
     }
     if (_state.isEmpty) {
-      if (_initialRoute != null) {
+      if (_initialRoute != null && _canNavigate(_initialRoute!)) {
         _state.add(_initialRoute!);
-      } else {
+      } else if (_canNavigate(routes.values.first(uri.queryParameters))) {
         _state.add(routes.values.first(uri.queryParameters));
       }
     }
@@ -175,7 +184,7 @@ class EazyRouter extends IEazyRouter {
     _state.insert(0, route);
     notifyListeners();
   }
-  
+
   @override
   void setNotFoundRoute(EazyRoute route) {
     _notFoundRoute = route;

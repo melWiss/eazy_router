@@ -1,11 +1,11 @@
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:eazy_router/eazy_router.dart';
 import 'package:flutter/material.dart';
-import 'package:full_example/src/home.dart';
+import 'package:full_example/src/second.dart';
 import 'package:full_example/src/third.dart';
 part 'admin_page.g.dart';
 
-@GenerateRoute(middlewares: [AdminMiddleware()])
+@GenerateRoute(pathName: 'admin', middlewares: [AdminMiddleware()])
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
 
@@ -20,14 +20,14 @@ class AdminPage extends StatelessWidget {
 }
 
 class AdminMiddleware extends EazyRouteMiddleware {
-  static int decider = 0;
+  static int decider = 6;
   const AdminMiddleware();
   @override
   bool onNavigation(EazyRouterResolver resolver) {
     if (decider++ % 5 == 0) {
       return true;
     } else if (decider % 5 == 1) {
-      resolver.redirect([HomeScaffoldRoute(title: 'FromAdmin')]);
+      resolver.redirect([SecondScaffoldRoute()]);
     } else if (decider % 5 == 2) {
       resolver.goHome();
     } else if (decider % 5 == 3) {

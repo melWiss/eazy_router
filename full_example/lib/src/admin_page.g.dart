@@ -15,8 +15,8 @@ class AdminPageRoute extends EazyRoute {
 
   @override
   Page get page => AdaptivePage(
-        key: const ValueKey('admin-page'),
-        name: 'admin-page',
+        key: const ValueKey('admin'),
+        name: 'admin',
         arguments: queryParameters,
         canPop: true,
         child: AdminPage(),

@@ -1,6 +1,7 @@
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
+import 'package:full_example/src/admin_page.dart';
 import 'package:full_example/src/second.dart';
 import 'package:full_example/src/third.dart';
 
@@ -61,6 +62,18 @@ class _HomeScaffoldState extends State<HomeScaffold> {
                 ]);
               },
               child: const Text('Push second and third'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () {
+                // use context to push
+                context.router?.pushRoutes([
+                  SecondScaffoldRoute(),
+                  ThirdScaffoldRoute(),
+                  AdminPageRoute(),
+                ]);
+              },
+              child: const Text('Push second, third and admin'),
             ),
           ],
         ),
