@@ -7,6 +7,7 @@ part 'processing_dialog.g.dart';
 @GenerateRoute(
   pathName: 'processing',
   canPop: false,
+  isAnonymous: true,
   transition: RouteTransitions.dialog,
 )
 class ProcessingDialog extends StatelessWidget {

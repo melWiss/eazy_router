@@ -2,6 +2,7 @@ import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:full_example/src/admin_page.dart';
+import 'package:full_example/src/anonymous_bottom_sheet.dart';
 import 'package:full_example/src/bottom_sheet.dart';
 import 'package:full_example/src/processing_dialog.dart';
 import 'package:full_example/src/third.dart';
@@ -51,6 +52,17 @@ class _SecondScaffoldState extends State<SecondScaffold> {
                 });
               },
               child: Text('open bottom sheet $selected'),
+            ),
+            const Divider(),
+            ElevatedButton(
+              onPressed: () async {
+                var result =
+                    await context.router?.push<int?>(AnonymousBottomSheetRoute());
+                setState(() {
+                  selected = result ?? 0;
+                });
+              },
+              child: Text('open anonymous bottom sheet $selected'),
             ),
             const Divider(),
             ElevatedButton(

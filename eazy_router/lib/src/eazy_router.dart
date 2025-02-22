@@ -156,8 +156,10 @@ class EazyRouter extends IEazyRouter {
     String completePath = '';
     Map<String, String> params = {};
     for (var route in _state) {
-      completePath += '/${route.page.name}';
-      params.addAll((route.queryParameters as Map<String, String>?) ?? {});
+      if (!route.isAnonymous) {
+        completePath += '/${route.page.name}';
+        params.addAll((route.queryParameters as Map<String, String>?) ?? {});
+      }
     }
     return Uri(
       path: completePath,

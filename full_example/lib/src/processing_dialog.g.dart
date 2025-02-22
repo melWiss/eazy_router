@@ -24,4 +24,6 @@ class ProcessingDialogRoute extends EazyRoute {
 
   @override
   Map<String, String> get queryParameters => {};
+  @override
+  bool get isAnonymous => true;
 }

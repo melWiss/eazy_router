@@ -18,6 +18,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     String transition =
         annotation.peek('transition')?.stringValue ?? 'AdaptivePage';
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
+    bool isAnonymous = annotation.peek('isAnonymous')?.boolValue ?? false;
     List<DartObject>? middlewares = annotation.peek('middlewares')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
@@ -113,6 +114,10 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
         buffer.writeln('${middleware.type?.getDisplayString()}(),');
       }
       buffer.writeln('];');
+    }
+    if (isAnonymous) {
+      buffer.writeln('@override');
+      buffer.writeln('bool get isAnonymous => $isAnonymous;');
     }
 
     buffer.write('}');

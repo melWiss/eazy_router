@@ -6,5 +6,6 @@ import 'package:flutter/material.dart';
 abstract class EazyRoute extends AbstractEazyRoute {
   Map<String, String> get queryParameters;
   Page get page;
+  bool get isAnonymous => false;
   List<EazyRouteMiddleware> get middlewares => [];
 }

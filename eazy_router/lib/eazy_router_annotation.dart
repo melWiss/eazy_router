@@ -7,6 +7,7 @@ class GenerateRoute {
   final bool isInitial;
   final bool isNotFoundRoute;
   final bool canPop;
+  final bool isAnonymous;
   final String transition;
   final List<EazyRouteMiddleware> middlewares;
 
@@ -14,6 +15,7 @@ class GenerateRoute {
     this.pathName,
     this.isInitial = false,
     this.canPop = true,
+    this.isAnonymous = false,
     this.transition = RouteTransitions.adaptive,
     this.isNotFoundRoute = false,
     this.middlewares = const [],
