@@ -41,7 +41,7 @@ class EazyRouterNavigator extends StatelessWidget {
                 .createRoute(context);
           },
           onDidRemovePage: (page) {
-            router.removeRouteByName(page.name!, notifyRootWidget: true);
+            router.removePageRoute(page, notifyRootWidget: true);
           },
         ),
         builder: (context, child) {

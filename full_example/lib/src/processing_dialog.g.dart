@@ -15,7 +15,7 @@ class ProcessingDialogRoute extends EazyRoute {
 
   @override
   Page get page => DialogPage(
-        key: const ValueKey('processing'),
+        key: ValueKey('processing~$hashCode'),
         name: 'processing',
         arguments: queryParameters,
         canPop: false,

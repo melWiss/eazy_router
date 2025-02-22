@@ -19,6 +19,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
         annotation.peek('transition')?.stringValue ?? 'AdaptivePage';
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
     bool isAnonymous = annotation.peek('isAnonymous')?.boolValue ?? false;
+    bool isInitial = annotation.peek('isInitial')?.boolValue ?? false;
     List<DartObject>? middlewares = annotation.peek('middlewares')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
@@ -65,8 +66,6 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
           buffer.writeln("$key: jsonDecode(params?['$key']),");
         } else if (value.equal('DateTime')) {
           buffer.writeln("$key: DateTime.parse(params?['$key']),");
-        } else {
-          buffer.writeln('// key=$key,\tvalue=$value');
         }
       },
     );
@@ -77,7 +76,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     // state the page getter
     buffer.writeln('@override');
     buffer.writeln('Page get page => $transition(');
-    buffer.writeln("key: const ValueKey('$pathName'),");
+    buffer.writeln("key: ValueKey('$pathName~\$hashCode'),");
     buffer.writeln("name: '$pathName',");
     buffer.writeln("arguments: queryParameters,");
     buffer.writeln("canPop: $canPop,");
@@ -118,6 +117,10 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     if (isAnonymous) {
       buffer.writeln('@override');
       buffer.writeln('bool get isAnonymous => $isAnonymous;');
+    }
+    if (isInitial) {
+      buffer.writeln('@override');
+      buffer.writeln('bool get isInitial => $isInitial;');
     }
 
     buffer.write('}');

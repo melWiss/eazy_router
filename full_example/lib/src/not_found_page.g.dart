@@ -15,7 +15,7 @@ class NotFoundPageRoute extends EazyRoute {
 
   @override
   Page get page => AdaptivePage(
-        key: const ValueKey('not-found'),
+        key: ValueKey('not-found~$hashCode'),
         name: 'not-found',
         arguments: queryParameters,
         canPop: true,

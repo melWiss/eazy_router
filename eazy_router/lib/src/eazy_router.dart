@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:eazy_router/src/eazy_route.dart';
 import 'package:eazy_router/src/other/eazy_route_middleware.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 abstract class IEazyRouter with ChangeNotifier {
   Map<String, EazyRoute Function(Map<String, String> params)> get routes;
@@ -18,6 +18,7 @@ abstract class IEazyRouter with ChangeNotifier {
   void replaceRoutes(List<EazyRoute> routes);
   void pop({int times = 1, dynamic data});
   void removeRoute(EazyRoute route, {bool notifyRootWidget = false});
+  void removePageRoute(Page page, {bool notifyRootWidget = false});
   void removeRouteByName(String name, {bool notifyRootWidget = false});
   void popUntilTrue(bool Function(EazyRoute route) predicate);
   void goTo(Uri uri);
@@ -127,6 +128,20 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
+  void removePageRoute(Page page, {bool notifyRootWidget = false}) {
+    if (_state.any((element) =>
+        element.page.name == page.name && element.page.key == page.key)) {
+      var pageToRemove = _state.firstWhere((element) =>
+          element.page.name == page.name && element.page.key == page.key);
+      _state.remove(pageToRemove);
+      if (notifyRootWidget) {
+        _state = List.from(_state);
+        notifyListeners();
+      }
+    }
+  }
+
+  @override
   bool hasRoute(String name) =>
       _state.any((element) => element.page.name == name);
 
@@ -159,11 +174,12 @@ class EazyRouter extends IEazyRouter {
   Uri get currentUri {
     String completePath = '';
     Map<String, String> params = {};
-    for (var route in _state) {
-      if (!route.isAnonymous) {
-        completePath += '/${route.page.name}';
-        params.addAll((route.queryParameters as Map<String, String>?) ?? {});
+    for (int i = 0; i < _state.length; i++) {
+      if (i == 0 && _state.first.isInitial || _state[i].isAnonymous) {
+        continue;
       }
+      completePath += '/${_state[i].page.name}';
+      params.addAll((_state[i].queryParameters as Map<String, String>?) ?? {});
     }
     return Uri(
       path: completePath,
@@ -195,21 +211,21 @@ class EazyRouter extends IEazyRouter {
   void setNotFoundRoute(EazyRoute route) {
     _notFoundRoute = route;
   }
-  
+
   @override
   void popTop() {
     _topRoutes.removeLast();
     _topRoutes = List.from(_topRoutes);
     notifyListeners();
   }
-  
+
   @override
   void pushTop<T>(EazyRoute route) {
     _topRoutes.add(route);
     _topRoutes = List.from(_topRoutes);
     notifyListeners();
   }
-  
+
   @override
   void removeAllTop() {
     _topRoutes = [];

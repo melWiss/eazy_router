@@ -15,7 +15,7 @@ class ThirdScaffoldRoute extends EazyRoute {
 
   @override
   Page get page => AdaptivePage(
-        key: const ValueKey('third'),
+        key: ValueKey('third~$hashCode'),
         name: 'third',
         arguments: queryParameters,
         canPop: true,

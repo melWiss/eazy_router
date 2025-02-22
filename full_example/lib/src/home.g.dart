@@ -14,14 +14,12 @@ class HomeScaffoldRoute extends EazyRoute {
   });
 
   factory HomeScaffoldRoute.fromQueryParam(Map<String, String>? params) {
-    return HomeScaffoldRoute(
-// key=title,	value=String?
-        );
+    return HomeScaffoldRoute();
   }
 
   @override
   Page get page => AdaptivePage(
-        key: const ValueKey('home'),
+        key: ValueKey('home~$hashCode'),
         name: 'home',
         arguments: queryParameters,
         canPop: true,
@@ -34,4 +32,6 @@ class HomeScaffoldRoute extends EazyRoute {
   Map<String, String> get queryParameters => {
         if (title != null) 'title': title!.toString(),
       };
+  @override
+  bool get isInitial => true;
 }

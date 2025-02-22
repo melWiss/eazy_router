@@ -16,7 +16,7 @@ class AnonymousBottomSheetRoute extends EazyRoute {
 
   @override
   Page get page => BottomSheetPage(
-        key: const ValueKey('anonymous-bottom-sheet'),
+        key: ValueKey('anonymous-bottom-sheet~$hashCode'),
         name: 'anonymous-bottom-sheet',
         arguments: queryParameters,
         canPop: true,

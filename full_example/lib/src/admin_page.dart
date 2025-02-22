@@ -1,7 +1,7 @@
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:eazy_router/eazy_router.dart';
 import 'package:flutter/material.dart';
-import 'package:full_example/src/second.dart';
+import 'package:full_example/src/home.dart';
 import 'package:full_example/src/third.dart';
 part 'admin_page.g.dart';
 
@@ -27,7 +27,7 @@ class AdminMiddleware extends EazyRouteMiddleware {
     if (decider++ % 5 == 0) {
       return true;
     } else if (decider % 5 == 1) {
-      resolver.redirect([SecondScaffoldRoute()]);
+      resolver.redirect([HomeScaffoldRoute(title: 'From admin')]);
     } else if (decider % 5 == 2) {
       resolver.goHome();
     } else if (decider % 5 == 3) {

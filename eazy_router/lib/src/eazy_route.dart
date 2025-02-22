@@ -7,5 +7,6 @@ abstract class EazyRoute extends AbstractEazyRoute {
   Map<String, String> get queryParameters;
   Page get page;
   bool get isAnonymous => false;
+  bool get isInitial => false;
   List<EazyRouteMiddleware> get middlewares => [];
 }
