@@ -5,11 +5,13 @@ import 'package:eazy_router/src/other/eazy_route_middleware.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class IEazyRouter with ChangeNotifier {
-  Map<String, EazyRoute Function(Map<String, String> params)> get routes;
+  Map<String, EazyRoute Function(Map<String, String>? params)> get routes;
+  IEazyRouter? get parent;
   void setInitialRoute(EazyRoute route);
+  EazyRoute? get initialRoute;
   void setNotFoundRoute(EazyRoute route);
   void registerRoutes(
-      Map<String, EazyRoute Function(Map<String, String> params)> routes);
+      Map<String, EazyRoute Function(Map<String, String>? params)> routes);
   Future<T?> push<T>(EazyRoute route);
   void pushTop<T>(EazyRoute route);
   void popTop();
@@ -25,6 +27,7 @@ abstract class IEazyRouter with ChangeNotifier {
   bool hasRoute(String name);
   List<EazyRoute> get routeStack;
   Uri get currentUri;
+  void setParentRouter(IEazyRouter? router);
 }
 
 class EazyRouter extends IEazyRouter {
@@ -33,8 +36,9 @@ class EazyRouter extends IEazyRouter {
   final List<Completer> _completersStack = [];
   EazyRoute? _initialRoute;
   EazyRoute? _notFoundRoute;
-  final Map<String, EazyRoute Function(Map<String, String> params)>
+  final Map<String, EazyRoute Function(Map<String, String>? params)>
       _registeredRoutes = {};
+  IEazyRouter? _parent;
 
   EazyRouter();
 
@@ -90,8 +94,11 @@ class EazyRouter extends IEazyRouter {
     _state.removeRange(_state.length - times, _state.length);
     _state = List.from(_state);
     notifyListeners();
-    _completersStack.last.complete(data);
-    _completersStack.removeLast();
+    if (_completersStack.isNotEmpty &&
+        data.runtimeType == _completersStack.last.runtimeType) {
+      _completersStack.last.complete(data);
+      _completersStack.removeLast();
+    }
   }
 
   @override
@@ -192,12 +199,12 @@ class EazyRouter extends IEazyRouter {
 
   @override
   void registerRoutes(
-      Map<String, EazyRoute Function(Map<String, String> params)> routes) {
+      Map<String, EazyRoute Function(Map<String, String>? params)> routes) {
     _registeredRoutes.addAll(routes);
   }
 
   @override
-  Map<String, EazyRoute Function(Map<String, String> params)> get routes =>
+  Map<String, EazyRoute Function(Map<String, String>? params)> get routes =>
       _registeredRoutes;
 
   @override
@@ -231,4 +238,15 @@ class EazyRouter extends IEazyRouter {
     _topRoutes = [];
     notifyListeners();
   }
+
+  @override
+  IEazyRouter? get parent => _parent;
+
+  @override
+  void setParentRouter(IEazyRouter? router) {
+    _parent = router;
+  }
+
+  @override
+  EazyRoute? get initialRoute => _initialRoute;
 }
