@@ -25,7 +25,7 @@ class AdminPageRoute extends EazyRoute {
   @override
   Map<String, String> get queryParameters => {};
   @override
-  List<EazyRouteMiddleware> get middlewares => [
-        AdminMiddleware(),
+  List<EazyRouteGuard> get guards => [
+        AdminGuard(),
       ];
 }

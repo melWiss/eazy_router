@@ -1,7 +1,7 @@
 import 'package:eazy_router/src/abstract_eazy_route.dart';
 
-abstract class EazyRouteMiddleware {
-  const EazyRouteMiddleware();
+abstract class EazyRouteGuard {
+  const EazyRouteGuard();
   bool onNavigation(EazyRouterResolver resolver);
 }
 

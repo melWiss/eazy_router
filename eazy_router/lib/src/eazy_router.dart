@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:eazy_router/src/eazy_route.dart';
-import 'package:eazy_router/src/other/eazy_route_middleware.dart';
+import 'package:eazy_router/src/other/eazy_route_guard.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class IEazyRouter with ChangeNotifier {
@@ -59,8 +59,8 @@ class EazyRouter extends IEazyRouter {
       goNotFound: () => _notFoundRoute != null ? push(_notFoundRoute!) : null,
       push: (route) => push(route as EazyRoute),
     );
-    for (var middleware in route.middlewares) {
-      if (!middleware.onNavigation(resolver)) {
+    for (var guard in route.guards) {
+      if (!guard.onNavigation(resolver)) {
         return false;
       }
     }

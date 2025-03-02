@@ -1,5 +1,5 @@
 ## 1.0.0
-* added support for middleware mechanism
+* added support for guard mechanism
 * added support for showing dialogs
 * added support for showing bottom sheets
 * added support for showing snackbars/toasts

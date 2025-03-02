@@ -1,6 +1,6 @@
 library eazy_router_annotation;
 
-import 'package:eazy_router/src/other/eazy_route_middleware.dart';
+import 'package:eazy_router/src/other/eazy_route_guard.dart';
 
 class GenerateRoute {
   final String? pathName;
@@ -9,7 +9,7 @@ class GenerateRoute {
   final bool canPop;
   final bool isAnonymous;
   final String transition;
-  final List<EazyRouteMiddleware> middlewares;
+  final List<EazyRouteGuard> guards;
 
   const GenerateRoute({
     this.pathName,
@@ -18,7 +18,7 @@ class GenerateRoute {
     this.isAnonymous = false,
     this.transition = RouteTransitions.adaptive,
     this.isNotFoundRoute = false,
-    this.middlewares = const [],
+    this.guards = const [],
   });
 }
 

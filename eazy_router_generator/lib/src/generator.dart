@@ -20,7 +20,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
     bool isAnonymous = annotation.peek('isAnonymous')?.boolValue ?? false;
     bool isInitial = annotation.peek('isInitial')?.boolValue ?? false;
-    List<DartObject>? middlewares = annotation.peek('middlewares')?.listValue;
+    List<DartObject>? guards = annotation.peek('guards')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
     final buffer = StringBuffer();
@@ -106,11 +106,11 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
       },
     );
     buffer.writeln('};');
-    if (middlewares?.isNotEmpty == true) {
+    if (guards?.isNotEmpty == true) {
       buffer.writeln('@override');
-      buffer.writeln('List<EazyRouteMiddleware> get middlewares => [');
-      for (var middleware in middlewares!) {
-        buffer.writeln('${middleware.type?.getDisplayString()}(),');
+      buffer.writeln('List<EazyRouteGuard> get guards => [');
+      for (var guard in guards!) {
+        buffer.writeln('${guard.type?.getDisplayString()}(),');
       }
       buffer.writeln('];');
     }

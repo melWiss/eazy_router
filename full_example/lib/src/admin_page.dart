@@ -5,7 +5,7 @@ import 'package:full_example/src/home.dart';
 import 'package:full_example/src/third.dart';
 part 'admin_page.g.dart';
 
-@GenerateRoute(pathName: 'admin', middlewares: [AdminMiddleware()])
+@GenerateRoute(pathName: 'admin', guards: [AdminGuard()])
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
 
@@ -19,9 +19,9 @@ class AdminPage extends StatelessWidget {
   }
 }
 
-class AdminMiddleware extends EazyRouteMiddleware {
+class AdminGuard extends EazyRouteGuard {
   static int decider = 6;
-  const AdminMiddleware();
+  const AdminGuard();
   @override
   bool onNavigation(EazyRouterResolver resolver) {
     if (decider++ % 5 == 0) {

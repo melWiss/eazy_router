@@ -8,4 +8,4 @@ export "package:eazy_router/src/eazy_route_state.dart";
 export "package:eazy_router/src/pages/bottom_sheet_page.dart";
 export "package:eazy_router/src/pages/dialog_page.dart";
 export "package:eazy_router/src/pages/adaptive_page.dart";
-export "package:eazy_router/src/other/eazy_route_middleware.dart";
+export "package:eazy_router/src/other/eazy_route_guard.dart";
