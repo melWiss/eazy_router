@@ -13,7 +13,7 @@ class AdminPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin page'),
+        title: const Text('Admin page'),
       ),
     );
   }

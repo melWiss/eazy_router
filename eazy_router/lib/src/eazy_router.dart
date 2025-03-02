@@ -13,9 +13,6 @@ abstract class IEazyRouter with ChangeNotifier {
   void registerRoutes(
       Map<String, EazyRoute Function(Map<String, String>? params)> routes);
   Future<T?> push<T>(EazyRoute route);
-  void pushTop<T>(EazyRoute route);
-  void popTop();
-  void removeAllTop();
   void pushRoutes(List<EazyRoute> routes);
   void replaceRoutes(List<EazyRoute> routes);
   void pop({int times = 1, dynamic data});
@@ -32,7 +29,6 @@ abstract class IEazyRouter with ChangeNotifier {
 
 class EazyRouter extends IEazyRouter {
   List<EazyRoute> _state = [];
-  List<EazyRoute> _topRoutes = [];
   final List<Completer> _completersStack = [];
   EazyRoute? _initialRoute;
   EazyRoute? _notFoundRoute;
@@ -195,7 +191,7 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
-  List<EazyRoute> get routeStack => [..._state, ..._topRoutes];
+  List<EazyRoute> get routeStack => _state;
 
   @override
   void registerRoutes(
@@ -217,26 +213,6 @@ class EazyRouter extends IEazyRouter {
   @override
   void setNotFoundRoute(EazyRoute route) {
     _notFoundRoute = route;
-  }
-
-  @override
-  void popTop() {
-    _topRoutes.removeLast();
-    _topRoutes = List.from(_topRoutes);
-    notifyListeners();
-  }
-
-  @override
-  void pushTop<T>(EazyRoute route) {
-    _topRoutes.add(route);
-    _topRoutes = List.from(_topRoutes);
-    notifyListeners();
-  }
-
-  @override
-  void removeAllTop() {
-    _topRoutes = [];
-    notifyListeners();
   }
 
   @override

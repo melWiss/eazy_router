@@ -90,16 +90,6 @@ class _SecondScaffoldState extends State<SecondScaffold> {
             const Divider(),
             ElevatedButton(
               onPressed: () async {
-                var router = context.router!;
-                router.pushTop(ProcessingDialogRoute());
-                await Future.delayed(const Duration(seconds: 5));
-                router.popTop();
-              },
-              child: const Text('open always on top processing dialog'),
-            ),
-            const Divider(),
-            ElevatedButton(
-              onPressed: () async {
                 context.router?.push(AdminPageRoute());
               },
               child: const Text('open admin page'),
