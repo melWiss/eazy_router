@@ -6,7 +6,9 @@ import 'package:eazy_router/src/other/eazy_route_guard.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class IEazyRouter with ChangeNotifier {
-  UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)> get routes;
+  UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)>
+      get routes;
+  Set<IEazyRouter> get nestedRouters;
   IEazyRouter? get parent;
   static IEazyRouter? currentRouter;
   void setInitialRoute(EazyRoute route);
@@ -32,6 +34,7 @@ abstract class IEazyRouter with ChangeNotifier {
 class EazyRouter extends IEazyRouter {
   List<EazyRoute> _state = [];
   final List<Completer> _completersStack = [];
+  final Set<IEazyRouter> _nestedRouters = {};
   EazyRoute? _initialRoute;
   EazyRoute? _notFoundRoute;
   final Map<String, EazyRoute Function(Map<String, String>? params)>
@@ -179,12 +182,17 @@ class EazyRouter extends IEazyRouter {
   Uri get currentUri {
     String completePath = '';
     Map<String, String> params = {};
-    for (int i = 0; i < _state.length; i++) {
-      if (i == 0 && _state.first.isInitial || _state[i].isAnonymous) {
-        continue;
+    for (var router in nestedRouters.toList().reversed) {
+      for (int i = 0; i < router.routeStack.length; i++) {
+        if (i == 0 && router.routeStack.first.isInitial ||
+            router.routeStack[i].isAnonymous) {
+          continue;
+        }
+        completePath += '/${router.routeStack[i].page.name}';
+        params.addAll(
+            (router.routeStack[i].queryParameters as Map<String, String>?) ??
+                {});
       }
-      completePath += '/${_state[i].page.name}';
-      params.addAll((_state[i].queryParameters as Map<String, String>?) ?? {});
     }
     return Uri(
       path: completePath,
@@ -203,8 +211,8 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
-  UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)> get routes =>
-      UnmodifiableMapView(_registeredRoutes);
+  UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)>
+      get routes => UnmodifiableMapView(_registeredRoutes);
 
   @override
   void setInitialRoute(EazyRoute route) {
@@ -224,8 +232,28 @@ class EazyRouter extends IEazyRouter {
   @override
   void setParentRouter(IEazyRouter? router) {
     _parent = router;
+    if (_parent != null) {
+      _parent?.nestedRouters.add(this);
+    } else {
+      nestedRouters.add(this);
+    }
   }
 
   @override
   EazyRoute? get initialRoute => _initialRoute;
+
+  @override
+  Set<IEazyRouter> get nestedRouters => _nestedRouters;
+
+  @override
+  void dispose() {
+    _parent?.nestedRouters.remove(this);
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    super.notifyListeners();
+    _parent?.notifyListeners();
+  }
 }
