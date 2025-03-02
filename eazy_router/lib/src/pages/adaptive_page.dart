@@ -29,6 +29,7 @@ class AdaptivePage<T> extends Page<T> {
     return MaterialPageRoute<T>(
       builder: (_) => child,
       settings: this,
+      allowSnapshotting: false,
     );
   }
 }
