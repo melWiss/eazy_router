@@ -18,7 +18,7 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
 
   @override
   Future<bool> popRoute() async {
-    router.pop();
+    IEazyRouter.currentRouter?.pop();
     notifyListeners();
     return true;
   }

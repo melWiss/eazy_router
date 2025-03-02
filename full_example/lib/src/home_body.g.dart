@@ -22,7 +22,7 @@ class HomeBodyRoute extends EazyRoute {
         key: ValueKey('home-body~$hashCode'),
         name: 'home-body',
         arguments: queryParameters,
-        canPop: false,
+        canPop: true,
         child: HomeBody(
           router: router,
         ),

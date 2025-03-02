@@ -7,7 +7,7 @@ import 'package:full_example/src/third.dart';
 
 part 'home_body.g.dart';
 
-@GenerateRoute(canPop: false)
+@GenerateRoute()
 class HomeBody extends StatefulWidget {
   const HomeBody({
     this.router,

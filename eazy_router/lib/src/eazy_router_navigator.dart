@@ -31,6 +31,7 @@ class EazyRouterNavigator extends StatelessWidget {
       builder: (_, __) => ListenableBuilder(
         listenable: router,
         builder: (context, child) {
+          IEazyRouter.currentRouter = router;
           return Navigator(
             pages: router.routeStack
                 .map<Page>(

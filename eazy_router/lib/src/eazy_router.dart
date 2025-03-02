@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 abstract class IEazyRouter with ChangeNotifier {
   UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)> get routes;
   IEazyRouter? get parent;
+  static IEazyRouter? currentRouter;
   void setInitialRoute(EazyRoute route);
   EazyRoute? get initialRoute;
   void setNotFoundRoute(EazyRoute route);
