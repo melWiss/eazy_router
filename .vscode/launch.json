@@ -1,0 +1,68 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "eazy_router",
+            "cwd": "eazy_router",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "eazy_router (profile mode)",
+            "cwd": "eazy_router",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "eazy_router (release mode)",
+            "cwd": "eazy_router",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "eazy_router_generator",
+            "cwd": "eazy_router_generator",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "eazy_router_generator (profile mode)",
+            "cwd": "eazy_router_generator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "eazy_router_generator (release mode)",
+            "cwd": "eazy_router_generator",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "full_example",
+            "cwd": "full_example",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "full_example (profile mode)",
+            "cwd": "full_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "full_example (release mode)",
+            "cwd": "full_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
