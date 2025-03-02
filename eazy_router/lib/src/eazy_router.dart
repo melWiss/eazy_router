@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:eazy_router/src/eazy_route.dart';
 import 'package:eazy_router/src/other/eazy_route_guard.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class IEazyRouter with ChangeNotifier {
-  Map<String, EazyRoute Function(Map<String, String>? params)> get routes;
+  UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)> get routes;
   IEazyRouter? get parent;
   void setInitialRoute(EazyRoute route);
   EazyRoute? get initialRoute;
@@ -22,7 +23,7 @@ abstract class IEazyRouter with ChangeNotifier {
   void popUntilTrue(bool Function(EazyRoute route) predicate);
   void goTo(Uri uri);
   bool hasRoute(String name);
-  List<EazyRoute> get routeStack;
+  UnmodifiableListView<EazyRoute> get routeStack;
   Uri get currentUri;
   void setParentRouter(IEazyRouter? router);
 }
@@ -191,7 +192,8 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
-  List<EazyRoute> get routeStack => _state;
+  UnmodifiableListView<EazyRoute> get routeStack =>
+      UnmodifiableListView(_state);
 
   @override
   void registerRoutes(
@@ -200,8 +202,8 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
-  Map<String, EazyRoute Function(Map<String, String>? params)> get routes =>
-      _registeredRoutes;
+  UnmodifiableMapView<String, EazyRoute Function(Map<String, String>? params)> get routes =>
+      UnmodifiableMapView(_registeredRoutes);
 
   @override
   void setInitialRoute(EazyRoute route) {
