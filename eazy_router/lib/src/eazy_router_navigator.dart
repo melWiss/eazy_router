@@ -1,7 +1,7 @@
-import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/src/eazy_route.dart';
 import 'package:eazy_router/src/eazy_router.dart';
 import 'package:eazy_router/src/eazy_router_configuration.dart';
+import 'package:eazy_router/src/eazy_router_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 export 'package:provider/provider.dart';
