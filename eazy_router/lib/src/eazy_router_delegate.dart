@@ -6,14 +6,12 @@ import 'package:flutter/widgets.dart';
 class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<EazyRouteState> {
   final IEazyRouter router;
-  EazyRouterDelegate(this.router) {
-    router.addListener(notifyListeners);
-  }
+  EazyRouterDelegate(this.router);
 
   @override
   Widget build(BuildContext context) => EazyRouterNavigator(
         router: router,
-        key: navigatorKey,
+        navigatorKey: navigatorKey,
       );
 
   @override
@@ -31,7 +29,14 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
 
   @override
   EazyRouteState? get currentConfiguration =>
-      EazyRouteState.fromUri(router.currentUri);
+      _oldConfiguration = EazyRouteState.fromUri(router.currentUri);
+  EazyRouteState? _oldConfiguration;
+
+  void refresh() {
+    if (_oldConfiguration != EazyRouteState.fromUri(router.currentUri)) {
+      notifyListeners();
+    }
+  }
 
   final _navigatorKey = GlobalKey<NavigatorState>();
 

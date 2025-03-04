@@ -250,10 +250,4 @@ class EazyRouter extends IEazyRouter {
     _parent?.nestedRouters.remove(this);
     super.dispose();
   }
-
-  @override
-  void notifyListeners() {
-    super.notifyListeners();
-    _parent?.notifyListeners();
-  }
 }
