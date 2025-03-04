@@ -7,11 +7,7 @@ part of 'home.dart';
 // **************************************************************************
 
 class HomeScaffoldRoute extends EazyRoute {
-  final String? title;
-
-  HomeScaffoldRoute({
-    this.title,
-  });
+  HomeScaffoldRoute();
 
   factory HomeScaffoldRoute.fromQueryParam(Map<String, String>? params) {
     return HomeScaffoldRoute();
@@ -23,15 +19,11 @@ class HomeScaffoldRoute extends EazyRoute {
         name: 'home',
         arguments: queryParameters,
         canPop: true,
-        child: HomeScaffold(
-          title: title,
-        ),
+        child: HomeScaffold(),
       );
 
   @override
-  Map<String, String> get queryParameters => {
-        if (title != null) 'title': title!.toString(),
-      };
+  Map<String, String> get queryParameters => {};
   @override
   bool get isInitial => true;
 }

@@ -33,8 +33,10 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
   EazyRouteState? _oldConfiguration;
 
   void refresh() {
-    if (_oldConfiguration != EazyRouteState.fromUri(router.currentUri)) {
-      notifyListeners();
+    var newConfiguration = EazyRouteState.fromUri(router.currentUri);
+    if (_oldConfiguration != newConfiguration) {
+      _oldConfiguration = newConfiguration;
+      WidgetsBinding.instance.addPostFrameCallback((_) => notifyListeners());
     }
   }
 

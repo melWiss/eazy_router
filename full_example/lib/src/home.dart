@@ -1,18 +1,16 @@
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
-import 'package:full_example/src/home_body.dart';
+import 'package:full_example/src/home_body/nested_home_body.dart';
+import 'package:full_example/src/home_body/non_nested_home_body.dart';
 
 part 'home.g.dart';
 
 @GenerateRoute(pathName: 'home', isInitial: true)
 class HomeScaffold extends StatefulWidget {
   const HomeScaffold({
-    this.title,
     super.key,
   });
-
-  final String? title;
 
   @override
   State<HomeScaffold> createState() => _HomeScaffoldState();
@@ -25,9 +23,6 @@ class _HomeScaffoldState extends State<HomeScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home ${widget.title ?? 'scaffold'}'),
-      ),
       bottomNavigationBar: ListenableBuilder(
           listenable: router,
           builder: (context, _) {
@@ -37,10 +32,21 @@ class _HomeScaffoldState extends State<HomeScaffold> {
                 if (navigationBarIndex != value) {
                   navigationBarIndex = value;
                   if (navigationBarIndex == 0) {
-                    router.replaceRoutes([HomeBodyRoute(router: router)]);
+                    router.replaceRoutes(
+                      [
+                        NestedHomeBodyRoute(
+                          router: router,
+                        ),
+                      ],
+                    );
                   } else {
-                    router
-                        .replaceRoutes([HomeBodyRoute(router: router.parent!)]);
+                    router.replaceRoutes(
+                      [
+                        NonNestedHomeBodyRoute(
+                          router: router.parent!,
+                        ),
+                      ],
+                    );
                   }
                 }
               },
@@ -53,7 +59,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
           }),
       body: EazyRouterNavigator(
         router: router,
-        initialRoute: HomeBodyRoute(router: router),
+        initialRoute: NestedHomeBodyRoute(router: router),
       ),
     );
   }

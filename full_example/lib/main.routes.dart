@@ -7,11 +7,12 @@
 import 'package:eazy_router/eazy_router.dart';
 import 'package:full_example/src/second.dart';
 import 'package:full_example/src/bottom_sheet.dart';
-import 'package:full_example/src/home_body.dart';
 import 'package:full_example/src/processing_dialog.dart';
 import 'package:full_example/src/third.dart';
 import 'package:full_example/src/admin_page.dart';
 import 'package:full_example/src/anonymous_bottom_sheet.dart';
+import 'package:full_example/src/home_body/nested_home_body.dart';
+import 'package:full_example/src/home_body/non_nested_home_body.dart';
 import 'package:full_example/src/not_found_page.dart';
 import 'package:full_example/src/home.dart';
 
@@ -25,11 +26,6 @@ void registerRoutes() {
     {
       'bottom-sheet-example': (params) =>
           BottomSheetExampleRoute.fromQueryParam(params),
-    },
-  );
-  EazyRouterConfiguration.instance.router.registerRoutes(
-    {
-      'home-body': (params) => HomeBodyRoute.fromQueryParam(params),
     },
   );
   EazyRouterConfiguration.instance.router.registerRoutes(
@@ -51,6 +47,16 @@ void registerRoutes() {
     {
       'anonymous-bottom-sheet': (params) =>
           AnonymousBottomSheetRoute.fromQueryParam(params),
+    },
+  );
+  EazyRouterConfiguration.instance.router.registerRoutes(
+    {
+      'nested': (params) => NestedHomeBodyRoute.fromQueryParam(params),
+    },
+  );
+  EazyRouterConfiguration.instance.router.registerRoutes(
+    {
+      'non-nested': (params) => NonNestedHomeBodyRoute.fromQueryParam(params),
     },
   );
   EazyRouterConfiguration.instance.router.registerRoutes(

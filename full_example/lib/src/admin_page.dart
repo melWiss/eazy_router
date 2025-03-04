@@ -27,7 +27,7 @@ class AdminGuard extends EazyRouteGuard {
     if (decider++ % 5 == 0) {
       return true;
     } else if (decider % 5 == 1) {
-      resolver.redirect([HomeScaffoldRoute(title: 'From admin')]);
+      resolver.redirect([HomeScaffoldRoute()]);
     } else if (decider % 5 == 2) {
       resolver.goHome();
     } else if (decider % 5 == 3) {

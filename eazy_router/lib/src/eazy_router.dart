@@ -156,6 +156,9 @@ class EazyRouter extends IEazyRouter {
   @override
   void goTo(Uri uri) {
     _state = List.empty(growable: true);
+    if (_initialRoute != null && _canNavigate(_initialRoute!)) {
+      _state.add(_initialRoute!);
+    }
     for (var path in uri.pathSegments) {
       if (routes[path] != null) {
         if (_canNavigate(routes[path]!(uri.queryParameters))) {
@@ -168,12 +171,9 @@ class EazyRouter extends IEazyRouter {
         break;
       }
     }
-    if (_state.isEmpty) {
-      if (_initialRoute != null && _canNavigate(_initialRoute!)) {
-        _state.add(_initialRoute!);
-      } else if (_canNavigate(routes.values.first(uri.queryParameters))) {
-        _state.add(routes.values.first(uri.queryParameters));
-      }
+    if (_state.isEmpty &&
+        _canNavigate(routes.values.first(uri.queryParameters))) {
+      _state.add(routes.values.first(uri.queryParameters));
     }
     notifyListeners();
   }
