@@ -1,27 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'not_found_page.dart';
+part of 'admin_page.dart';
 
 // **************************************************************************
 // EazyRouteGenerator
 // **************************************************************************
 
-class NotFoundPageRoute extends EazyRoute {
-  NotFoundPageRoute();
+class AdminPageRoute extends EazyRoute {
+  AdminPageRoute();
 
-  factory NotFoundPageRoute.fromQueryParam(Map<String, String>? params) {
-    return NotFoundPageRoute();
+  factory AdminPageRoute.fromQueryParam(Map<String, String>? params) {
+    return AdminPageRoute();
   }
 
   @override
   Page get page => AdaptivePage(
-        key: ValueKey('not-found~$hashCode'),
-        name: 'not-found',
+        key: ValueKey('admin~$hashCode'),
+        name: 'admin',
         arguments: queryParameters,
         canPop: true,
-        child: NotFoundPage(),
+        child: AdminPage(),
       );
 
   @override
   Map<String, String> get queryParameters => {};
+  @override
+  List<EazyRouteGuard> get guards => [
+        AdminGuard(),
+      ];
 }

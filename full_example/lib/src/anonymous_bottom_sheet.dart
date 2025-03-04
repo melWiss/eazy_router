@@ -1,11 +1,11 @@
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
-part 'bottom_sheet.g.dart';
+part 'anonymous_bottom_sheet.g.dart';
 
-@GenerateRoute(transition: RouteTransitions.bottomsheet)
-class BottomSheetExample extends StatelessWidget {
-  const BottomSheetExample({super.key});
+@GenerateRoute(transition: RouteTransitions.bottomsheet, isAnonymous: true)
+class AnonymousBottomSheet extends StatelessWidget {
+  const AnonymousBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {

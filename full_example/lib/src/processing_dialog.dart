@@ -1,5 +1,5 @@
-import 'package:eazy_router_annotation/eazy_router_annotation.dart';
 import 'package:eazy_router/eazy_router.dart';
+import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
 
 part 'processing_dialog.g.dart';
@@ -7,6 +7,7 @@ part 'processing_dialog.g.dart';
 @GenerateRoute(
   pathName: 'processing',
   canPop: false,
+  isAnonymous: true,
   transition: RouteTransitions.dialog,
 )
 class ProcessingDialog extends StatelessWidget {

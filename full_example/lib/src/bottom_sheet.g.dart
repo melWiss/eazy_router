@@ -15,7 +15,7 @@ class BottomSheetExampleRoute extends EazyRoute {
 
   @override
   Page get page => BottomSheetPage(
-        key: const ValueKey('bottom-sheet-example'),
+        key: ValueKey('bottom-sheet-example~$hashCode'),
         name: 'bottom-sheet-example',
         arguments: queryParameters,
         canPop: true,

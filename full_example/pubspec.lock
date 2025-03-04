@@ -189,13 +189,6 @@ packages:
       relative: true
     source: path
     version: "1.0.0"
-  eazy_router_annotation:
-    dependency: "direct main"
-    description:
-      path: "../eazy_router_annotation"
-      relative: true
-    source: path
-    version: "1.0.0"
   eazy_router_generator:
     dependency: "direct dev"
     description:

@@ -15,7 +15,7 @@ class SecondScaffoldRoute extends EazyRoute {
 
   @override
   Page get page => AdaptivePage(
-        key: const ValueKey('second'),
+        key: ValueKey('second~$hashCode'),
         name: 'second',
         arguments: queryParameters,
         canPop: true,

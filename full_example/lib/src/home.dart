@@ -1,8 +1,7 @@
-import 'package:eazy_router_annotation/eazy_router_annotation.dart';
-import 'package:flutter/material.dart';
-import 'package:full_example/src/second.dart';
-import 'package:full_example/src/third.dart';
 import 'package:eazy_router/eazy_router.dart';
+import 'package:eazy_router/eazy_router_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:full_example/src/home_body.dart';
 
 part 'home.g.dart';
 
@@ -21,49 +20,40 @@ class HomeScaffold extends StatefulWidget {
 
 class _HomeScaffoldState extends State<HomeScaffold> {
   DateTime? secondPagePoped;
+  int navigationBarIndex = 0;
+  IEazyRouter router = EazyRouter();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home ${widget.title ?? 'scaffold'}'),
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 0,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'home'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'profile'),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (secondPagePoped != null)
-              Text(
-                  "Second page was poped on: ${secondPagePoped!.toIso8601String()}"),
-            const Divider(),
-            ElevatedButton(
-              onPressed: () async {
-                // use context to push
-                secondPagePoped = await context.router
-                    ?.push<DateTime?>(SecondScaffoldRoute());
-                setState(() {});
+      bottomNavigationBar: ListenableBuilder(
+          listenable: router,
+          builder: (context, _) {
+            return NavigationBar(
+              selectedIndex: navigationBarIndex,
+              onDestinationSelected: (value) {
+                if (navigationBarIndex != value) {
+                  navigationBarIndex = value;
+                  if (navigationBarIndex == 0) {
+                    router.replaceRoutes([HomeBodyRoute(router: router)]);
+                  } else {
+                    router
+                        .replaceRoutes([HomeBodyRoute(router: router.parent!)]);
+                  }
+                }
               },
-              child: const Text('Go second'),
-            ),
-            const Divider(),
-            ElevatedButton(
-              onPressed: () {
-                // use context to push
-                context.router?.pushRoutes([
-                  SecondScaffoldRoute(),
-                  ThirdScaffoldRoute(),
-                ]);
-              },
-              child: const Text('Push second and third'),
-            ),
-          ],
-        ),
+              destinations: const [
+                NavigationDestination(icon: Icon(Icons.home), label: 'home'),
+                NavigationDestination(
+                    icon: Icon(Icons.person), label: 'profile'),
+              ],
+            );
+          }),
+      body: EazyRouterNavigator(
+        router: router,
+        initialRoute: HomeBodyRoute(router: router),
       ),
     );
   }
