@@ -33,7 +33,7 @@ abstract class IEazyRouter with ChangeNotifier {
 
 class EazyRouter extends IEazyRouter {
   List<EazyRoute> _state = [];
-  final List<Completer> _completersStack = [];
+  final Map<EazyRoute, Completer> _completersStack = {};
   final Set<IEazyRouter> _nestedRouters = {};
   EazyRoute? _initialRoute;
   EazyRoute? _notFoundRoute;
@@ -49,7 +49,7 @@ class EazyRouter extends IEazyRouter {
       _state = List.from([..._state, route]);
       notifyListeners();
       Completer<T> completer = Completer();
-      _completersStack.add(completer);
+      _completersStack[route] = completer;
       return completer.future;
     }
     return Future.value(null);
@@ -92,13 +92,13 @@ class EazyRouter extends IEazyRouter {
 
   @override
   void pop({int times = 1, dynamic data}) {
+    var currentRoute = _state.last;
     _state.removeRange(_state.length - times, _state.length);
     _state = List.from(_state);
     notifyListeners();
-    if (_completersStack.isNotEmpty &&
-        data.runtimeType == _completersStack.last.runtimeType) {
-      _completersStack.last.complete(data);
-      _completersStack.removeLast();
+    if (_completersStack.containsKey(currentRoute)) {
+      _completersStack[currentRoute]!.complete(data);
+      _completersStack.remove(currentRoute);
     }
   }
 
