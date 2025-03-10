@@ -19,48 +19,50 @@ class HomeScaffold extends StatefulWidget {
 class _HomeScaffoldState extends State<HomeScaffold> {
   DateTime? secondPagePoped;
   int navigationBarIndex = 0;
-  IEazyRouter router = EazyRouter();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: ListenableBuilder(
-          listenable: router,
-          builder: (context, _) {
-            return NavigationBar(
-              selectedIndex: navigationBarIndex,
-              onDestinationSelected: (value) {
-                if (navigationBarIndex != value) {
-                  navigationBarIndex = value;
-                  if (navigationBarIndex == 0) {
-                    router.replaceRoutes(
-                      [
-                        NestedHomeBodyRoute(
-                          router: router,
-                        ),
-                      ],
-                    );
-                  } else {
-                    router.replaceRoutes(
-                      [
-                        NonNestedHomeBodyRoute(
-                          router: router.parent!,
-                        ),
-                      ],
-                    );
-                  }
-                }
-              },
-              destinations: const [
-                NavigationDestination(icon: Icon(Icons.home), label: 'home'),
-                NavigationDestination(
-                    icon: Icon(Icons.person), label: 'profile'),
-              ],
-            );
-          }),
-      body: EazyRouterNavigator(
-        router: router,
-        initialRoute: NestedHomeBodyRoute(router: router),
+    return EazyRouterNavigator(
+      routerKey: 'nested',
+      onRouterCreation: (router) => router.setInitialRoute(
+        NestedHomeBodyRoute(router: router),
       ),
+      listener: (router, currentRoute) {
+        print(currentRoute);
+      },
+      builder: (navigator, router) {
+        return Scaffold(
+          body: navigator,
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: navigationBarIndex,
+            onDestinationSelected: (value) {
+              if (navigationBarIndex != value) {
+                navigationBarIndex = value;
+                if (navigationBarIndex == 0) {
+                  router.replaceRoutes(
+                    [
+                      NestedHomeBodyRoute(
+                        router: router,
+                      ),
+                    ],
+                  );
+                } else {
+                  router.replaceRoutes(
+                    [
+                      NonNestedHomeBodyRoute(
+                        router: router.parent!,
+                      ),
+                    ],
+                  );
+                }
+              }
+            },
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home), label: 'home'),
+              NavigationDestination(icon: Icon(Icons.person), label: 'profile'),
+            ],
+          ),
+        );
+      },
     );
   }
 }

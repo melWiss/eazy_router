@@ -10,7 +10,7 @@ class EazyRouterConfiguration extends RouterConfig<EazyRouteState>
   EazyRouterConfiguration._()
       : super(
           backButtonDispatcher: EazyRouterBackButtonDispatcher(),
-          routerDelegate: EazyRouterDelegate(EazyRouter()),
+          routerDelegate: EazyRouterDelegate(),
           routeInformationParser: EazyRouteInformationParser(),
           routeInformationProvider: PlatformRouteInformationProvider(
             initialRouteInformation: RouteInformation(
@@ -25,7 +25,7 @@ class EazyRouterConfiguration extends RouterConfig<EazyRouteState>
       _instance ??= EazyRouterConfiguration._();
 
   EazyRouterDelegate get delegate => routerDelegate as EazyRouterDelegate;
-  IEazyRouter get router => delegate.router;
+  IEazyRouter get router => delegate.rootRouter;
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 

@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:full_example/src/home_body/home_body.dart';

@@ -13,6 +13,8 @@ abstract class IEazyRouter with ChangeNotifier {
   static IEazyRouter? currentRouter;
   void setInitialRoute(EazyRoute route);
   EazyRoute? get initialRoute;
+  EazyRoute? get currentRoute;
+  EazyRoute? get notFoundRoute;
   void setNotFoundRoute(EazyRoute route);
   void registerRoutes(
       Map<String, EazyRoute Function(Map<String, String>? params)> routes);
@@ -201,8 +203,12 @@ class EazyRouter extends IEazyRouter {
   }
 
   @override
-  UnmodifiableListView<EazyRoute> get routeStack =>
-      UnmodifiableListView(_state);
+  UnmodifiableListView<EazyRoute> get routeStack {
+    if (_state.isEmpty && initialRoute != null) {
+      return UnmodifiableListView([initialRoute!]);
+    }
+    return UnmodifiableListView(_state);
+  }
 
   @override
   void registerRoutes(
@@ -250,4 +256,15 @@ class EazyRouter extends IEazyRouter {
     _parent?.nestedRouters.remove(this);
     super.dispose();
   }
+
+  @override
+  EazyRoute? get currentRoute {
+    if (_state.isNotEmpty) {
+      return _state.last;
+    }
+    return null;
+  }
+
+  @override
+  EazyRoute? get notFoundRoute => _notFoundRoute;
 }

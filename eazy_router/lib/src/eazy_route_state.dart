@@ -55,10 +55,10 @@ class EazyRouteState {
   @override
   int get hashCode => path.hashCode ^ params.hashCode;
 
-  factory EazyRouteState.fromUri(Uri uri) {
+  factory EazyRouteState.fromUri(Uri? uri) {
     return EazyRouteState(
-      path: uri.path,
-      params: uri.queryParameters,
+      path: uri?.path ?? '',
+      params: uri?.queryParameters,
     );
   }
 
