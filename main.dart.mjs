@@ -549,8 +549,12 @@ class CompiledApp {
       _1806: (ms, c) =>
       setTimeout(() => dartInstance.exports.$invokeCallback(c),ms),
       _1807: (handle) => clearTimeout(handle),
+      _1808: (ms, c) =>
+      setInterval(() => dartInstance.exports.$invokeCallback(c), ms),
+      _1809: (handle) => clearInterval(handle),
       _1810: (c) =>
       queueMicrotask(() => dartInstance.exports.$invokeCallback(c)),
+      _1811: () => Date.now(),
       _1812: (s, m) => {
         try {
           return new RegExp(s, m);
