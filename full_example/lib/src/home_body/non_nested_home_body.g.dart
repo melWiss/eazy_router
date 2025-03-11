@@ -35,4 +35,6 @@ class NonNestedHomeBodyRoute extends EazyRoute {
   Map<String, String> get queryParameters => {
         if (title != null) 'title': title!.toString(),
       };
+  @override
+  String get parent => 'nested';
 }

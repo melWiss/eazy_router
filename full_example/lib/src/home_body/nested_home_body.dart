@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 part 'nested_home_body.g.dart';
 
-@GenerateRoute(pathName: 'nested')
+@GenerateRoute(pathName: 'nested', parent: 'nested')
 class NestedHomeBody extends HomeBody {
   const NestedHomeBody({
     super.key,

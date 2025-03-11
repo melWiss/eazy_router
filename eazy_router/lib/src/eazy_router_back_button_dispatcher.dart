@@ -12,14 +12,16 @@ class EazyRouterBackButtonDispatcher extends RootBackButtonDispatcher {
   }
 
   int _callCount = 0;
+  IEazyRouter get _currentRouter =>
+      EazyRouterConfiguration.instance.delegate.currentRouter;
 
   @override
   Future<bool> didPopRoute() async {
-    if (IEazyRouter.currentRouter?.routeStack.last.page.canPop == false) {
+    if (_currentRouter.routeStack.last.page.canPop == false) {
       return Future.value(true);
     }
     if (_closeOnDoubleBackSnackBarMessage != null &&
-        IEazyRouter.currentRouter?.routeStack.length == 1) {
+        _currentRouter.routeStack.length == 1) {
       _callCount++;
       if (_callCount == 1) {
         EazyRouterConfiguration.instance.scaffoldMessengerKey.currentState
@@ -33,7 +35,7 @@ class EazyRouterBackButtonDispatcher extends RootBackButtonDispatcher {
         return true;
       }
     }
-    if (IEazyRouter.currentRouter?.routeStack.length == 1) {
+    if (_currentRouter.routeStack.length == 1) {
       return false;
     }
     return invokeCallback(Future<bool>.value(false));

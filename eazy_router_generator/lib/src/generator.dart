@@ -17,6 +17,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
         generateRouteNameFromClassName(element.name!);
     String transition =
         annotation.peek('transition')?.stringValue ?? 'AdaptivePage';
+    String? parent = annotation.peek('parent')?.stringValue;
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
     bool isAnonymous = annotation.peek('isAnonymous')?.boolValue ?? false;
     bool isInitial = annotation.peek('isInitial')?.boolValue ?? false;
@@ -121,6 +122,10 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     if (isInitial) {
       buffer.writeln('@override');
       buffer.writeln('bool get isInitial => $isInitial;');
+    }
+    if (parent != null) {
+      buffer.writeln('@override');
+      buffer.writeln("String get parent => '$parent';");
     }
 
     buffer.write('}');

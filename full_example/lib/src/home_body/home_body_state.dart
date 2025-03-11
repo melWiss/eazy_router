@@ -6,6 +6,7 @@ import 'package:full_example/src/third.dart';
 
 class HomeBodyState extends State<HomeBody> {
   DateTime? secondPagePoped;
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class HomeBodyState extends State<HomeBody> {
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (secondPagePoped != null)
               Text(
@@ -52,6 +54,24 @@ class HomeBodyState extends State<HomeBody> {
                 ]);
               },
               child: const Text('Push second, third and admin'),
+            ),
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width * .5,
+                  child: TextField(
+                    controller: _controller,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.router?.goTo(Uri.parse(_controller.text));
+                  },
+                  child: const Text('go to custom uri'),
+                ),
+              ],
             ),
           ],
         ),

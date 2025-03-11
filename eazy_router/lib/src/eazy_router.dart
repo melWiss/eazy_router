@@ -10,7 +10,6 @@ abstract class IEazyRouter with ChangeNotifier {
       get routes;
   Set<IEazyRouter> get nestedRouters;
   IEazyRouter? get parent;
-  static IEazyRouter? currentRouter;
   void setInitialRoute(EazyRoute route);
   EazyRoute? get initialRoute;
   EazyRoute? get currentRoute;
@@ -184,17 +183,18 @@ class EazyRouter extends IEazyRouter {
   Uri get currentUri {
     String completePath = '';
     Map<String, String> params = {};
-    for (var router in nestedRouters.toList().reversed) {
-      for (int i = 0; i < router.routeStack.length; i++) {
-        if (i == 0 && router.routeStack.first.isInitial ||
-            router.routeStack[i].isAnonymous) {
-          continue;
-        }
-        completePath += '/${router.routeStack[i].page.name}';
-        params.addAll(
-            (router.routeStack[i].queryParameters as Map<String, String>?) ??
-                {});
+    for (int i = 0; i < routeStack.length; i++) {
+      if (i == 0 && routeStack.first.isInitial || routeStack[i].isAnonymous) {
+        continue;
       }
+      completePath += '/${routeStack[i].page.name}';
+      params.addAll(
+          (routeStack[i].queryParameters as Map<String, String>?) ?? {});
+    }
+
+    if (parent != null) {
+      completePath = '${parent!.currentUri.path}$completePath';
+      params = Map.from(parent!.currentUri.queryParameters)..addAll(params);
     }
     return Uri(
       path: completePath,

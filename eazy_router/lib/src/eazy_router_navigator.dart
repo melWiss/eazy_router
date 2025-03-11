@@ -35,6 +35,8 @@ class EazyRouterNavigator extends StatefulWidget {
 class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
   late final IEazyRouter router = widget.router ?? EazyRouter();
   void _updateRootRouter() {
+    (Router.of(context).routerDelegate as EazyRouterDelegate)
+        .setCurrentRouter(router);
     (Router.of(context).routerDelegate as EazyRouterDelegate).refresh();
   }
 
@@ -44,8 +46,8 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
 
   @override
   void initState() {
-    if (router != widget.router && widget.router != null) {
-      router.registerRoutes(widget.router!.routes);
+    if (router != widget.router) {
+      router.registerRoutes(EazyRouterConfiguration.instance.router.routes);
     }
     widget.onRouterCreation?.call(router);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -54,20 +56,6 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
     });
     router.addListener(_updateRootRouter);
     router.addListener(_callListener);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    (Router.of(context).routerDelegate as EazyRouterDelegate)
-        .unregisterRouter(widget.routerKey);
-    router.removeListener(_updateRootRouter);
-    router.removeListener(_callListener);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     router.setParentRouter(context.router);
     if (widget.initialRoute != null) {
       router.setInitialRoute(widget.initialRoute!);
@@ -75,6 +63,24 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
     if (widget.notFoundRoute != null) {
       router.setNotFoundRoute(widget.notFoundRoute!);
     }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    (Router.of(context).routerDelegate as EazyRouterDelegate)
+        .unregisterRouter(widget.routerKey);
+    if (router.parent != null) {
+      (Router.of(context).routerDelegate as EazyRouterDelegate)
+          .setCurrentRouter(router.parent!);
+    }
+    router.removeListener(_updateRootRouter);
+    router.removeListener(_callListener);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: router,
       builder: (context, child) {

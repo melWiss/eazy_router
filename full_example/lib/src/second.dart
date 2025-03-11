@@ -9,7 +9,7 @@ import 'package:full_example/src/third.dart';
 
 part 'second.g.dart';
 
-@GenerateRoute(pathName: 'second')
+@GenerateRoute(pathName: 'second', parent: 'nested')
 class SecondScaffold extends StatefulWidget {
   const SecondScaffold({super.key});
 

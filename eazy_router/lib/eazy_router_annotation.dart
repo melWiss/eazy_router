@@ -4,6 +4,7 @@ import 'package:eazy_router/src/other/eazy_route_guard.dart';
 
 class GenerateRoute {
   final String? pathName;
+  final String? parent;
   final bool isInitial;
   final bool isNotFoundRoute;
   final bool canPop;
@@ -19,6 +20,7 @@ class GenerateRoute {
     this.transition = RouteTransitions.adaptive,
     this.isNotFoundRoute = false,
     this.guards = const [],
+    this.parent,
   });
 }
 

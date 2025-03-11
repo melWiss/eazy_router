@@ -24,4 +24,6 @@ class SecondScaffoldRoute extends EazyRoute {
 
   @override
   Map<String, String> get queryParameters => {};
+  @override
+  String get parent => 'nested';
 }

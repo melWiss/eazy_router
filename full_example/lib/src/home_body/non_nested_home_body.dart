@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 part 'non_nested_home_body.g.dart';
 
-@GenerateRoute(pathName: 'non-nested')
+@GenerateRoute(pathName: 'non-nested', parent: 'nested')
 class NonNestedHomeBody extends HomeBody {
   const NonNestedHomeBody({
     super.key,
