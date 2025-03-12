@@ -105,10 +105,13 @@ class EazyRouter extends IEazyRouter {
 
   @override
   void popUntilTrue(bool Function(EazyRoute route) predicate) {
-    while (!predicate(_state.last)) {
+    while (_state.isNotEmpty && !predicate(_state.last)) {
       _state.removeLast();
     }
     _state = List.from(_state);
+    if (_state.isEmpty && initialRoute != null) {
+      _state.add(initialRoute!);
+    }
     notifyListeners();
   }
 
