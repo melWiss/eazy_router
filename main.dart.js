@@ -34790,10 +34790,13 @@ q.C(0,r)}},
 dI(){return this.E1(null,1)},
 afC(a){return this.E1(null,a)},
 iF(a){return this.E1(a,1)},
-afE(a){var s=this
-for(;!a.$1(B.b.gao(s.r));)B.b.iG(s.r)
-s.r=A.e3(s.r,!0,t.eG)
-s.ab()},
+afE(a){var s,r,q=this
+while(!0){s=q.r
+if(!(s.length!==0&&!a.$1(B.b.gao(s))))break
+B.b.iG(q.r)}s=q.r=A.e3(q.r,!0,t.eG)
+if(s.length===0&&q.y!=null){r=q.y
+r.toString
+s.push(r)}q.ab()},
 age(a,b){var s,r=this
 if(B.b.h5(r.r,new A.Vr(a))){s=B.b.CZ(r.r,new A.Vs(a))
 B.b.C(r.r,s)
