@@ -47,14 +47,11 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      delegate = Router.of(context).routerDelegate as EazyRouterDelegate;
-    });
     if (router != widget.router) {
       router.registerRoutes(EazyRouterConfiguration.instance.router.routes);
     }
-    widget.onRouterCreation?.call(router);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      delegate ??= Router.of(context).routerDelegate as EazyRouterDelegate;
       delegate?.registerRouter(router, widget.routerKey);
     });
     router.addListener(_updateRootRouter);
@@ -66,6 +63,7 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
     if (widget.notFoundRoute != null) {
       router.setNotFoundRoute(widget.notFoundRoute!);
     }
+    widget.onRouterCreation?.call(router);
     super.initState();
   }
 
@@ -77,6 +75,7 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
     }
     router.removeListener(_updateRootRouter);
     router.removeListener(_callListener);
+    router.dispose();
     super.dispose();
   }
 

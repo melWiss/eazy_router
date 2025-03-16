@@ -31,6 +31,7 @@ abstract class IEazyRouter with ChangeNotifier {
   UnmodifiableListView<EazyRoute> get routeStack;
   Uri get currentUri;
   void setParentRouter(IEazyRouter? router);
+  String get routerKey;
 }
 
 class EazyRouter extends IEazyRouter {
@@ -42,6 +43,8 @@ class EazyRouter extends IEazyRouter {
   final Map<String, EazyRoute Function(Map<String, String>? params)>
       _registeredRoutes = {};
   IEazyRouter? _parent;
+
+  @override
   final String routerKey;
 
   EazyRouter({this.routerKey = rootRouterKey});
@@ -227,9 +230,15 @@ class EazyRouter extends IEazyRouter {
 
   @override
   void setInitialRoute(EazyRoute route) {
-    _initialRoute = route;
-    _state.insert(0, route);
-    notifyListeners();
+    if (_canNavigate(route)) {
+      _initialRoute = route;
+      if (_state.isEmpty) {
+        _state.add(route);
+      } else {
+        _state[0] = route;
+      }
+      notifyListeners();
+    }
   }
 
   @override

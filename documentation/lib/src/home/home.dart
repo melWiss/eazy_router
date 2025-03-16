@@ -17,7 +17,12 @@ class HomePage extends StatelessWidget with HomePageHelpersMixin {
   Widget build(BuildContext context) {
     return EazyRouterNavigator(
       routerKey: homeNavigatorKey,
-      onRouterCreation: (router) => router.setInitialRoute(WelcomePageRoute()),
+      initialRoute: WelcomePageRoute(),
+      listener: (router, currentRoute) {
+        if (router.routeStack.length > 1) {
+          router.replaceRoutes([currentRoute]);
+        }
+      },
       builder: (navigator, router) => LayoutBuilder(
         builder: (context, constraints) {
           var child = Theme(
