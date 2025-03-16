@@ -33,11 +33,12 @@ class EazyRouterNavigator extends StatefulWidget {
 }
 
 class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
-  late final IEazyRouter router = widget.router ?? EazyRouter();
+  late final IEazyRouter router =
+      widget.router ?? EazyRouter(routerKey: widget.routerKey);
+  EazyRouterDelegate? delegate;
   void _updateRootRouter() {
-    (Router.of(context).routerDelegate as EazyRouterDelegate)
-        .setCurrentRouter(router);
-    (Router.of(context).routerDelegate as EazyRouterDelegate).refresh();
+    delegate?.setCurrentRouter(router);
+    delegate?.refresh();
   }
 
   void _callListener() {
@@ -46,13 +47,15 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      delegate = Router.of(context).routerDelegate as EazyRouterDelegate;
+    });
     if (router != widget.router) {
       router.registerRoutes(EazyRouterConfiguration.instance.router.routes);
     }
     widget.onRouterCreation?.call(router);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      (Router.of(context).routerDelegate as EazyRouterDelegate)
-          .registerRouter(router, widget.routerKey);
+      delegate?.registerRouter(router, widget.routerKey);
     });
     router.addListener(_updateRootRouter);
     router.addListener(_callListener);
@@ -68,11 +71,9 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
 
   @override
   void dispose() {
-    (Router.of(context).routerDelegate as EazyRouterDelegate)
-        .unregisterRouter(widget.routerKey);
+    delegate?.unregisterRouter(widget.routerKey);
     if (router.parent != null) {
-      (Router.of(context).routerDelegate as EazyRouterDelegate)
-          .setCurrentRouter(router.parent!);
+      delegate?.setCurrentRouter(router.parent!);
     }
     router.removeListener(_updateRootRouter);
     router.removeListener(_callListener);

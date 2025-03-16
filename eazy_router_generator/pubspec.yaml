@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  build:
-  source_gen:
+  build: 2.4.1
+  source_gen: 1.5.0
   analyzer:
   eazy_router:
     path: ../eazy_router

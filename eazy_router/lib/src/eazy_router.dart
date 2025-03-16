@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:eazy_router/src/eazy_route.dart';
+import 'package:eazy_router/src/other/constants.dart';
 import 'package:eazy_router/src/other/eazy_route_guard.dart';
 import 'package:flutter/widgets.dart';
 
@@ -41,8 +42,9 @@ class EazyRouter extends IEazyRouter {
   final Map<String, EazyRoute Function(Map<String, String>? params)>
       _registeredRoutes = {};
   IEazyRouter? _parent;
+  final String routerKey;
 
-  EazyRouter();
+  EazyRouter({this.routerKey = rootRouterKey});
 
   @override
   Future<T?> push<T>(EazyRoute route) {
@@ -207,8 +209,8 @@ class EazyRouter extends IEazyRouter {
 
   @override
   UnmodifiableListView<EazyRoute> get routeStack {
-    if (_state.isEmpty && initialRoute != null) {
-      return UnmodifiableListView([initialRoute!]);
+    if (_state.isEmpty && _initialRoute != null) {
+      return UnmodifiableListView([_initialRoute!]);
     }
     return UnmodifiableListView(_state);
   }
@@ -270,4 +272,7 @@ class EazyRouter extends IEazyRouter {
 
   @override
   EazyRoute? get notFoundRoute => _notFoundRoute;
+
+  @override
+  String toString() => 'EazyRouter#$routerKey';
 }
