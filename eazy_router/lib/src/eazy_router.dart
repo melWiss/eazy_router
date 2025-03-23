@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:eazy_router/src/eazy_route.dart';
+import 'package:eazy_router/src/other/constants.dart';
 import 'package:eazy_router/src/other/eazy_route_guard.dart';
 import 'package:flutter/widgets.dart';
 
@@ -30,6 +31,7 @@ abstract class IEazyRouter with ChangeNotifier {
   UnmodifiableListView<EazyRoute> get routeStack;
   Uri get currentUri;
   void setParentRouter(IEazyRouter? router);
+  String get routerKey;
 }
 
 class EazyRouter extends IEazyRouter {
@@ -42,7 +44,10 @@ class EazyRouter extends IEazyRouter {
       _registeredRoutes = {};
   IEazyRouter? _parent;
 
-  EazyRouter();
+  @override
+  final String routerKey;
+
+  EazyRouter({this.routerKey = rootRouterKey});
 
   @override
   Future<T?> push<T>(EazyRoute route) {
@@ -207,8 +212,8 @@ class EazyRouter extends IEazyRouter {
 
   @override
   UnmodifiableListView<EazyRoute> get routeStack {
-    if (_state.isEmpty && initialRoute != null) {
-      return UnmodifiableListView([initialRoute!]);
+    if (_state.isEmpty && _initialRoute != null) {
+      return UnmodifiableListView([_initialRoute!]);
     }
     return UnmodifiableListView(_state);
   }
@@ -225,9 +230,15 @@ class EazyRouter extends IEazyRouter {
 
   @override
   void setInitialRoute(EazyRoute route) {
-    _initialRoute = route;
-    _state.insert(0, route);
-    notifyListeners();
+    if (_canNavigate(route)) {
+      _initialRoute = route;
+      if (_state.isEmpty) {
+        _state.add(route);
+      } else {
+        _state[0] = route;
+      }
+      notifyListeners();
+    }
   }
 
   @override
@@ -270,4 +281,7 @@ class EazyRouter extends IEazyRouter {
 
   @override
   EazyRoute? get notFoundRoute => _notFoundRoute;
+
+  @override
+  String toString() => 'EazyRouter#$routerKey';
 }

@@ -50,10 +50,14 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
     IEazyRouter? localRouter;
     for (var path in pathSegments) {
       await Future.delayed(Durations.short1);
-      localRouter = _routersMap[
-              rootRouter.routes[path]?.call(configuration.params).parent] ??
-          rootRouter;
-      var routeFromPath = rootRouter.routes[path]!.call(configuration.params);
+      var routeFromPath = rootRouter.routes[path]?.call(configuration.params);
+      localRouter = _routersMap[routeFromPath?.parent] ?? rootRouter;
+      if (routeFromPath == null) {
+        if (localRouter.notFoundRoute != null) {
+          localRouter.push(localRouter.notFoundRoute!);
+        }
+        break;
+      }
       if (localRouter.initialRoute?.page.name != routeFromPath.page.name &&
           localRouter.currentRoute?.page.name != routeFromPath.page.name) {
         localRouter.push(routeFromPath);
