@@ -19,6 +19,7 @@ class BottomSheetExampleRoute extends EazyRoute {
         name: 'bottom-sheet-example',
         arguments: queryParameters,
         canPop: true,
+        showDragHandle: true,
         child: BottomSheetExample(),
       );
 

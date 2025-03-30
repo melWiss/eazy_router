@@ -188,14 +188,14 @@ packages:
       path: "../eazy_router"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.0-dev.2"
   eazy_router_generator:
     dependency: "direct dev"
     description:
       path: "../eazy_router_generator"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.0-dev.2"
   fake_async:
     dependency: transitive
     description:

@@ -21,6 +21,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
     bool isAnonymous = annotation.peek('isAnonymous')?.boolValue ?? false;
     bool isInitial = annotation.peek('isInitial')?.boolValue ?? false;
+    bool showDragHandle = annotation.peek('showDragHandle')?.boolValue ?? false;
     List<DartObject>? guards = annotation.peek('guards')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
@@ -81,6 +82,9 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     buffer.writeln("name: '$pathName',");
     buffer.writeln("arguments: queryParameters,");
     buffer.writeln("canPop: $canPop,");
+    if (transition == RouteTransitions.bottomsheet) {
+      buffer.writeln("showDragHandle: $showDragHandle,");
+    }
     buffer.writeln("child: ${visitor.className} (");
     visitor.fields.forEach(
       (key, value) {

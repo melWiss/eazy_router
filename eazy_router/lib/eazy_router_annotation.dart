@@ -9,6 +9,9 @@ class GenerateRoute {
   final bool isNotFoundRoute;
   final bool canPop;
   final bool isAnonymous;
+
+  /// Only available for bottom sheets transition
+  final bool showDragHandle;
   final String transition;
   final List<EazyRouteGuard> guards;
 
@@ -21,6 +24,7 @@ class GenerateRoute {
     this.isNotFoundRoute = false,
     this.guards = const [],
     this.parent,
+    this.showDragHandle = false,
   });
 }
 

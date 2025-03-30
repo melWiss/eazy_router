@@ -20,6 +20,7 @@ class AnonymousBottomSheetRoute extends EazyRoute {
         name: 'anonymous-bottom-sheet',
         arguments: queryParameters,
         canPop: true,
+        showDragHandle: false,
         child: AnonymousBottomSheet(),
       );
 
