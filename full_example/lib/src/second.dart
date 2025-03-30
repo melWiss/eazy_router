@@ -94,6 +94,8 @@ class _SecondScaffoldState extends State<SecondScaffold> {
               },
               child: const Text('open admin page'),
             ),
+            const Divider(),
+            const AboutListTile(),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:eazy_router/src/eazy_navigator.dart';
 import 'package:eazy_router/src/eazy_route.dart';
 import 'package:eazy_router/src/eazy_router.dart';
 import 'package:eazy_router/src/eazy_router_configuration.dart';
@@ -85,7 +86,7 @@ class _EazyRouterNavigatorState extends State<EazyRouterNavigator> {
       listenable: router,
       builder: (context, child) {
         return widget.builder(
-          Navigator(
+          EazyNavigator(
             key: widget.navigatorKey,
             onUnknownRoute: (_) =>
                 widget.notFoundRoute?.page.createRoute(context) ??
