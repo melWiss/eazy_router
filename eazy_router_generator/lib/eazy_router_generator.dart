@@ -1,5 +1,3 @@
-library eazy_router_generator;
-
 import 'package:build/build.dart';
 import 'package:eazy_router_generator/src/eazy_route_registrar.dart';
 import 'package:eazy_router_generator/src/generator.dart';
@@ -18,7 +16,7 @@ Builder configureRouteRegistrar(BuilderOptions options) {
     RegistrarConfigureGenerator(),
     generatedExtension: '.registrar.json',
     header: '',
-    formatOutput: (code) {
+    formatOutput: (code, _) {
       var lines =  code.split('\n');
       lines.removeRange(0, 4);
       return lines.join();
