@@ -55,18 +55,24 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     buffer.writeln('return $routeClassName(');
     visitor.fields.forEach(
       (key, value) {
+        value = value.replaceAll('?', '');
         if (value.equal('int')) {
-          buffer.writeln("$key: int.parse(params?['$key']),");
+          buffer.writeln(
+              "$key: params?['$key'] == null? null : int.tryParse(params!['$key']!),");
         } else if (value.equal('double')) {
-          buffer.writeln("$key: double.parse(params?['$key']),");
+          buffer.writeln(
+              "$key: params?['$key'] == null? null : double.tryParse(params!['$key']!),");
         } else if (value.equal('bool')) {
-          buffer.writeln("$key: bool.parse(params?['$key']),");
+          buffer.writeln(
+              "$key: params?['$key'] == null? null : bool.tryParse(params!['$key']!),");
         } else if (value.equal('String')) {
           buffer.writeln("$key: params?['$key'],");
-        } else if (value.equal('List') || value.equal('Map')) {
-          buffer.writeln("$key: jsonDecode(params?['$key']),");
+        } else if (value.equal('Map') || value.equal('List')) {
+          buffer.writeln(
+              "$key: params?['$key'] == null? null : jsonDecode(params!['$key']!),");
         } else if (value.equal('DateTime')) {
-          buffer.writeln("$key: DateTime.parse(params?['$key']),");
+          buffer.writeln(
+              "$key: params?['$key'] == null? null : DateTime.parse(params!['$key']!),");
         }
       },
     );

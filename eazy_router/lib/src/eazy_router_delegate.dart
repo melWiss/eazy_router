@@ -2,6 +2,7 @@ import 'package:eazy_router/src/eazy_route_state.dart';
 import 'package:eazy_router/src/eazy_router.dart';
 import 'package:eazy_router/src/eazy_router_navigator.dart';
 import 'package:eazy_router/src/other/constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
@@ -58,8 +59,16 @@ class EazyRouterDelegate extends RouterDelegate<EazyRouteState>
         }
         break;
       }
-      if (localRouter.initialRoute?.page.name != routeFromPath.page.name &&
-          localRouter.currentRoute?.page.name != routeFromPath.page.name) {
+      if ((localRouter.initialRoute?.page.name != routeFromPath.page.name ||
+              !mapEquals(
+                localRouter.initialRoute?.queryParameters,
+                routeFromPath.queryParameters,
+              )) &&
+          (localRouter.currentRoute?.page.name != routeFromPath.page.name ||
+              !mapEquals(
+                localRouter.currentRoute?.queryParameters,
+                routeFromPath.queryParameters,
+              ))) {
         localRouter.push(routeFromPath);
       }
     }
