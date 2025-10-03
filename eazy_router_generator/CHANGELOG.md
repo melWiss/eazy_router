@@ -1,3 +1,6 @@
+## 1.0.0-dev.3
+* updated dependencies
+
 ## 1.0.0
 * added support for guard mechanism
 * added support for showing dialogs
