@@ -7,10 +7,16 @@ part of 'welcome.dart';
 // **************************************************************************
 
 class WelcomePageRoute extends EazyRoute {
-  WelcomePageRoute();
+  final int? index;
+
+  WelcomePageRoute({
+    this.index,
+  });
 
   factory WelcomePageRoute.fromQueryParam(Map<String, String>? params) {
-    return WelcomePageRoute();
+    return WelcomePageRoute(
+      index: params?['index'] == null ? null : int.tryParse(params!['index']!),
+    );
   }
 
   @override
@@ -19,11 +25,15 @@ class WelcomePageRoute extends EazyRoute {
         name: 'welcome',
         arguments: queryParameters,
         canPop: true,
-        child: WelcomePage(),
+        child: WelcomePage(
+          index: index,
+        ),
       );
 
   @override
-  Map<String, String> get queryParameters => {};
+  Map<String, String> get queryParameters => {
+        if (index != null) 'index': index!.toString(),
+      };
   @override
   String get parent => 'home';
 }

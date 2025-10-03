@@ -4,16 +4,16 @@ EazyRouter is a flexible and easy-to-use navigation package for Flutter that lev
 
 ## Table of Contents
 
-1. [Installation](#installation)
-2. [Getting Started](#getting-started)
-3. [Annotations](#annotations)
-   - [@RegisterRoutes](#registerroutes)
-   - [@GenerateRoute](#generateroute)
-4. [Using EazyRouter](#using-eazyrouter)
-   - [Basic Routing](#basic-routing)
-   - [Navigating Between Pages](#navigating-between-pages)
-   - [Pushing a Stack of Pages](#pushing-a-stack-of-pages)
-5. [Example](#example)
+1. [Installation](/welcome?index=4)
+2. [Getting Started](/welcome?index=8)
+3. [Annotations](/welcome?index=11)
+   - [@RegisterRoutes](/welcome?index=12)
+   - [@GenerateRoute](/welcome?index=15)
+4. [Using EazyRouter](/welcome?index=18)
+   - [Basic Routing](/welcome?index=19)
+   - [Navigating Between Pages](/welcome?index=22)
+   - [Pushing a Stack of Pages](/welcome?index=25)
+5. [Example](/welcome?index=28)
 
 ## Installation
 
