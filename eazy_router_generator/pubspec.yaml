@@ -1,6 +1,6 @@
 name: eazy_router_generator
 description: "The code generator of eazy_router package."
-version: 1.0.0
+version: 1.0.0-dev.1
 homepage: https://github.com/melWiss/eazy_router
 
 environment:
@@ -14,8 +14,7 @@ dependencies:
   build: 2.4.1
   source_gen: 1.5.0
   analyzer:
-  eazy_router:
-    path: ../eazy_router
+  eazy_router: 1.0.0-dev.1
   glob: ^2.1.2
 
 dev_dependencies:
