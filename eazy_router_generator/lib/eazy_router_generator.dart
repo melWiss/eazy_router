@@ -16,7 +16,7 @@ Builder configureRouteRegistrar(BuilderOptions options) {
     RegistrarConfigureGenerator(),
     generatedExtension: '.registrar.json',
     header: '',
-    formatOutput: (code) {
+    formatOutput: (code, _) {
       var lines =  code.split('\n');
       lines.removeRange(0, 4);
       return lines.join();

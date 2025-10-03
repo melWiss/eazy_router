@@ -1,14 +1,14 @@
 {
   "roots": [
-    "_",
     "documentation",
     "eazy_router",
     "eazy_router_generator",
+    "eazy_router_workspace",
     "full_example"
   ],
   "packages": [
     {
-      "name": "_",
+      "name": "eazy_router_workspace",
       "version": "0.0.0",
       "dependencies": [],
       "devDependencies": []
@@ -32,7 +32,7 @@
     },
     {
       "name": "eazy_router",
-      "version": "1.0.0-dev.2",
+      "version": "1.0.0-dev.3",
       "dependencies": [
         "flutter",
         "provider",
@@ -46,7 +46,7 @@
     },
     {
       "name": "eazy_router_generator",
-      "version": "1.0.0-dev.2",
+      "version": "1.0.0-dev.3",
       "dependencies": [
         "analyzer",
         "build",
@@ -84,18 +84,16 @@
     },
     {
       "name": "build_runner",
-      "version": "2.4.13",
+      "version": "2.7.1",
       "dependencies": [
-        "analyzer",
         "args",
         "async",
         "build",
         "build_config",
         "build_daemon",
-        "build_resolvers",
         "build_runner_core",
+        "built_collection",
         "code_builder",
-        "collection",
         "crypto",
         "dart_style",
         "frontend_server_client",
@@ -103,20 +101,15 @@
         "graphs",
         "http_multi_server",
         "io",
-        "js",
         "logging",
         "meta",
         "mime",
-        "package_config",
         "path",
-        "pool",
         "pub_semver",
-        "pubspec_parse",
         "shelf",
         "shelf_web_socket",
         "stack_trace",
         "stream_transform",
-        "timing",
         "watcher",
         "web_socket_channel",
         "yaml"
@@ -180,14 +173,13 @@
     },
     {
       "name": "analyzer",
-      "version": "6.11.0",
+      "version": "7.7.1",
       "dependencies": [
         "_fe_analyzer_shared",
         "collection",
         "convert",
         "crypto",
         "glob",
-        "macros",
         "meta",
         "package_config",
         "path",
@@ -199,7 +191,7 @@
     },
     {
       "name": "source_gen",
-      "version": "1.5.0",
+      "version": "3.1.0",
       "dependencies": [
         "analyzer",
         "async",
@@ -207,21 +199,22 @@
         "dart_style",
         "glob",
         "path",
+        "pub_semver",
         "source_span",
         "yaml"
       ]
     },
     {
       "name": "build",
-      "version": "2.4.1",
+      "version": "3.1.0",
       "dependencies": [
         "analyzer",
         "async",
+        "build_runner_core",
         "convert",
         "crypto",
         "glob",
         "logging",
-        "meta",
         "package_config",
         "path"
       ]
@@ -325,13 +318,6 @@
       ]
     },
     {
-      "name": "timing",
-      "version": "1.0.2",
-      "dependencies": [
-        "json_annotation"
-      ]
-    },
-    {
       "name": "stream_transform",
       "version": "2.1.1",
       "dependencies": []
@@ -365,17 +351,6 @@
       ]
     },
     {
-      "name": "pubspec_parse",
-      "version": "1.5.0",
-      "dependencies": [
-        "checked_yaml",
-        "collection",
-        "json_annotation",
-        "pub_semver",
-        "yaml"
-      ]
-    },
-    {
       "name": "pub_semver",
       "version": "2.2.0",
       "dependencies": [
@@ -383,24 +358,9 @@
       ]
     },
     {
-      "name": "pool",
-      "version": "1.5.2",
-      "dependencies": [
-        "async",
-        "stack_trace"
-      ]
-    },
-    {
       "name": "path",
       "version": "1.9.1",
       "dependencies": []
-    },
-    {
-      "name": "package_config",
-      "version": "2.2.0",
-      "dependencies": [
-        "path"
-      ]
     },
     {
       "name": "mime",
@@ -415,11 +375,6 @@
     {
       "name": "logging",
       "version": "1.3.0",
-      "dependencies": []
-    },
-    {
-      "name": "js",
-      "version": "0.7.2",
       "dependencies": []
     },
     {
@@ -455,7 +410,7 @@
     },
     {
       "name": "dart_style",
-      "version": "2.3.8",
+      "version": "3.1.1",
       "dependencies": [
         "analyzer",
         "args",
@@ -463,7 +418,8 @@
         "package_config",
         "path",
         "pub_semver",
-        "source_span"
+        "source_span",
+        "yaml"
       ]
     },
     {
@@ -472,11 +428,6 @@
       "dependencies": [
         "typed_data"
       ]
-    },
-    {
-      "name": "collection",
-      "version": "1.19.1",
-      "dependencies": []
     },
     {
       "name": "code_builder",
@@ -490,13 +441,22 @@
       ]
     },
     {
+      "name": "built_collection",
+      "version": "5.1.1",
+      "dependencies": []
+    },
+    {
       "name": "build_runner_core",
-      "version": "7.3.2",
+      "version": "9.3.1",
       "dependencies": [
+        "analyzer",
         "async",
         "build",
         "build_config",
         "build_resolvers",
+        "build_runner",
+        "built_collection",
+        "built_value",
         "collection",
         "convert",
         "crypto",
@@ -510,26 +470,6 @@
         "pool",
         "timing",
         "watcher",
-        "yaml"
-      ]
-    },
-    {
-      "name": "build_resolvers",
-      "version": "2.4.4",
-      "dependencies": [
-        "analyzer",
-        "async",
-        "build",
-        "collection",
-        "convert",
-        "crypto",
-        "graphs",
-        "logging",
-        "package_config",
-        "path",
-        "pool",
-        "pub_semver",
-        "stream_transform",
         "yaml"
       ]
     },
@@ -553,13 +493,12 @@
     },
     {
       "name": "build_config",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "dependencies": [
         "checked_yaml",
         "json_annotation",
         "path",
-        "pubspec_parse",
-        "yaml"
+        "pubspec_parse"
       ]
     },
     {
@@ -634,6 +573,11 @@
         "path",
         "vm_service"
       ]
+    },
+    {
+      "name": "collection",
+      "version": "1.19.1",
+      "dependencies": []
     },
     {
       "name": "characters",
@@ -717,10 +661,10 @@
       ]
     },
     {
-      "name": "macros",
-      "version": "0.1.3-main.0",
+      "name": "package_config",
+      "version": "2.2.0",
       "dependencies": [
-        "_macros"
+        "path"
       ]
     },
     {
@@ -732,7 +676,7 @@
     },
     {
       "name": "_fe_analyzer_shared",
-      "version": "76.0.0",
+      "version": "85.0.0",
       "dependencies": [
         "meta"
       ]
@@ -806,13 +750,6 @@
       "dependencies": []
     },
     {
-      "name": "json_annotation",
-      "version": "4.9.0",
-      "dependencies": [
-        "meta"
-      ]
-    },
-    {
       "name": "http_parser",
       "version": "4.1.2",
       "dependencies": [
@@ -820,15 +757,6 @@
         "source_span",
         "string_scanner",
         "typed_data"
-      ]
-    },
-    {
-      "name": "checked_yaml",
-      "version": "2.0.4",
-      "dependencies": [
-        "json_annotation",
-        "source_span",
-        "yaml"
       ]
     },
     {
@@ -849,14 +777,61 @@
       ]
     },
     {
-      "name": "built_collection",
-      "version": "5.1.1",
-      "dependencies": []
+      "name": "timing",
+      "version": "1.0.2",
+      "dependencies": [
+        "json_annotation"
+      ]
     },
     {
-      "name": "_macros",
-      "version": "0.3.3",
-      "dependencies": []
+      "name": "pool",
+      "version": "1.5.2",
+      "dependencies": [
+        "async",
+        "stack_trace"
+      ]
+    },
+    {
+      "name": "json_annotation",
+      "version": "4.9.0",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
+      "name": "build_resolvers",
+      "version": "3.0.3",
+      "dependencies": [
+        "analyzer",
+        "async",
+        "build",
+        "build_runner_core",
+        "collection",
+        "package_config",
+        "path",
+        "pool",
+        "pub_semver"
+      ]
+    },
+    {
+      "name": "pubspec_parse",
+      "version": "1.5.0",
+      "dependencies": [
+        "checked_yaml",
+        "collection",
+        "json_annotation",
+        "pub_semver",
+        "yaml"
+      ]
+    },
+    {
+      "name": "checked_yaml",
+      "version": "2.0.4",
+      "dependencies": [
+        "json_annotation",
+        "source_span",
+        "yaml"
+      ]
     },
     {
       "name": "process",
