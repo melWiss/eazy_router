@@ -4,8 +4,10 @@ version: 1.0.0-dev.2
 homepage: https://github.com/melWiss/eazy_router
 
 environment:
-  sdk: ">=3.4.3 <4.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+resolution: workspace
 
 dependencies:
   flutter:
@@ -18,5 +20,5 @@ dependencies:
   glob: ^2.1.2
 
 dev_dependencies:
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
   build_runner:

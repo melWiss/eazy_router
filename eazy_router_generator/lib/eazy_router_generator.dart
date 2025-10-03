@@ -1,5 +1,3 @@
-library eazy_router_generator;
-
 import 'package:build/build.dart';
 import 'package:eazy_router_generator/src/eazy_route_registrar.dart';
 import 'package:eazy_router_generator/src/generator.dart';

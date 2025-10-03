@@ -1,5 +1,3 @@
-library eazy_router_annotation;
-
 import 'package:eazy_router/src/other/eazy_route_guard.dart';
 
 class GenerateRoute {
