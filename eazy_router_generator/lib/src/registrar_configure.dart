@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:eazy_router_generator/src/generator.dart';
@@ -10,14 +10,14 @@ class RegistrarConfigureGenerator
     extends GeneratorForAnnotation<GenerateRoute> {
   @override
   String generateForAnnotatedElement(
-    Element2 element,
+    Element element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
     String pathName = annotation.peek('pathName')?.stringValue ??
-        generateRouteNameFromClassName(element.name3!);
+        generateRouteNameFromClassName(element.name!);
     final PageModelVisitor visitor = PageModelVisitor();
-    element.visitChildren2(visitor);
+    element.visitChildren(visitor);
     String routeClassName = '${visitor.className}Route';
     RegistrarConfigModel model = RegistrarConfigModel(
       pathName: pathName,

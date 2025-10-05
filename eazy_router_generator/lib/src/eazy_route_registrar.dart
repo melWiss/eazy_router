@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:eazy_router_generator/src/registrar_config_model.dart';
@@ -12,7 +12,7 @@ import 'package:source_gen/source_gen.dart';
 class EazyRouteRegistrar extends GeneratorForAnnotation<RegisterRoutes> {
   @override
   Future<String> generateForAnnotatedElement(
-      Element2 element, ConstantReader annotation, BuildStep buildStep) async {
+      Element element, ConstantReader annotation, BuildStep buildStep) async {
     final routeFile = Glob('**/*.registrar.json');
     final files = routeFile.listSync();
     StringBuffer buffer = StringBuffer();

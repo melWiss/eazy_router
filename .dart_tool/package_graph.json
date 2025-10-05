@@ -32,7 +32,7 @@
     },
     {
       "name": "eazy_router",
-      "version": "1.0.0-dev.3",
+      "version": "1.0.0-dev.4",
       "dependencies": [
         "flutter",
         "provider",
@@ -46,7 +46,7 @@
     },
     {
       "name": "eazy_router_generator",
-      "version": "1.0.0-dev.3",
+      "version": "1.0.0-dev.4",
       "dependencies": [
         "analyzer",
         "build",
@@ -62,7 +62,7 @@
     },
     {
       "name": "full_example",
-      "version": "1.0.0-dev.3",
+      "version": "1.0.0-dev.4",
       "dependencies": [
         "cupertino_icons",
         "eazy_router",
@@ -84,33 +84,42 @@
     },
     {
       "name": "build_runner",
-      "version": "2.7.1",
+      "version": "2.5.4",
       "dependencies": [
+        "analyzer",
         "args",
         "async",
         "build",
         "build_config",
         "build_daemon",
+        "build_resolvers",
         "build_runner_core",
-        "built_collection",
         "code_builder",
+        "collection",
         "crypto",
         "dart_style",
         "frontend_server_client",
         "glob",
         "graphs",
+        "http",
         "http_multi_server",
         "io",
+        "js",
         "logging",
         "meta",
         "mime",
+        "package_config",
         "path",
+        "pool",
         "pub_semver",
+        "pubspec_parse",
         "shelf",
         "shelf_web_socket",
         "stack_trace",
         "stream_transform",
+        "timing",
         "watcher",
+        "web",
         "web_socket_channel",
         "yaml"
       ]
@@ -191,7 +200,7 @@
     },
     {
       "name": "source_gen",
-      "version": "3.1.0",
+      "version": "2.0.0",
       "dependencies": [
         "analyzer",
         "async",
@@ -206,17 +215,22 @@
     },
     {
       "name": "build",
-      "version": "3.1.0",
+      "version": "2.5.4",
       "dependencies": [
         "analyzer",
         "async",
         "build_runner_core",
+        "built_collection",
+        "built_value",
         "convert",
         "crypto",
         "glob",
+        "graphs",
         "logging",
+        "meta",
         "package_config",
-        "path"
+        "path",
+        "pool"
       ]
     },
     {
@@ -310,11 +324,23 @@
       ]
     },
     {
+      "name": "web",
+      "version": "1.1.1",
+      "dependencies": []
+    },
+    {
       "name": "watcher",
       "version": "1.1.4",
       "dependencies": [
         "async",
         "path"
+      ]
+    },
+    {
+      "name": "timing",
+      "version": "1.0.2",
+      "dependencies": [
+        "json_annotation"
       ]
     },
     {
@@ -351,6 +377,17 @@
       ]
     },
     {
+      "name": "pubspec_parse",
+      "version": "1.5.0",
+      "dependencies": [
+        "checked_yaml",
+        "collection",
+        "json_annotation",
+        "pub_semver",
+        "yaml"
+      ]
+    },
+    {
       "name": "pub_semver",
       "version": "2.2.0",
       "dependencies": [
@@ -358,9 +395,24 @@
       ]
     },
     {
+      "name": "pool",
+      "version": "1.5.2",
+      "dependencies": [
+        "async",
+        "stack_trace"
+      ]
+    },
+    {
       "name": "path",
       "version": "1.9.1",
       "dependencies": []
+    },
+    {
+      "name": "package_config",
+      "version": "2.2.0",
+      "dependencies": [
+        "path"
+      ]
     },
     {
       "name": "mime",
@@ -378,6 +430,11 @@
       "dependencies": []
     },
     {
+      "name": "js",
+      "version": "0.7.2",
+      "dependencies": []
+    },
+    {
       "name": "io",
       "version": "1.0.5",
       "dependencies": [
@@ -391,6 +448,16 @@
       "version": "3.2.2",
       "dependencies": [
         "async"
+      ]
+    },
+    {
+      "name": "http",
+      "version": "1.5.0",
+      "dependencies": [
+        "async",
+        "http_parser",
+        "meta",
+        "web"
       ]
     },
     {
@@ -430,6 +497,11 @@
       ]
     },
     {
+      "name": "collection",
+      "version": "1.19.1",
+      "dependencies": []
+    },
+    {
       "name": "code_builder",
       "version": "4.11.0",
       "dependencies": [
@@ -441,13 +513,8 @@
       ]
     },
     {
-      "name": "built_collection",
-      "version": "5.1.1",
-      "dependencies": []
-    },
-    {
       "name": "build_runner_core",
-      "version": "9.3.1",
+      "version": "9.1.2",
       "dependencies": [
         "analyzer",
         "async",
@@ -474,6 +541,26 @@
       ]
     },
     {
+      "name": "build_resolvers",
+      "version": "2.5.4",
+      "dependencies": [
+        "analyzer",
+        "async",
+        "build",
+        "build_runner_core",
+        "collection",
+        "convert",
+        "crypto",
+        "graphs",
+        "logging",
+        "package_config",
+        "path",
+        "pool",
+        "pub_semver",
+        "stream_transform"
+      ]
+    },
+    {
       "name": "build_daemon",
       "version": "4.0.4",
       "dependencies": [
@@ -493,12 +580,13 @@
     },
     {
       "name": "build_config",
-      "version": "1.2.0",
+      "version": "1.1.2",
       "dependencies": [
         "checked_yaml",
         "json_annotation",
         "path",
-        "pubspec_parse"
+        "pubspec_parse",
+        "yaml"
       ]
     },
     {
@@ -573,11 +661,6 @@
         "path",
         "vm_service"
       ]
-    },
-    {
-      "name": "collection",
-      "version": "1.19.1",
-      "dependencies": []
     },
     {
       "name": "characters",
@@ -661,13 +744,6 @@
       ]
     },
     {
-      "name": "package_config",
-      "version": "2.2.0",
-      "dependencies": [
-        "path"
-      ]
-    },
-    {
       "name": "convert",
       "version": "3.1.2",
       "dependencies": [
@@ -680,6 +756,21 @@
       "dependencies": [
         "meta"
       ]
+    },
+    {
+      "name": "built_value",
+      "version": "8.12.0",
+      "dependencies": [
+        "built_collection",
+        "collection",
+        "fixnum",
+        "meta"
+      ]
+    },
+    {
+      "name": "built_collection",
+      "version": "5.1.1",
+      "dependencies": []
     },
     {
       "name": "webdriver",
@@ -745,9 +836,11 @@
       ]
     },
     {
-      "name": "web",
-      "version": "1.1.1",
-      "dependencies": []
+      "name": "json_annotation",
+      "version": "4.9.0",
+      "dependencies": [
+        "meta"
+      ]
     },
     {
       "name": "http_parser",
@@ -760,71 +853,6 @@
       ]
     },
     {
-      "name": "typed_data",
-      "version": "1.4.0",
-      "dependencies": [
-        "collection"
-      ]
-    },
-    {
-      "name": "built_value",
-      "version": "8.12.0",
-      "dependencies": [
-        "built_collection",
-        "collection",
-        "fixnum",
-        "meta"
-      ]
-    },
-    {
-      "name": "timing",
-      "version": "1.0.2",
-      "dependencies": [
-        "json_annotation"
-      ]
-    },
-    {
-      "name": "pool",
-      "version": "1.5.2",
-      "dependencies": [
-        "async",
-        "stack_trace"
-      ]
-    },
-    {
-      "name": "json_annotation",
-      "version": "4.9.0",
-      "dependencies": [
-        "meta"
-      ]
-    },
-    {
-      "name": "build_resolvers",
-      "version": "3.0.3",
-      "dependencies": [
-        "analyzer",
-        "async",
-        "build",
-        "build_runner_core",
-        "collection",
-        "package_config",
-        "path",
-        "pool",
-        "pub_semver"
-      ]
-    },
-    {
-      "name": "pubspec_parse",
-      "version": "1.5.0",
-      "dependencies": [
-        "checked_yaml",
-        "collection",
-        "json_annotation",
-        "pub_semver",
-        "yaml"
-      ]
-    },
-    {
       "name": "checked_yaml",
       "version": "2.0.4",
       "dependencies": [
@@ -832,6 +860,18 @@
         "source_span",
         "yaml"
       ]
+    },
+    {
+      "name": "typed_data",
+      "version": "1.4.0",
+      "dependencies": [
+        "collection"
+      ]
+    },
+    {
+      "name": "fixnum",
+      "version": "1.1.1",
+      "dependencies": []
     },
     {
       "name": "process",
@@ -858,11 +898,6 @@
         "process",
         "vm_service"
       ]
-    },
-    {
-      "name": "fixnum",
-      "version": "1.1.1",
-      "dependencies": []
     }
   ],
   "configVersion": 1

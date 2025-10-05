@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:eazy_router_generator/src/utils/strings.dart';
@@ -9,12 +9,12 @@ import 'package:source_gen/source_gen.dart';
 class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
   @override
   String generateForAnnotatedElement(
-    Element2 element,
+    Element element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
     String pathName = annotation.peek('pathName')?.stringValue ??
-        generateRouteNameFromClassName(element.name3!);
+        generateRouteNameFromClassName(element.name!);
     String transition =
         annotation.peek('transition')?.stringValue ?? 'AdaptivePage';
     String? parent = annotation.peek('parent')?.stringValue;
@@ -24,7 +24,7 @@ class EazyRouteGenerator extends GeneratorForAnnotation<GenerateRoute> {
     bool showDragHandle = annotation.peek('showDragHandle')?.boolValue ?? false;
     List<DartObject>? guards = annotation.peek('guards')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
-    element.visitChildren2(visitor);
+    element.visitChildren(visitor);
     final buffer = StringBuffer();
     String routeClassName = '${visitor.className}Route';
     buffer.writeln('class $routeClassName extends EazyRoute {');

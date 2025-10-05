@@ -33,15 +33,15 @@
     },
     {
       "name": "build",
-      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build-3.1.0",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build-2.5.4",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
     {
       "name": "build_config",
-      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_config-1.2.0",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_config-1.1.2",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.6"
     },
     {
       "name": "build_daemon",
@@ -51,19 +51,19 @@
     },
     {
       "name": "build_resolvers",
-      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_resolvers-3.0.3",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_resolvers-2.5.4",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_runner-2.7.1",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_runner-2.5.4",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_runner_core-9.3.1",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/build_runner_core-9.1.2",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -206,6 +206,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "http",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/http-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "http_multi_server",
       "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/http_multi_server-3.2.2",
       "packageUri": "lib/",
@@ -228,6 +234,12 @@
       "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/io-1.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "js",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/js-0.7.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.7"
     },
     {
       "name": "json_annotation",
@@ -375,9 +387,9 @@
     },
     {
       "name": "source_gen",
-      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/source_gen-3.1.0",
+      "rootUri": "file:///home/elwiss/.pub-cache/hosted/pub.dev/source_gen-2.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.6"
     },
     {
       "name": "source_span",
