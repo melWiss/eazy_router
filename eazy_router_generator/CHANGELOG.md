@@ -1,3 +1,6 @@
+## 1.0.0-dev.5
+* added support for scrollable sheets
+
 ## 1.0.0-dev.4
 * use source_gen 2.0.0 instead
 
