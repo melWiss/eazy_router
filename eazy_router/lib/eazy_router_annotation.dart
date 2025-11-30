@@ -32,11 +32,12 @@ class GenerateBottomSheetRoute {
   final String? parent;
   final bool canPop;
   final bool isAnonymous;
-
-  /// Only available for bottom sheets transition
   final bool showDragHandle;
   final List<EazyRouteGuard> guards;
   final bool isScrollControlled;
+  final double minChildSize;
+  final double maxChildSize;
+  final double initialChildSize;
   const GenerateBottomSheetRoute({
     this.pathName,
     this.canPop = true,
@@ -45,6 +46,9 @@ class GenerateBottomSheetRoute {
     this.parent,
     this.showDragHandle = false,
     this.isScrollControlled = false,
+    this.minChildSize = 0.25,
+    this.initialChildSize = 0.5,
+    this.maxChildSize = 1.0,
   });
 }
 

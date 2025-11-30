@@ -4,7 +4,13 @@ import 'package:eazy_router/eazy_router_annotation.dart';
 
 part 'modal_scrollable_bottom_sheet.g.dart';
 
-@GenerateBottomSheetRoute(isScrollControlled: true)
+@GenerateBottomSheetRoute(
+  isScrollControlled: true,
+  showDragHandle: true,
+  minChildSize: 0.1,
+  initialChildSize: 0.3,
+  maxChildSize: 0.8,
+)
 class ModalScrollableBottomSheet extends StatelessWidget {
   const ModalScrollableBottomSheet({super.key});
 
@@ -13,6 +19,7 @@ class ModalScrollableBottomSheet extends StatelessWidget {
     return ListView.builder(
       itemCount: 100,
       shrinkWrap: true,
+      controller: context.read(),
       itemBuilder: (context, index) => ListTile(
         leading: const Icon(Icons.filter),
         title: Text('Option $index'),

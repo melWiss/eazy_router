@@ -1,3 +1,8 @@
+## 1.0.0-dev.6
+* added minChildSize that represents the minimum screen taken friction for the scrollable sheet
+* added initialChildSize that represents the initial screen taken friction for the scrollable sheet
+* added maxChildSize that represents the maximum screen taken friction for the scrollable sheet
+
 ## 1.0.0-dev.5
 * added support for scrollable sheets
 

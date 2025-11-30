@@ -21,7 +21,12 @@ class ModalBottomSheetGenerator
     bool canPop = annotation.peek('canPop')?.boolValue ?? true;
     bool isAnonymous = annotation.peek('isAnonymous')?.boolValue ?? false;
     bool showDragHandle = annotation.peek('showDragHandle')?.boolValue ?? false;
-    bool isScrollControlled = annotation.peek('isScrollControlled')?.boolValue ?? false;
+    bool isScrollControlled =
+        annotation.peek('isScrollControlled')?.boolValue ?? false;
+    double minChildSize = annotation.peek('minChildSize')?.doubleValue ?? 0.25;
+    double initialChildSize =
+        annotation.peek('initialChildSize')?.doubleValue ?? 0.5;
+    double maxChildSize = annotation.peek('maxChildSize')?.doubleValue ?? 1.0;
     List<DartObject>? guards = annotation.peek('guards')?.listValue;
     final PageModelVisitor visitor = PageModelVisitor();
     element.visitChildren(visitor);
@@ -84,6 +89,9 @@ class ModalBottomSheetGenerator
     buffer.writeln("canPop: $canPop,");
     buffer.writeln("showDragHandle: $showDragHandle,");
     buffer.writeln("isScrollControlled: $isScrollControlled,");
+    buffer.writeln("minChildSize: $minChildSize,");
+    buffer.writeln("initialChildSize: $initialChildSize,");
+    buffer.writeln("maxChildSize: $maxChildSize,");
     buffer.writeln("child: ${visitor.className} (");
     visitor.fields.forEach(
       (key, value) {
