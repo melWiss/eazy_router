@@ -14,7 +14,8 @@ class EazyRouteRegistrar extends GeneratorForAnnotation<RegisterRoutes> {
   Future<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {
     final routeFile = Glob('**/*.registrar.json');
-    final files = routeFile.listSync();
+    final modalFile = Glob('**/*.modals.json');
+    final files = [...routeFile.listSync(), ...modalFile.listSync()];
     StringBuffer buffer = StringBuffer();
     buffer.writeln("import 'package:eazy_router/eazy_router.dart';");
     for (var file in files) {
@@ -22,7 +23,8 @@ class EazyRouteRegistrar extends GeneratorForAnnotation<RegisterRoutes> {
       filePath = filePath
           .replaceAll('./.dart_tool/build/generated/', '')
           .replaceAll('/lib', '')
-          .replaceAll('.registrar.json', '.dart');
+          .replaceAll('.registrar.json', '.dart')
+          .replaceAll('.modals.json', '.dart');
       buffer.writeln("import 'package:$filePath';");
     }
     buffer.writeln("void registerRoutes() {");

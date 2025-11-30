@@ -18,11 +18,33 @@ class GenerateRoute {
     this.isInitial = false,
     this.canPop = true,
     this.isAnonymous = false,
+    @Deprecated('Pelase use GenerateBottomSheetRoute annotation instead')
     this.transition = RouteTransitions.adaptive,
     this.isNotFoundRoute = false,
     this.guards = const [],
     this.parent,
     this.showDragHandle = false,
+  });
+}
+
+class GenerateBottomSheetRoute {
+  final String? pathName;
+  final String? parent;
+  final bool canPop;
+  final bool isAnonymous;
+
+  /// Only available for bottom sheets transition
+  final bool showDragHandle;
+  final List<EazyRouteGuard> guards;
+  final bool isScrollControlled;
+  const GenerateBottomSheetRoute({
+    this.pathName,
+    this.canPop = true,
+    this.isAnonymous = true,
+    this.guards = const [],
+    this.parent,
+    this.showDragHandle = false,
+    this.isScrollControlled = false,
   });
 }
 

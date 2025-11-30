@@ -6,8 +6,7 @@ import 'package:eazy_router_generator/src/registrar_config_model.dart';
 import 'package:eazy_router_generator/src/visitor.dart';
 import 'package:source_gen/source_gen.dart';
 
-class RegistrarConfigureGenerator
-    extends GeneratorForAnnotation<GenerateRoute> {
+class _RegistrarConfigureGenerator<T> extends GeneratorForAnnotation<T> {
   @override
   String generateForAnnotatedElement(
     Element element,
@@ -29,3 +28,8 @@ class RegistrarConfigureGenerator
     return model.toJson();
   }
 }
+
+class PageRouteRegistrar extends _RegistrarConfigureGenerator<GenerateRoute> {}
+
+class ModalBottomSheetRouteRegistrar
+    extends _RegistrarConfigureGenerator<GenerateBottomSheetRoute> {}
