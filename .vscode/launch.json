@@ -25,46 +25,6 @@
             "flutterMode": "release"
         },
         {
-            "name": "eazy_router",
-            "cwd": "eazy_router",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "eazy_router (profile mode)",
-            "cwd": "eazy_router",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "eazy_router (release mode)",
-            "cwd": "eazy_router",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "eazy_router_generator",
-            "cwd": "eazy_router_generator",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "eazy_router_generator (profile mode)",
-            "cwd": "eazy_router_generator",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "eazy_router_generator (release mode)",
-            "cwd": "eazy_router_generator",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
             "name": "full_example",
             "cwd": "full_example",
             "request": "launch",

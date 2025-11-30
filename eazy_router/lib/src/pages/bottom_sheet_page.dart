@@ -8,14 +8,16 @@ class BottomSheetPage extends Page {
     super.canPop,
     required this.child,
     this.showDragHandle = false,
+    this.isScrollControlled = false,
   });
   final Widget child;
   final bool showDragHandle;
+  final bool isScrollControlled;
   @override
   Route createRoute(BuildContext context) {
     return ModalBottomSheetRoute(
       builder: (_) => child,
-      isScrollControlled: false,
+      isScrollControlled: isScrollControlled,
       settings: this,
       showDragHandle: showDragHandle,
     );

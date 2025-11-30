@@ -1,6 +1,6 @@
 name: eazy_router
 description: "A flexible and easy-to-use navigation package for Flutter that leverages code generation to simplify route management"
-version: 1.0.0-dev.4
+version: 1.0.0-dev.5
 homepage: https://github.com/melWiss/eazy_router
 
 environment:

@@ -16,6 +16,7 @@ import 'package:full_example/src/home_body/nested_home_body.dart';
 import 'package:full_example/src/home_body/non_nested_home_body.dart';
 import 'package:full_example/src/not_found_page.dart';
 import 'package:full_example/src/home.dart';
+import 'package:full_example/src/modal_scrollable_bottom_sheet.dart';
 
 void registerRoutes() {
   EazyRouterConfiguration.instance.router.registerRoutes(
@@ -72,4 +73,10 @@ void registerRoutes() {
     },
   );
   EazyRouterConfiguration.instance.router.setInitialRoute(HomeScaffoldRoute());
+  EazyRouterConfiguration.instance.router.registerRoutes(
+    {
+      'modal-scrollable-bottom-sheet': (params) =>
+          ModalScrollableBottomSheetRoute.fromQueryParam(params),
+    },
+  );
 }
