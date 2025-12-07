@@ -1,3 +1,6 @@
+## 1.0.0-dev.7
+* fixed scrollController dispose issue when it comes to scrollable bottom sheets
+
 ## 1.0.0-dev.6
 * added minChildSize that represents the minimum screen taken friction for the scrollable sheet
 * added initialChildSize that represents the initial screen taken friction for the scrollable sheet

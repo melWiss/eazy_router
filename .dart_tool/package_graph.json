@@ -32,7 +32,7 @@
     },
     {
       "name": "eazy_router",
-      "version": "1.0.0-dev.6",
+      "version": "1.0.0-dev.7",
       "dependencies": [
         "flutter",
         "provider",
@@ -46,7 +46,7 @@
     },
     {
       "name": "eazy_router_generator",
-      "version": "1.0.0-dev.6",
+      "version": "1.0.0-dev.7",
       "dependencies": [
         "analyzer",
         "build",

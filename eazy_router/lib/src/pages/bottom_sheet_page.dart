@@ -31,8 +31,8 @@ class BottomSheetPage extends Page {
             initialChildSize: initialChildSize,
             expand: false,
             builder: (context, scrollController) {
-              return ChangeNotifierProvider<ScrollController>(
-                create: (_) => scrollController,
+              return ChangeNotifierProvider<ScrollController>.value(
+                value: scrollController,
                 child: child,
               );
             },
