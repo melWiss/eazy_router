@@ -1,5 +1,5 @@
-import 'package:eazy_router/eazy_router.dart';
 import 'package:flutter/material.dart';
+import 'package:ioc_widget/ioc_widget.dart';
 
 class BottomSheetPage extends Page {
   const BottomSheetPage({
@@ -31,9 +31,9 @@ class BottomSheetPage extends Page {
             initialChildSize: initialChildSize,
             expand: false,
             builder: (context, scrollController) {
-              return ChangeNotifierProvider<ScrollController>.value(
+              return InjectScopedNotifier<ScrollController>(
                 value: scrollController,
-                child: child,
+                builder: (_, __) => child,
               );
             },
           );

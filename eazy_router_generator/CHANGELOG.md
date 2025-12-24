@@ -1,3 +1,6 @@
+## 1.0.0-dev.8
+* removed provider and used ioc_widget instead
+
 ## 1.0.0-dev.7
 * fixed scrollController dispose issue when it comes to scrollable bottom sheets
 

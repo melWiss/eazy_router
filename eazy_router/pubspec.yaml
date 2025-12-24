@@ -1,6 +1,6 @@
 name: eazy_router
 description: "A flexible and easy-to-use navigation package for Flutter that leverages code generation to simplify route management"
-version: 1.0.0-dev.7
+version: 1.0.0-dev.8
 homepage: https://github.com/melWiss/eazy_router
 
 environment:
@@ -12,7 +12,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^6.1.2
+  ioc_widget: ^2.0.3
   rxdart: ^0.28.0
 
 dev_dependencies:

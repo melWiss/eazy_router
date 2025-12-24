@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
+import 'package:ioc_widget/ioc_widget.dart';
 
 part 'modal_scrollable_bottom_sheet.g.dart';
 
@@ -19,7 +20,7 @@ class ModalScrollableBottomSheet extends StatelessWidget {
     return ListView.builder(
       itemCount: 100,
       shrinkWrap: true,
-      controller: context.read(),
+      controller: context.get(),
       itemBuilder: (context, index) => ListTile(
         leading: const Icon(Icons.filter),
         title: Text('Option $index'),

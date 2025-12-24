@@ -32,10 +32,10 @@
     },
     {
       "name": "eazy_router",
-      "version": "1.0.0-dev.7",
+      "version": "1.0.0-dev.8",
       "dependencies": [
         "flutter",
-        "provider",
+        "ioc_widget",
         "rxdart"
       ],
       "devDependencies": [
@@ -46,7 +46,7 @@
     },
     {
       "name": "eazy_router_generator",
-      "version": "1.0.0-dev.7",
+      "version": "1.0.0-dev.8",
       "dependencies": [
         "analyzer",
         "build",
@@ -66,7 +66,8 @@
       "dependencies": [
         "cupertino_icons",
         "eazy_router",
-        "flutter"
+        "flutter",
+        "ioc_widget"
       ],
       "devDependencies": [
         "build_runner",
@@ -150,6 +151,13 @@
         "test_api",
         "vector_math",
         "vm_service"
+      ]
+    },
+    {
+      "name": "ioc_widget",
+      "version": "2.0.3",
+      "dependencies": [
+        "flutter"
       ]
     },
     {
@@ -270,15 +278,6 @@
       "name": "rxdart",
       "version": "0.28.0",
       "dependencies": []
-    },
-    {
-      "name": "provider",
-      "version": "6.1.5+1",
-      "dependencies": [
-        "collection",
-        "flutter",
-        "nested"
-      ]
     },
     {
       "name": "markdown",
@@ -819,13 +818,6 @@
         "vector_math",
         "vm_service",
         "webdriver"
-      ]
-    },
-    {
-      "name": "nested",
-      "version": "1.0.0",
-      "dependencies": [
-        "flutter"
       ]
     },
     {

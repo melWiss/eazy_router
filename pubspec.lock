@@ -298,6 +298,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  ioc_widget:
+    dependency: transitive
+    description:
+      name: ioc_widget
+      sha256: eaff08faf2d1c294706fb72e1300fb21c9330637633cf6a94f45eb575ea888da
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   js:
     dependency: transitive
     description:
@@ -394,14 +402,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   package_config:
     dependency: transitive
     description:
@@ -442,14 +442,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.3"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.5+1"
   pub_semver:
     dependency: transitive
     description:

@@ -4,7 +4,6 @@ import 'package:eazy_router/src/eazy_router_configuration.dart';
 import 'package:eazy_router/src/eazy_router_delegate.dart';
 import 'package:eazy_router/src/other/constants.dart';
 import 'package:flutter/material.dart';
-export 'package:provider/provider.dart';
 
 class EazyRouterNavigator extends StatefulWidget {
   final GlobalKey<NavigatorState>? navigatorKey;
