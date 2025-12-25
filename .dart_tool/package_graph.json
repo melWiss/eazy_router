@@ -1,6 +1,5 @@
 {
   "roots": [
-    "documentation",
     "eazy_router",
     "eazy_router_generator",
     "eazy_router_workspace",
@@ -12,23 +11,6 @@
       "version": "0.0.0",
       "dependencies": [],
       "devDependencies": []
-    },
-    {
-      "name": "documentation",
-      "version": "1.0.0+1",
-      "dependencies": [
-        "cupertino_icons",
-        "eazy_router",
-        "flutter",
-        "flutter_markdown_plus",
-        "markdown"
-      ],
-      "devDependencies": [
-        "build_runner",
-        "eazy_router_generator",
-        "flutter_lints",
-        "flutter_test"
-      ]
     },
     {
       "name": "eazy_router",
@@ -278,24 +260,6 @@
       "name": "rxdart",
       "version": "0.28.0",
       "dependencies": []
-    },
-    {
-      "name": "markdown",
-      "version": "7.3.0",
-      "dependencies": [
-        "args",
-        "meta"
-      ]
-    },
-    {
-      "name": "flutter_markdown_plus",
-      "version": "1.0.5",
-      "dependencies": [
-        "flutter",
-        "markdown",
-        "meta",
-        "path"
-      ]
     },
     {
       "name": "lints",
