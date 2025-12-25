@@ -5,26 +5,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "documentation",
-            "cwd": "documentation",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "documentation (profile mode)",
-            "cwd": "documentation",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "documentation (release mode)",
-            "cwd": "documentation",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
             "name": "full_example",
             "cwd": "full_example",
             "request": "launch",
