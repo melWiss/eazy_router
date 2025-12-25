@@ -7,9 +7,6 @@ class GenerateRoute {
   final bool isNotFoundRoute;
   final bool canPop;
   final bool isAnonymous;
-
-  /// Only available for bottom sheets transition
-  final bool showDragHandle;
   final String transition;
   final List<EazyRouteGuard> guards;
 
@@ -18,12 +15,10 @@ class GenerateRoute {
     this.isInitial = false,
     this.canPop = true,
     this.isAnonymous = false,
-    @Deprecated('Pelase use GenerateBottomSheetRoute annotation instead')
     this.transition = RouteTransitions.adaptive,
     this.isNotFoundRoute = false,
     this.guards = const [],
     this.parent,
-    this.showDragHandle = false,
   });
 }
 
@@ -35,9 +30,6 @@ class GenerateBottomSheetRoute {
   final bool showDragHandle;
   final List<EazyRouteGuard> guards;
   final bool isScrollControlled;
-  final double minChildSize;
-  final double maxChildSize;
-  final double initialChildSize;
   const GenerateBottomSheetRoute({
     this.pathName,
     this.canPop = true,
@@ -46,9 +38,6 @@ class GenerateBottomSheetRoute {
     this.parent,
     this.showDragHandle = false,
     this.isScrollControlled = false,
-    this.minChildSize = 0.25,
-    this.initialChildSize = 0.5,
-    this.maxChildSize = 1.0,
   });
 }
 
@@ -60,6 +49,7 @@ abstract class RouteTransitions {
   static const String adaptive = 'AdaptivePage';
   static const String material = 'MaterialPage';
   static const String cupertino = 'CupertinoPage';
+  @Deprecated('Pelase use @GenerateBottomSheetRoute annotation instead of @GenerateRoute.')
   static const String bottomsheet = 'BottomSheetPage';
   static const String dialog = 'DialogPage';
 }

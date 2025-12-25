@@ -3,7 +3,7 @@
 part of 'anonymous_bottom_sheet.dart';
 
 // **************************************************************************
-// EazyRouteGenerator
+// ModalBottomSheetGenerator
 // **************************************************************************
 
 class AnonymousBottomSheetRoute extends EazyRoute {
@@ -21,6 +21,7 @@ class AnonymousBottomSheetRoute extends EazyRoute {
         arguments: queryParameters,
         canPop: true,
         showDragHandle: false,
+        isScrollControlled: false,
         child: AnonymousBottomSheet(),
       );
 

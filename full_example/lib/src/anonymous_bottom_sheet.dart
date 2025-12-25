@@ -3,7 +3,7 @@ import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
 part 'anonymous_bottom_sheet.g.dart';
 
-@GenerateRoute(transition: RouteTransitions.bottomsheet, isAnonymous: true)
+@GenerateBottomSheetRoute(isAnonymous: true)
 class AnonymousBottomSheet extends StatelessWidget {
   const AnonymousBottomSheet({super.key});
 

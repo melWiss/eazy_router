@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:eazy_router/eazy_router.dart';
 import 'package:eazy_router/eazy_router_annotation.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class _HomeScaffoldState extends State<HomeScaffold> {
         NestedHomeBodyRoute(router: router),
       ),
       listener: (router, currentRoute) {
-        print(currentRoute);
+        log(currentRoute.toString());
       },
       builder: (navigator, router) {
         return Scaffold(

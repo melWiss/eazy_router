@@ -3,7 +3,7 @@
 part of 'bottom_sheet.dart';
 
 // **************************************************************************
-// EazyRouteGenerator
+// ModalBottomSheetGenerator
 // **************************************************************************
 
 class BottomSheetExampleRoute extends EazyRoute {
@@ -20,9 +20,12 @@ class BottomSheetExampleRoute extends EazyRoute {
         arguments: queryParameters,
         canPop: true,
         showDragHandle: true,
+        isScrollControlled: false,
         child: BottomSheetExample(),
       );
 
   @override
   Map<String, String> get queryParameters => {};
+  @override
+  bool get isAnonymous => true;
 }

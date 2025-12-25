@@ -22,9 +22,6 @@ class ModalScrollableBottomSheetRoute extends EazyRoute {
         canPop: true,
         showDragHandle: true,
         isScrollControlled: true,
-        minChildSize: 0.1,
-        initialChildSize: 0.3,
-        maxChildSize: 0.8,
         child: ModalScrollableBottomSheet(),
       );
 
